@@ -1,13 +1,13 @@
 # Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight)
 
-Uma biblioteca completa e performatica para destacar textos usando `Spannable` e Expressões Regulares (Regex) para Android totalmente em Java.
+Uma biblioteca completa e performática para destacar textos usando `Spannable` e Expressões Regulares (Regex) para Android totalmente em Java.
 
 ### Processamento por linhas alteradas (opcional)
-Quando ativado (por padrão é), a classe ``HighlightTextWatcher`` processa apenas as linhas alteradas e não todo o texto, melhorando considerávelmente a performance. Mas você pode desabilitar essa funcionalidade com ``setRange(HighlightTextWatcher.RANGE_PROCESS.MODIFIED);``
+Quando ativado (por padrão é), a classe ``HighlightTextWatcher`` processa apenas as linhas alteradas e não todo o texto, melhorando consideravelmente a performance. Mas você pode desabilitar essa funcionalidade com ``setRange(HighlightTextWatcher.RANGE_PROCESS.MODIFIED);``
 
 ## Como usar
 
-A forma mais básica de utilizar a lib é com as implemntações padrões, como ``HighlightTextWatcher`` e os ``Scheme`` (``ColorScheme``, ``StyleScheme`` etc.)
+A forma mais básica de utilizar a lib é com as implementações padrões, como ``HighlightTextWatcher`` e os ``Scheme`` (``ColorScheme``, ``StyleScheme`` etc.)
 ``` java
 //crie uma instância de Hightlight
 Highlight highlight = new Highlight();
@@ -34,7 +34,7 @@ HighlightTextWatcher textWatcher = new HighlightTextWatcher(highlight);
 binding.edittext.addTextChangedListener(textWatcher);
  ```
  
- Mais você pode fazer suas próprias implementações, por exemplo extendendo a classe ``LinesTextWatcher`` que fornece o processamento por linhas alteradas ou criar seus próprios ``Scheme``, apenas extendendo a interface Scheme e implementando os métodos.
+ Mais você pode fazer suas próprias implementações, por exemplo estendendo a classe ``LinesTextWatcher`` que fornece o processamento por linhas alteradas ou criar seus próprios ``Scheme``, apenas estendendo a interface Scheme e implementando os métodos.
 ``` java
 //custom scheme example
 highlight.addScheme(
@@ -80,4 +80,3 @@ Adicione a dependencia ao gradle do módulo (geralmente o módulo app)
 ```
 implementation 'com.github.Irineu333:Highlight:version'
 ```
- 
