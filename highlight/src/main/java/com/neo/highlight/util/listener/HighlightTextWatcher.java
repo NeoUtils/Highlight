@@ -56,7 +56,7 @@ public class HighlightTextWatcher extends LinesTextWatcher {
         this.highlight = highlight;
     }
 
-    enum RANGE_PROCESS {
+    public enum RANGE_PROCESS {
         MODIFIED,
         ALL
     }

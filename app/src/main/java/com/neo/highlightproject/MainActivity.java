@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+        highlight.addSpanType(StrikethroughSpan.class);
+
         binding.edittext.addTextChangedListener(
                 new HighlightTextWatcher(
                         highlight
