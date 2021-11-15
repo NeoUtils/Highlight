@@ -1,9 +1,12 @@
 # Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight)
 
-Uma biblioteca completa e performática para destacar textos usando `Spannable` e Expressões Regulares (Regex) para Android totalmente em Java.
+Uma biblioteca completa e performática para destacar trechos de textos usando `Spannable` com Expressões Regulares (Regex) para Android totalmente em Java.
 
 ### Processamento por linhas alteradas (opcional)
 Quando ativado (por padrão é), a classe ``HighlightTextWatcher`` processa apenas as linhas alteradas e não todo o texto, melhorando consideravelmente a performance. Mas você pode desabilitar essa funcionalidade com ``setRange(HighlightTextWatcher.RANGE_PROCESS.MODIFIED);``
+
+### Por que em Java?
+Para maior compatibilidade... Mas você pode utilizar em Kotlin.
 
 ## Como usar
 
@@ -58,7 +61,7 @@ highlight.addScheme(
 highlight.addSpanType(StrikethroughSpan.class);
 ```
 
-A classe ``Highlight`` possui as implementaçõs de adicionar e remover spans em todo Editable ou apenas em trechos específicos, você pode usá-la idividualmente também.
+A classe ``Highlight`` possui as implementaçõs de adicionar e remover spans em todo ``Editable`` ou apenas em trechos específicos, você pode usá-la idividualmente também.
 
 ``` java
 highlight.removeSpan(editable, start, end);
@@ -71,12 +74,12 @@ highlight.setSpan(editable);
 ## Adicionar a seu projeto
 
 
-Adicione o jitpack a seu projeto, em settings.gradle
-```
+Adicione o jitpack a seu projeto em settings.gradle
+``` groovy
 maven { url 'https://jitpack.io' }
 ```
 
 Adicione a dependencia ao gradle do módulo (geralmente o módulo app)
-```
+``` groovy
 implementation 'com.github.Irineu333:Highlight:version'
 ```
