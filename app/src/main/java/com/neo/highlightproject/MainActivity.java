@@ -30,37 +30,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initHighlightExample() {
-        Highlight highlight = new Highlight();
+        HighlightTextWatcher highlightTextWatcher =
+                new HighlightTextWatcher();
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(J|j)ava\\b",
                         Color.parseColor("#FC0400")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(K|k)otlin\\b",
                         Color.parseColor("#FC8500")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(J|j)ava(S|s)cript\\b",
                         Color.parseColor("#F5E200")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(A|a)ndroid\\b",
                         Color.parseColor("#00CA0E")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new StyleScheme(
                         "\\b([Hh])ighlight\\b",
                         StyleScheme.STYLE.BOLD_ITALIC
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         //custom example
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new Scheme() {
                     final Pattern pattern =
                             Pattern.compile("\\b([Jj])ava([Ss])cript\\b");
@@ -85,13 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        highlight.addSpanType(StrikethroughSpan.class);
+        highlightTextWatcher.addSpanType(StrikethroughSpan.class);
 
-        binding.edittext.addTextChangedListener(
-                new HighlightTextWatcher(
-                        highlight
-                )
-        );
+        binding.edittext.addTextChangedListener(highlightTextWatcher);
 
         binding.edittext.setText(R.string.example);
     }
