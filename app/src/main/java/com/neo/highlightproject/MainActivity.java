@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.style.StrikethroughSpan;
+import android.text.style.UnderlineSpan;
 
 import com.neo.highlight.core.Highlight;
 import com.neo.highlight.core.Scheme;
@@ -82,6 +83,24 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public Object getSpan() {
                         return new StrikethroughSpan();
+                    }
+                }
+        );
+
+        //custom example 2
+        highlightTextWatcher.addScheme(
+                new Scheme() {
+                    final Pattern pattern =
+                            Pattern.compile("\\b([Hh])ighlight\\b");
+
+                    @Override
+                    public Pattern getRegex() {
+                        return pattern;
+                    }
+
+                    @Override
+                    public Object getSpan() {
+                        return new UnderlineSpan();
                     }
                 }
         );
