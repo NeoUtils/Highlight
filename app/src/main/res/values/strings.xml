@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HighlightProject</string>
+    <string name="example">Java\nKotlin\nJavaScript\nAndroid\n\nThis is the best highlight lib!!</string>
+</resources>
