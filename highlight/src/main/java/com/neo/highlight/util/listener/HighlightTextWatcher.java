@@ -1,5 +1,7 @@
 package com.neo.highlight.util.listener;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 
 import androidx.annotation.NonNull;
@@ -17,7 +19,7 @@ import java.util.List;
 public class HighlightTextWatcher extends LinesTextWatcher implements HighlightContract {
 
     @NonNull
-    private RANGE_PROCESS range = RANGE_PROCESS.MODIFIED;
+    private RANGE range = RANGE.MODIFIED;
 
     @NonNull
     private Highlight highlight;
@@ -37,22 +39,28 @@ public class HighlightTextWatcher extends LinesTextWatcher implements HighlightC
             int firstLineStart, int lastLineEnd
     ) {
 
-        if (range == RANGE_PROCESS.MODIFIED) {
+        if (range == RANGE.MODIFIED) {
             removeSpan(editable, firstLineStart, lastLineEnd);
             setSpan(editable, firstLineStart, lastLineEnd);
         } else {
-            removeSpan(editable);
-            setSpan(editable);
-        }
+            final Editable _editable = editable;
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
 
+                @Override
+                public void run() {
+                    removeSpan(_editable);
+                    setSpan(_editable);
+                }
+            });
+        }
     }
 
-    public void setRange(@NonNull RANGE_PROCESS range) {
+    public void setRange(@NonNull RANGE range) {
         this.range = range;
     }
 
     @NonNull
-    public RANGE_PROCESS getRange() {
+    public RANGE getRange() {
         return range;
     }
 
@@ -127,7 +135,7 @@ public class HighlightTextWatcher extends LinesTextWatcher implements HighlightC
         highlight.clearSpanTypes();
     }
 
-    public enum RANGE_PROCESS {
+    public enum RANGE {
         MODIFIED,
         ALL
     }
