@@ -1,6 +1,6 @@
 # Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight)
 
-Uma biblioteca completa e performatica para destacar textos usando `Spannable` e Expressões Regulares (Regex) totalmente em Java.
+Uma biblioteca completa e performatica para destacar textos usando `Spannable` e Expressões Regulares (Regex) para Android totalmente em Java.
 
 ### Processamento por linhas alteradas (opcional)
 Quando ativado (por padrão é), a classe ``HighlightTextWatcher`` processa apenas as linhas alteradas e não todo o texto, melhorando considerávelmente a performance. Mas você pode desabilitar essa funcionalidade com ``setRange(HighlightTextWatcher.RANGE_PROCESS.MODIFIED);``
