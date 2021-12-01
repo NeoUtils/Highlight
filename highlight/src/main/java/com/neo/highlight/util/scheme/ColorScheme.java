@@ -21,13 +21,18 @@ public class ColorScheme implements Scheme {
     @ColorInt
     private final int color;
 
-    public ColorScheme(@NonNull String regex, @ColorInt int color) {
-        this(Pattern.compile(regex), color);
+    boolean clearOldSpan;
+
+    public ColorScheme(@NonNull Pattern pattern, @ColorInt int color, boolean clearOldSpan) {
+        this.pattern = pattern;
+        this.color = color;
+        this.clearOldSpan = clearOldSpan;
     }
 
     public ColorScheme(@NonNull Pattern pattern, @ColorInt int color) {
         this.pattern = pattern;
         this.color = color;
+        this.clearOldSpan = false;
     }
 
     @Override
@@ -38,5 +43,10 @@ public class ColorScheme implements Scheme {
     @Override
     public Object getSpan(@NonNull CharSequence text) {
         return new ForegroundColorSpan(color);
+    }
+
+    @Override
+    public boolean getClearOldSpan() {
+        return clearOldSpan;
     }
 }

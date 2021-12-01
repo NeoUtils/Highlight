@@ -51,13 +51,23 @@ public class Highlight implements HighlightContract {
             Matcher matcher = regex.matcher(subText);
 
             while (matcher.find()) {
+
+                CharSequence matcherText = subText.subSequence(
+                        matcher.start(),
+                        matcher.end()
+                );
+
+                if (scheme.getClearOldSpan()) {
+                    removeSpan(
+                            editable,
+                            start + matcher.start(),
+                            start + matcher.end()
+                    );
+                }
+
                 SpanUtils.setSpan(
-                        editable, scheme.getSpan(
-                                subText.subSequence(
-                                        matcher.start(),
-                                        matcher.end()
-                                )
-                        ),
+                        editable,
+                        scheme.getSpan(matcherText),
                         start + matcher.start(),
                         start + matcher.end()
                 );
@@ -74,14 +84,23 @@ public class Highlight implements HighlightContract {
             Matcher matcher = regex.matcher(editable);
 
             while (matcher.find()) {
+
+                CharSequence matcherText = editable.subSequence(
+                        matcher.start(),
+                        matcher.end()
+                );
+
+                if (scheme.getClearOldSpan()) {
+                    removeSpan(
+                            editable,
+                            matcher.start(),
+                            matcher.end()
+                    );
+                }
+
                 SpanUtils.setSpan(
                         editable,
-                        scheme.getSpan(
-                                editable.subSequence(
-                                        matcher.start(),
-                                        matcher.end()
-                                )
-                        ),
+                        scheme.getSpan(matcherText),
                         matcher.start(),
                         matcher.end()
                 );
@@ -101,13 +120,22 @@ public class Highlight implements HighlightContract {
             Matcher matcher = regex.matcher(spannableString);
 
             while (matcher.find()) {
+
+                CharSequence matcherText = text.subSequence(
+                        matcher.start(),
+                        matcher.end()
+                );
+
+                if (scheme.getClearOldSpan()) {
+                    removeSpan(
+                            spannableString,
+                            matcher.start(),
+                            matcher.end()
+                    );
+                }
+
                 spannableString.setSpan(
-                        scheme.getSpan(
-                                text.subSequence(
-                                        matcher.start(),
-                                        matcher.end()
-                                )
-                        ),
+                        scheme.getSpan(matcherText),
                         matcher.start(),
                         matcher.end(),
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -116,6 +144,15 @@ public class Highlight implements HighlightContract {
         }
 
         return spannableString;
+    }
+
+    private void removeSpan(SpannableString spannableString, int start, int end) {
+
+        for (Class<?> spanClass : spanTypes) {
+            for (Object span : spannableString.getSpans(start, end, spanClass)) {
+                spannableString.removeSpan(span);
+            }
+        }
     }
 
     public void setSpan(TextView textView) {

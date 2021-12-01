@@ -9,7 +9,6 @@ import android.text.style.StrikethroughSpan;
 import android.text.style.UnderlineSpan;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.neo.highlight.core.Highlight;
@@ -42,21 +41,21 @@ public class MainActivity extends AppCompatActivity {
 
         highlight.addScheme(
                 new StyleScheme(
-                        "Highlight",
+                        Pattern.compile("Highlight"),
                         StyleScheme.STYLE.BOLD_ITALIC
                 )
         );
 
         highlight.addScheme(
                 new ColorScheme(
-                        "light",
+                        Pattern.compile("light"),
                         Color.parseColor("#FF03DAC5")
                 )
         );
 
         highlight.addScheme(
                 new ColorScheme(
-                        "Project",
+                        Pattern.compile("Project"),
                         Color.BLACK
                 )
         );
@@ -72,35 +71,35 @@ public class MainActivity extends AppCompatActivity {
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(J|j)ava\\b",
+                        Pattern.compile("\\b([Jj])ava\\b"),
                         Color.parseColor("#FC0400")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(K|k)otlin\\b",
+                        Pattern.compile("\\b([Kk])otlin\\b"),
                         Color.parseColor("#FC8500")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(J|j)ava(S|s)cript\\b",
+                        Pattern.compile("\\b([Jj])ava([Ss])cript\\b"),
                         Color.parseColor("#F5E200")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(A|a)ndroid\\b",
+                        Pattern.compile("\\b([Aa])ndroid\\b"),
                         Color.parseColor("#00CA0E")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new StyleScheme(
-                        "\\b([Hh])ighlight\\b",
+                        Pattern.compile("\\b([Hh])ighlight\\b"),
                         StyleScheme.STYLE.BOLD_ITALIC
                 )
         );
@@ -120,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
                     public Object getSpan(@NonNull CharSequence text) {
                         return new StrikethroughSpan();
                     }
+
+                    @Override
+                    public boolean getClearOldSpan() {
+                        return false;
+                    }
                 }
         );
 
@@ -138,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
                     public Object getSpan(@NonNull CharSequence text) {
                         return new UnderlineSpan();
                     }
+
+                    @Override
+                    public boolean getClearOldSpan() {
+                        return false;
+                    }
                 }
         );
 
@@ -146,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         //add link scheme
 
         highlightTextWatcher.addScheme(
-                new LinkScheme()
+                new LinkScheme(true)
         );
 
         binding.edittext.setMovementMethod(LinkMovementMethod.getInstance());

@@ -14,6 +14,16 @@ public class LinkScheme implements Scheme {
     @Nullable
     Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
 
+    boolean clearOldSpan;
+
+    public LinkScheme() {
+        clearOldSpan = true;
+    }
+
+    public LinkScheme(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+    }
+
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -22,5 +32,9 @@ public class LinkScheme implements Scheme {
     @Override
     public Object getSpan(@NonNull CharSequence text) {
         return new URLSpan(text.toString());
+    }
+
+    public boolean getClearOldSpan() {
+        return clearOldSpan;
     }
 }

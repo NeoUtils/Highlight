@@ -21,13 +21,18 @@ public class StyleScheme implements Scheme {
     @NonNull
     STYLE style;
 
-    public StyleScheme(@NonNull String regex, @NonNull STYLE style) {
-        this(Pattern.compile(regex), style);
+    boolean clearOldSpan;
+
+    public StyleScheme(@NonNull Pattern pattern, @NonNull STYLE style, boolean clearOldSpan) {
+        this.pattern = pattern;
+        this.style = style;
+        this.clearOldSpan = clearOldSpan;
     }
 
     public StyleScheme(@NonNull Pattern pattern, @NonNull STYLE style) {
         this.pattern = pattern;
         this.style = style;
+        this.clearOldSpan = false;
     }
 
     @Override
@@ -39,6 +44,11 @@ public class StyleScheme implements Scheme {
     @Override
     public Object getSpan(@NonNull CharSequence text) {
         return new StyleSpan(getType());
+    }
+
+    @Override
+    public boolean getClearOldSpan() {
+        return clearOldSpan;
     }
 
     private int getType() {

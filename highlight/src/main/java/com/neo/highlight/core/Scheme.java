@@ -1,7 +1,6 @@
 package com.neo.highlight.core;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.regex.Pattern;
 
@@ -14,5 +13,7 @@ public interface Scheme {
      * @param text trecho destacado
      */
     Object getSpan(@NonNull CharSequence text);
+
+    boolean getClearOldSpan();
 
 }
