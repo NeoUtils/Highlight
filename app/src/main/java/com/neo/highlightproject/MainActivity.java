@@ -1,10 +1,13 @@
 package com.neo.highlightproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.style.StrikethroughSpan;
+import android.text.style.UnderlineSpan;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.neo.highlight.core.Highlight;
 import com.neo.highlight.core.Scheme;
@@ -25,42 +28,73 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        configToolbar();
         initHighlightExample();
     }
 
-    private void initHighlightExample() {
+    private void configToolbar() {
+
         Highlight highlight = new Highlight();
 
         highlight.addScheme(
+                new StyleScheme(
+                        "Highlight",
+                        StyleScheme.STYLE.BOLD_ITALIC
+                )
+        );
+
+        highlight.addScheme(
+                new ColorScheme(
+                        "light",
+                        Color.parseColor("#FF03DAC5")
+                )
+        );
+
+        highlight.addScheme(
+                new ColorScheme(
+                        "Project",
+                        Color.BLACK
+                )
+        );
+
+
+        highlight.setSpan(binding.toolbarTitle);
+    }
+
+
+    private void initHighlightExample() {
+        HighlightTextWatcher highlightTextWatcher =
+                new HighlightTextWatcher();
+
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(J|j)ava\\b",
                         Color.parseColor("#FC0400")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(K|k)otlin\\b",
                         Color.parseColor("#FC8500")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(J|j)ava(S|s)cript\\b",
                         Color.parseColor("#F5E200")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new ColorScheme(
                         "\\b(A|a)ndroid\\b",
                         Color.parseColor("#00CA0E")
                 )
         );
 
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new StyleScheme(
                         "\\b([Hh])ighlight\\b",
                         StyleScheme.STYLE.BOLD_ITALIC
@@ -68,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         //custom example
-        highlight.addScheme(
+        highlightTextWatcher.addScheme(
                 new Scheme() {
                     final Pattern pattern =
                             Pattern.compile("\\b([Jj])ava([Ss])cript\\b");
@@ -85,14 +119,49 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        highlight.addSpanType(StrikethroughSpan.class);
+        //custom example 2
+        highlightTextWatcher.addScheme(
+                new Scheme() {
+                    final Pattern pattern =
+                            Pattern.compile("\\b([Hh])ighlight\\b");
 
-        binding.edittext.addTextChangedListener(
-                new HighlightTextWatcher(
-                        highlight
-                )
+                    @Override
+                    public Pattern getRegex() {
+                        return pattern;
+                    }
+
+                    @Override
+                    public Object getSpan() {
+                        return new UnderlineSpan();
+                    }
+                }
         );
 
-        binding.edittext.setText(R.string.example);
+        highlightTextWatcher.addSpanType(StrikethroughSpan.class);
+
+        binding.edittext.addTextChangedListener(highlightTextWatcher);
+
+        //binding.edittext.setText(R.string.example);
+        initAutoText(getString(R.string.example));
+    }
+
+    private void initAutoText(String text) {
+
+        binding.edittext.setText("");
+
+        new Thread(() -> {
+            try {
+                for (int index = 0; index < text.length(); index++) {
+
+                    Thread.sleep(50);
+                    char charToAdd = text.charAt(index);
+
+                    new Handler(Looper.getMainLooper())
+                            .post(() -> binding.edittext.getText().append(charToAdd));
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
