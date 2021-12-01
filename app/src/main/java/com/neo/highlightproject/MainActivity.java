@@ -1,11 +1,13 @@
 package com.neo.highlightproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.style.StrikethroughSpan;
 import android.text.style.UnderlineSpan;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.neo.highlight.core.Highlight;
 import com.neo.highlight.core.Scheme;
@@ -26,9 +28,39 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        configToolbar();
         initHighlightExample();
     }
+
+    private void configToolbar() {
+
+        Highlight highlight = new Highlight();
+
+        highlight.addScheme(
+                new StyleScheme(
+                        "Highlight",
+                        StyleScheme.STYLE.BOLD_ITALIC
+                )
+        );
+
+        highlight.addScheme(
+                new ColorScheme(
+                        "light",
+                        Color.parseColor("#FF03DAC5")
+                )
+        );
+
+        highlight.addScheme(
+                new ColorScheme(
+                        "Project",
+                        Color.BLACK
+                )
+        );
+
+
+        highlight.setSpan(binding.toolbarTitle);
+    }
+
 
     private void initHighlightExample() {
         HighlightTextWatcher highlightTextWatcher =
@@ -109,6 +141,27 @@ public class MainActivity extends AppCompatActivity {
 
         binding.edittext.addTextChangedListener(highlightTextWatcher);
 
-        binding.edittext.setText(R.string.example);
+        //binding.edittext.setText(R.string.example);
+        initAutoText(getString(R.string.example));
+    }
+
+    private void initAutoText(String text) {
+
+        binding.edittext.setText("");
+
+        new Thread(() -> {
+            try {
+                for (int index = 0; index < text.length(); index++) {
+
+                    Thread.sleep(50);
+                    char charToAdd = text.charAt(index);
+
+                    new Handler(Looper.getMainLooper())
+                            .post(() -> binding.edittext.getText().append(charToAdd));
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }

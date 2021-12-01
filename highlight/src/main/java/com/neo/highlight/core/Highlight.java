@@ -1,9 +1,13 @@
 package com.neo.highlight.core;
 
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -71,6 +75,39 @@ public class Highlight implements HighlightContract  {
                         matcher.end()
                 );
             }
+        }
+    }
+
+    public SpannableString getSpannable(CharSequence text) {
+
+        SpannableString spannableString =
+                new SpannableString(text);
+
+        for (Scheme scheme : schemes) {
+
+            Pattern regex = scheme.getRegex();
+
+            Matcher matcher = regex.matcher(spannableString);
+
+            while (matcher.find()) {
+                spannableString.setSpan(
+                        scheme.getSpan(),
+                        matcher.start(),
+                        matcher.end(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                );
+            }
+        }
+
+        return spannableString;
+    }
+
+    public void setSpan(TextView textView) {
+
+        if (textView instanceof EditText) {
+            setSpan((Editable) textView.getText());
+        } else {
+            textView.setText(getSpannable(textView.getText()));
         }
     }
 
