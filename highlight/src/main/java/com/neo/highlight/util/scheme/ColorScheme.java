@@ -36,7 +36,7 @@ public class ColorScheme implements Scheme {
     }
 
     @Override
-    public Object getSpan() {
+    public Object getSpan(@NonNull CharSequence text) {
         return new ForegroundColorSpan(color);
     }
 }

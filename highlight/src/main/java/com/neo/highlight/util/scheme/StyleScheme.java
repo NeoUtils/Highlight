@@ -37,7 +37,7 @@ public class StyleScheme implements Scheme {
 
     @NonNull
     @Override
-    public Object getSpan() {
+    public Object getSpan(@NonNull CharSequence text) {
         return new StyleSpan(getType());
     }
 

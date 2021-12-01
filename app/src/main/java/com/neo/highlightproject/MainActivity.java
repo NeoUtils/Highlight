@@ -4,15 +4,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.method.LinkMovementMethod;
 import android.text.style.StrikethroughSpan;
 import android.text.style.UnderlineSpan;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.neo.highlight.core.Highlight;
 import com.neo.highlight.core.Scheme;
 import com.neo.highlight.util.listener.HighlightTextWatcher;
 import com.neo.highlight.util.scheme.ColorScheme;
+import com.neo.highlight.util.scheme.LinkScheme;
 import com.neo.highlight.util.scheme.StyleScheme;
 import com.neo.highlightproject.databinding.ActivityMainBinding;
 
@@ -113,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public Object getSpan() {
+                    public Object getSpan(@NonNull CharSequence text) {
                         return new StrikethroughSpan();
                     }
                 }
@@ -131,13 +135,21 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public Object getSpan() {
+                    public Object getSpan(@NonNull CharSequence text) {
                         return new UnderlineSpan();
                     }
                 }
         );
 
         highlightTextWatcher.addSpanType(StrikethroughSpan.class);
+
+        //add link scheme
+
+        highlightTextWatcher.addScheme(
+                new LinkScheme()
+        );
+
+        binding.edittext.setMovementMethod(LinkMovementMethod.getInstance());
 
         binding.edittext.addTextChangedListener(highlightTextWatcher);
 

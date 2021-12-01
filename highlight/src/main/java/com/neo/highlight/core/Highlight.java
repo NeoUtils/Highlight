@@ -6,6 +6,7 @@ import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.text.style.URLSpan;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 /**
  * @author Irineu A. Silva
  */
-public class Highlight implements HighlightContract  {
+public class Highlight implements HighlightContract {
 
     @NonNull
     private List<Scheme> schemes;
@@ -51,7 +52,12 @@ public class Highlight implements HighlightContract  {
 
             while (matcher.find()) {
                 SpanUtils.setSpan(
-                        editable, scheme.getSpan(),
+                        editable, scheme.getSpan(
+                                subText.subSequence(
+                                        matcher.start(),
+                                        matcher.end()
+                                )
+                        ),
                         start + matcher.start(),
                         start + matcher.end()
                 );
@@ -70,7 +76,12 @@ public class Highlight implements HighlightContract  {
             while (matcher.find()) {
                 SpanUtils.setSpan(
                         editable,
-                        scheme.getSpan(),
+                        scheme.getSpan(
+                                editable.subSequence(
+                                        matcher.start(),
+                                        matcher.end()
+                                )
+                        ),
                         matcher.start(),
                         matcher.end()
                 );
@@ -91,7 +102,12 @@ public class Highlight implements HighlightContract  {
 
             while (matcher.find()) {
                 spannableString.setSpan(
-                        scheme.getSpan(),
+                        scheme.getSpan(
+                                text.subSequence(
+                                        matcher.start(),
+                                        matcher.end()
+                                )
+                        ),
                         matcher.start(),
                         matcher.end(),
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -176,5 +192,6 @@ public class Highlight implements HighlightContract  {
         addSpanType(ForegroundColorSpan.class);
         addSpanType(BackgroundColorSpan.class);
         addSpanType(StyleSpan.class);
+        addSpanType(URLSpan.class);
     }
 }
