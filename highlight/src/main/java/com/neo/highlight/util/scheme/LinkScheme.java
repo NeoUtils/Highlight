@@ -1,5 +1,6 @@
 package com.neo.highlight.util.scheme;
 
+import android.text.TextPaint;
 import android.text.style.URLSpan;
 
 import androidx.annotation.NonNull;
@@ -12,9 +13,11 @@ import java.util.regex.Pattern;
 public class LinkScheme implements Scheme {
 
     @Nullable
-    Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
+    private final Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
 
-    boolean clearOldSpan;
+    private final boolean clearOldSpan;
+
+    private boolean painText = true;
 
     public LinkScheme() {
         clearOldSpan = true;
@@ -24,6 +27,11 @@ public class LinkScheme implements Scheme {
         this.clearOldSpan = clearOldSpan;
     }
 
+    public LinkScheme(boolean clearOldSpan, boolean painText) {
+        this.clearOldSpan = clearOldSpan;
+        this.painText = painText;
+    }
+
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -31,7 +39,14 @@ public class LinkScheme implements Scheme {
 
     @Override
     public Object getSpan(@NonNull CharSequence text) {
-        return new URLSpan(text.toString());
+        return new URLSpan(text.toString()) {
+            @Override
+            public void updateDrawState(@NonNull TextPaint ds) {
+
+                if (painText)
+                    super.updateDrawState(ds);
+            }
+        };
     }
 
     public boolean getClearOldSpan() {

@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.text.method.LinkMovementMethod;
 import android.text.style.StrikethroughSpan;
 import android.text.style.UnderlineSpan;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.neo.highlight.core.Scheme;
 import com.neo.highlight.util.listener.HighlightTextWatcher;
 import com.neo.highlight.util.scheme.ColorScheme;
 import com.neo.highlight.util.scheme.LinkScheme;
+import com.neo.highlight.util.scheme.OnClickScheme;
 import com.neo.highlight.util.scheme.StyleScheme;
 import com.neo.highlightproject.databinding.ActivityMainBinding;
 
@@ -160,6 +162,16 @@ public class MainActivity extends AppCompatActivity {
 
         binding.edittext.setMovementMethod(LinkMovementMethod.getInstance());
 
+        //add click scheme
+
+        highlightTextWatcher.addScheme(
+                new OnClickScheme(Pattern.compile("[hH]ighlight"), (CharSequence text) -> Toast.makeText(
+                        MainActivity.this,
+                        "Highlight is the best!!",
+                        Toast.LENGTH_SHORT
+                ).show())
+        );
+
         binding.edittext.addTextChangedListener(highlightTextWatcher);
 
         //binding.edittext.setText(R.string.example);
@@ -169,16 +181,17 @@ public class MainActivity extends AppCompatActivity {
     private void initAutoText(String text) {
 
         binding.edittext.setText("");
+        Handler handler = new Handler(Looper.getMainLooper());
 
         new Thread(() -> {
             try {
-                for (int index = 0; index < text.length(); index++) {
+                for (char charToAdd : text.toCharArray()) {
 
                     Thread.sleep(50);
-                    char charToAdd = text.charAt(index);
 
-                    new Handler(Looper.getMainLooper())
-                            .post(() -> binding.edittext.getText().append(charToAdd));
+                    handler.post(
+                            () -> binding.edittext.getText().append(charToAdd)
+                    );
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

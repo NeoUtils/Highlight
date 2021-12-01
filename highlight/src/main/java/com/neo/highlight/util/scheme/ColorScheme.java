@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class ColorScheme implements Scheme {
 
     @Nullable
-    Pattern pattern;
+    private final Pattern pattern;
 
     @ColorInt
     private final int color;

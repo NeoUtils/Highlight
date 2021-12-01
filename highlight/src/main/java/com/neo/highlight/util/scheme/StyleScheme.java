@@ -16,10 +16,10 @@ import java.util.regex.Pattern;
 public class StyleScheme implements Scheme {
 
     @Nullable
-    Pattern pattern;
+    private final Pattern pattern;
 
     @NonNull
-    STYLE style;
+    private final STYLE style;
 
     boolean clearOldSpan;
 
