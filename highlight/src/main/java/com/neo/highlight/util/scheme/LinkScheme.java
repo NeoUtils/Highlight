@@ -3,6 +3,7 @@ package com.neo.highlight.util.scheme;
 import android.text.TextPaint;
 import android.text.style.URLSpan;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -15,21 +16,23 @@ public class LinkScheme implements Scheme {
     @Nullable
     private final Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
 
-    private final boolean clearOldSpan;
+    private boolean clearOldSpan = true;
 
     private boolean painText = true;
 
-    public LinkScheme() {
-        clearOldSpan = true;
-    }
+    private boolean painTextUnderline = true;
 
-    public LinkScheme(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-    }
+    @ColorInt
+    private int painTextColor = -1;
 
-    public LinkScheme(boolean clearOldSpan, boolean painText) {
-        this.clearOldSpan = clearOldSpan;
+    public LinkScheme setPainText(boolean painText) {
         this.painText = painText;
+        return this;
+    }
+
+    public LinkScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
     }
 
     @Override
@@ -43,10 +46,29 @@ public class LinkScheme implements Scheme {
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
 
-                if (painText)
-                    super.updateDrawState(ds);
+                if (painText) {
+
+                    if (painTextColor == -1) {
+                        ds.setColor(ds.linkColor);
+                    } else {
+                        ds.setColor(painTextColor);
+                    }
+
+                    ds.setUnderlineText(painTextUnderline);
+                };
             }
         };
+    }
+
+
+    public LinkScheme setPainTextColor(@ColorInt int painTextColor) {
+        this.painTextColor = painTextColor;
+        return setPainText(true);
+    }
+
+    public LinkScheme setPainTextUnderline(boolean painTextUnderline) {
+        this.painTextUnderline = painTextUnderline;
+        return this;
     }
 
     public boolean getClearOldSpan() {

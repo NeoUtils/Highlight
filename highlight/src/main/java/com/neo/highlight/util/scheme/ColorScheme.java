@@ -15,24 +15,23 @@ import java.util.regex.Pattern;
  */
 public class ColorScheme implements Scheme {
 
-    @Nullable
+    @NonNull
     private final Pattern pattern;
 
     @ColorInt
     private final int color;
 
-    boolean clearOldSpan;
-
-    public ColorScheme(@NonNull Pattern pattern, @ColorInt int color, boolean clearOldSpan) {
-        this.pattern = pattern;
-        this.color = color;
-        this.clearOldSpan = clearOldSpan;
-    }
+    private boolean clearOldSpan;
 
     public ColorScheme(@NonNull Pattern pattern, @ColorInt int color) {
         this.pattern = pattern;
         this.color = color;
         this.clearOldSpan = false;
+    }
+
+    public ColorScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.neo.highlightproject;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         //add link scheme
 
         highlightTextWatcher.addScheme(
-                new LinkScheme(true)
+                new LinkScheme().setClearOldSpan(true)
         );
 
         binding.edittext.setMovementMethod(LinkMovementMethod.getInstance());
@@ -165,17 +167,34 @@ public class MainActivity extends AppCompatActivity {
         //add click scheme
 
         highlightTextWatcher.addScheme(
-                new OnClickScheme(Pattern.compile("[hH]ighlight"), (CharSequence text) -> Toast.makeText(
-                        MainActivity.this,
-                        "Highlight is the best!!",
-                        Toast.LENGTH_SHORT
-                ).show())
+                new OnClickScheme(Pattern.compile("[hH]ighlight"), (CharSequence text) -> showToast())
+        );
+
+        highlightTextWatcher.addScheme(
+                new OnClickScheme(Pattern.compile("Irineu A\\. Silva"), (CharSequence text) ->
+                        goToMyGithub()
+                ).setPainTextColor(Color.GRAY)
         );
 
         binding.edittext.addTextChangedListener(highlightTextWatcher);
 
         //binding.edittext.setText(R.string.example);
         initAutoText(getString(R.string.example));
+    }
+
+    private void goToMyGithub() {
+        String url = "https://github.com/Irineu333";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+    private void showToast() {
+        Toast.makeText(
+                MainActivity.this,
+                "Highlight is the best!!",
+                Toast.LENGTH_SHORT
+        ).show();
     }
 
     private void initAutoText(String text) {

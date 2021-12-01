@@ -4,6 +4,7 @@ import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.neo.highlight.core.Scheme;
@@ -20,24 +21,26 @@ public class OnClickScheme implements Scheme {
 
     private boolean painText = false;
 
+    @ColorInt
+    private int painTextColor = -1;
+
     private boolean clearOldSpan = false;
+
+    private boolean painTextUnderline = false;
 
     public OnClickScheme(@NonNull Pattern pattern, @NonNull OnClickListener onClickListener) {
         this.pattern = pattern;
         this.onClickListener = onClickListener;
     }
 
-    public OnClickScheme(@NonNull Pattern pattern, @NonNull OnClickListener onClickListener, boolean clearOldSpan) {
-        this.pattern = pattern;
-        this.onClickListener = onClickListener;
-        this.clearOldSpan = clearOldSpan;
+    public OnClickScheme setPainText(boolean painText) {
+        this.painText = painText;
+        return this;
     }
 
-    public OnClickScheme(@NonNull Pattern pattern, @NonNull OnClickListener onClickListener, boolean clearOldSpan, boolean painText) {
-        this.pattern = pattern;
-        this.onClickListener = onClickListener;
+    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
-        this.painText = painText;
+        return this;
     }
 
     @Override
@@ -57,8 +60,16 @@ public class OnClickScheme implements Scheme {
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
 
-                if (painText)
-                    super.updateDrawState(ds);
+                if (painText) {
+
+                    if (painTextColor == -1) {
+                        ds.setColor(ds.linkColor);
+                    } else {
+                        ds.setColor(painTextColor);
+                    }
+
+                    ds.setUnderlineText(painTextUnderline);
+                }
             }
         };
     }
@@ -66,6 +77,16 @@ public class OnClickScheme implements Scheme {
     @Override
     public boolean getClearOldSpan() {
         return clearOldSpan;
+    }
+
+    public OnClickScheme setPainTextColor(@ColorInt int painTextColor) {
+        this.painTextColor = painTextColor;
+        return setPainText(true);
+    }
+
+    public OnClickScheme setPainTextUnderline(boolean painTextUnderline) {
+        this.painTextUnderline = painTextUnderline;
+        return this;
     }
 
     public interface OnClickListener {
