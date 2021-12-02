@@ -1,18 +1,25 @@
 package com.neo.highlightproject;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.method.LinkMovementMethod;
 import android.text.style.StrikethroughSpan;
 import android.text.style.UnderlineSpan;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.neo.highlight.core.Highlight;
 import com.neo.highlight.core.Scheme;
 import com.neo.highlight.util.listener.HighlightTextWatcher;
 import com.neo.highlight.util.scheme.ColorScheme;
+import com.neo.highlight.util.scheme.LinkScheme;
+import com.neo.highlight.util.scheme.OnClickScheme;
 import com.neo.highlight.util.scheme.StyleScheme;
 import com.neo.highlightproject.databinding.ActivityMainBinding;
 
@@ -38,21 +45,21 @@ public class MainActivity extends AppCompatActivity {
 
         highlight.addScheme(
                 new StyleScheme(
-                        "Highlight",
+                        Pattern.compile("Highlight"),
                         StyleScheme.STYLE.BOLD_ITALIC
                 )
         );
 
         highlight.addScheme(
                 new ColorScheme(
-                        "light",
+                        Pattern.compile("light"),
                         Color.parseColor("#FF03DAC5")
                 )
         );
 
         highlight.addScheme(
                 new ColorScheme(
-                        "Project",
+                        Pattern.compile("Project"),
                         Color.BLACK
                 )
         );
@@ -68,35 +75,35 @@ public class MainActivity extends AppCompatActivity {
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(J|j)ava\\b",
+                        Pattern.compile("\\b([Jj])ava\\b"),
                         Color.parseColor("#FC0400")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(K|k)otlin\\b",
+                        Pattern.compile("\\b([Kk])otlin\\b"),
                         Color.parseColor("#FC8500")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(J|j)ava(S|s)cript\\b",
+                        Pattern.compile("\\b([Jj])ava([Ss])cript\\b"),
                         Color.parseColor("#F5E200")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
-                        "\\b(A|a)ndroid\\b",
+                        Pattern.compile("\\b([Aa])ndroid\\b"),
                         Color.parseColor("#00CA0E")
                 )
         );
 
         highlightTextWatcher.addScheme(
                 new StyleScheme(
-                        "\\b([Hh])ighlight\\b",
+                        Pattern.compile("\\b([Hh])ighlight\\b"),
                         StyleScheme.STYLE.BOLD_ITALIC
                 )
         );
@@ -113,8 +120,13 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public Object getSpan() {
+                    public Object getSpan(@NonNull CharSequence text) {
                         return new StrikethroughSpan();
+                    }
+
+                    @Override
+                    public boolean getClearOldSpan() {
+                        return false;
                     }
                 }
         );
@@ -131,13 +143,38 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public Object getSpan() {
+                    public Object getSpan(@NonNull CharSequence text) {
                         return new UnderlineSpan();
+                    }
+
+                    @Override
+                    public boolean getClearOldSpan() {
+                        return false;
                     }
                 }
         );
 
         highlightTextWatcher.addSpanType(StrikethroughSpan.class);
+
+        //add link scheme
+
+        highlightTextWatcher.addScheme(
+                new LinkScheme().setClearOldSpan(true)
+        );
+
+        binding.edittext.setMovementMethod(LinkMovementMethod.getInstance());
+
+        //add click scheme
+
+        highlightTextWatcher.addScheme(
+                new OnClickScheme(Pattern.compile("[hH]ighlight"), (CharSequence text) -> showToast())
+        );
+
+        highlightTextWatcher.addScheme(
+                new OnClickScheme(Pattern.compile("Irineu A\\. Silva"), (CharSequence text) ->
+                        goToMyGithub()
+                ).setPainTextColor(Color.GRAY)
+        );
 
         binding.edittext.addTextChangedListener(highlightTextWatcher);
 
@@ -145,19 +182,35 @@ public class MainActivity extends AppCompatActivity {
         initAutoText(getString(R.string.example));
     }
 
+    private void goToMyGithub() {
+        String url = "https://github.com/Irineu333";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+    private void showToast() {
+        Toast.makeText(
+                MainActivity.this,
+                "Highlight is the best!!",
+                Toast.LENGTH_SHORT
+        ).show();
+    }
+
     private void initAutoText(String text) {
 
         binding.edittext.setText("");
+        Handler handler = new Handler(Looper.getMainLooper());
 
         new Thread(() -> {
             try {
-                for (int index = 0; index < text.length(); index++) {
+                for (char charToAdd : text.toCharArray()) {
 
                     Thread.sleep(50);
-                    char charToAdd = text.charAt(index);
 
-                    new Handler(Looper.getMainLooper())
-                            .post(() -> binding.edittext.getText().append(charToAdd));
+                    handler.post(
+                            () -> binding.edittext.getText().append(charToAdd)
+                    );
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

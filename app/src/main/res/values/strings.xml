@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">HighlightProject</string>
-    <string name="example">Java\nKotlin\nJavaScript\nAndroid\n\nThis is the best highlight lib!!</string>
+    <string name="example">Java\nKotlin\nJavaScript\nAndroid\n\nThis is the best highlight lib!!\n\nRepo: https://github.com/Irineu333/Highlight\nAuthor: Irineu A. Silva</string>
 </resources>

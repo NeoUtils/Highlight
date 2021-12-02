@@ -15,15 +15,13 @@ import java.util.regex.Pattern;
  */
 public class StyleScheme implements Scheme {
 
-    @Nullable
-    Pattern pattern;
+    @NonNull
+    private final Pattern pattern;
 
     @NonNull
-    STYLE style;
+    private final STYLE style;
 
-    public StyleScheme(@NonNull String regex, @NonNull STYLE style) {
-        this(Pattern.compile(regex), style);
-    }
+    private boolean clearOldSpan = false;
 
     public StyleScheme(@NonNull Pattern pattern, @NonNull STYLE style) {
         this.pattern = pattern;
@@ -37,8 +35,18 @@ public class StyleScheme implements Scheme {
 
     @NonNull
     @Override
-    public Object getSpan() {
+    public Object getSpan(@NonNull CharSequence text) {
         return new StyleSpan(getType());
+    }
+
+    @Override
+    public boolean getClearOldSpan() {
+        return clearOldSpan;
+    }
+
+    public StyleScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
     }
 
     private int getType() {

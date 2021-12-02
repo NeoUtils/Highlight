@@ -15,15 +15,13 @@ import java.util.regex.Pattern;
  */
 public class ColorScheme implements Scheme {
 
-    @Nullable
-    Pattern pattern;
+    @NonNull
+    private final Pattern pattern;
 
     @ColorInt
     private final int color;
 
-    public ColorScheme(@NonNull String regex, @ColorInt int color) {
-        this(Pattern.compile(regex), color);
-    }
+    private boolean clearOldSpan = false;
 
     public ColorScheme(@NonNull Pattern pattern, @ColorInt int color) {
         this.pattern = pattern;
@@ -36,7 +34,17 @@ public class ColorScheme implements Scheme {
     }
 
     @Override
-    public Object getSpan() {
+    public Object getSpan(@NonNull CharSequence text) {
         return new ForegroundColorSpan(color);
+    }
+
+    @Override
+    public boolean getClearOldSpan() {
+        return clearOldSpan;
+    }
+
+    public ColorScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
     }
 }
