@@ -33,16 +33,6 @@ public class OnClickScheme implements Scheme {
         this.onClickListener = onClickListener;
     }
 
-    public OnClickScheme setPainText(boolean painText) {
-        this.painText = painText;
-        return this;
-    }
-
-    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
-    }
-
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -77,6 +67,16 @@ public class OnClickScheme implements Scheme {
     @Override
     public boolean getClearOldSpan() {
         return clearOldSpan;
+    }
+
+    public OnClickScheme setPainText(boolean painText) {
+        this.painText = painText;
+        return this;
+    }
+
+    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
     }
 
     public OnClickScheme setPainTextColor(@ColorInt int painTextColor) {

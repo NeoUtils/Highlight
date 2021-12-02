@@ -21,17 +21,11 @@ public class ColorScheme implements Scheme {
     @ColorInt
     private final int color;
 
-    private boolean clearOldSpan;
+    private boolean clearOldSpan = false;
 
     public ColorScheme(@NonNull Pattern pattern, @ColorInt int color) {
         this.pattern = pattern;
         this.color = color;
-        this.clearOldSpan = false;
-    }
-
-    public ColorScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
     }
 
     @Override
@@ -47,5 +41,10 @@ public class ColorScheme implements Scheme {
     @Override
     public boolean getClearOldSpan() {
         return clearOldSpan;
+    }
+
+    public ColorScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
     }
 }

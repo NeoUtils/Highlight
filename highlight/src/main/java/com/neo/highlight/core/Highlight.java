@@ -109,62 +109,6 @@ public class Highlight implements HighlightContract {
         }
     }
 
-    public SpannableString getSpannable(CharSequence text) {
-
-        SpannableString spannableString =
-                new SpannableString(text);
-
-        for (Scheme scheme : schemes) {
-
-            Pattern regex = scheme.getRegex();
-
-            Matcher matcher = regex.matcher(spannableString);
-
-            while (matcher.find()) {
-
-                CharSequence matcherText = text.subSequence(
-                        matcher.start(),
-                        matcher.end()
-                );
-
-                if (scheme.getClearOldSpan()) {
-                    removeSpan(
-                            spannableString,
-                            matcher.start(),
-                            matcher.end()
-                    );
-                }
-
-                spannableString.setSpan(
-                        scheme.getSpan(matcherText),
-                        matcher.start(),
-                        matcher.end(),
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                );
-            }
-        }
-
-        return spannableString;
-    }
-
-    private void removeSpan(SpannableString spannableString, int start, int end) {
-
-        for (Class<?> spanClass : spanTypes) {
-            for (Object span : spannableString.getSpans(start, end, spanClass)) {
-                spannableString.removeSpan(span);
-            }
-        }
-    }
-
-    public void setSpan(TextView textView) {
-
-        if (textView instanceof EditText) {
-            setSpan((Editable) textView.getText());
-        } else {
-            textView.setText(getSpannable(textView.getText()));
-        }
-    }
-
     @Override
     public void removeSpan(Editable editable) {
 
@@ -224,6 +168,62 @@ public class Highlight implements HighlightContract {
     public void clearSpanTypes() {
         this.spanTypes.clear();
         configDefaultSpanTypes();
+    }
+
+    public SpannableString getSpannable(CharSequence text) {
+
+        SpannableString spannableString =
+                new SpannableString(text);
+
+        for (Scheme scheme : schemes) {
+
+            Pattern regex = scheme.getRegex();
+
+            Matcher matcher = regex.matcher(spannableString);
+
+            while (matcher.find()) {
+
+                CharSequence matcherText = text.subSequence(
+                        matcher.start(),
+                        matcher.end()
+                );
+
+                if (scheme.getClearOldSpan()) {
+                    removeSpan(
+                            spannableString,
+                            matcher.start(),
+                            matcher.end()
+                    );
+                }
+
+                spannableString.setSpan(
+                        scheme.getSpan(matcherText),
+                        matcher.start(),
+                        matcher.end(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                );
+            }
+        }
+
+        return spannableString;
+    }
+
+    private void removeSpan(SpannableString spannableString, int start, int end) {
+
+        for (Class<?> spanClass : spanTypes) {
+            for (Object span : spannableString.getSpans(start, end, spanClass)) {
+                spannableString.removeSpan(span);
+            }
+        }
+    }
+
+    public void setSpan(TextView textView) {
+
+        if (textView instanceof EditText) {
+            setSpan((Editable) textView.getText());
+        } else {
+            textView.setText(getSpannable(textView.getText()));
+        }
     }
 
     private void configDefaultSpanTypes() {

@@ -25,16 +25,6 @@ public class LinkScheme implements Scheme {
     @ColorInt
     private int painTextColor = -1;
 
-    public LinkScheme setPainText(boolean painText) {
-        this.painText = painText;
-        return this;
-    }
-
-    public LinkScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
-    }
-
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -60,6 +50,15 @@ public class LinkScheme implements Scheme {
         };
     }
 
+    public LinkScheme setPainText(boolean painText) {
+        this.painText = painText;
+        return this;
+    }
+
+    public LinkScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
+        return this;
+    }
 
     public LinkScheme setPainTextColor(@ColorInt int painTextColor) {
         this.painTextColor = painTextColor;

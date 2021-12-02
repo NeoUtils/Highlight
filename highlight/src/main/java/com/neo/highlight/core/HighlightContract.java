@@ -7,16 +7,16 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 public interface HighlightContract {
-    public void setSpan(Editable editable, int start, int end);
-    public void setSpan(Editable editable);
-    public void removeSpan(Editable editable);
-    public void removeSpan(Editable editable, int start, int end);
-    public List<Scheme> getSchemes();
-    public void setSchemes(@NonNull List<Scheme> schemes);
-    public void addScheme(@NonNull Scheme scheme);
-    public void clearScheme();
-    public List<Class<?>> getSpanTypes();
-    public void setSpanTypes(@NonNull List<Class<?>> spanTypes);
-    public void addSpanType(Class<?> span);
-    public void clearSpanTypes();
+    void setSpan(Editable editable, int start, int end);
+    void setSpan(Editable editable);
+    void removeSpan(Editable editable);
+    void removeSpan(Editable editable, int start, int end);
+    List<Scheme> getSchemes();
+    void setSchemes(@NonNull List<Scheme> schemes);
+    void addScheme(@NonNull Scheme scheme);
+    void clearScheme();
+    List<Class<?>> getSpanTypes();
+    void setSpanTypes(@NonNull List<Class<?>> spanTypes);
+    void addSpanType(Class<?> span);
+    void clearSpanTypes();
 }

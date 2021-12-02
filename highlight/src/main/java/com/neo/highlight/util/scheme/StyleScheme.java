@@ -21,12 +21,11 @@ public class StyleScheme implements Scheme {
     @NonNull
     private final STYLE style;
 
-    boolean clearOldSpan;
+    private boolean clearOldSpan = false;
 
     public StyleScheme(@NonNull Pattern pattern, @NonNull STYLE style) {
         this.pattern = pattern;
         this.style = style;
-        this.clearOldSpan = false;
     }
 
     @Override
