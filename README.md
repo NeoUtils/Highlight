@@ -54,8 +54,73 @@ highlightTextWatcher.addScheme(
 //add the listener
 binding.edittext.addTextChangedListener(highlightTextWatcher);
 ```
-## Add to project
+## Schemes
+Use the default schemes; `ColorScheme`, `StyleScheme`, `LinkScheme` and `OnClickScheme`, or implement the `Scheme` interface to create a custom scheme.
 
+``` java
+...
+
+highlight.addScheme(
+        //modify the style
+        new StyleScheme(
+                Pattern.compile("Highlight"),
+                StyleScheme.STYLE.BOLD_ITALIC
+        )
+);
+
+highlight.addScheme(
+        //modify the text color
+        new ColorScheme(
+                Pattern.compile("light"),
+                Color.parseColor("#FF03DAC5")
+        )
+);
+
+highlight.addScheme(
+        //make the links clickable
+        new LinkScheme().setPainTextUnderline(false)
+);
+
+highlight.addScheme(
+        //make a clickable text
+        new OnClickScheme(
+                Pattern.compile("Highlight"),
+                new OnClickScheme.OnClickListener() {
+                    @Override
+                    public void onClick(CharSequence text) {
+                        goToURL("https://github.com/Irineu333/Highlight");
+                    }
+                }
+        )
+);
+
+highlight.addScheme(
+        //create the custom scheme
+        new Scheme() {
+            @Override
+            public Pattern getRegex() {
+                return Pattern.compile("Highlight");
+            }
+
+            @Override
+            public Object getSpan(@NonNull CharSequence text) {
+                return new BackgroundColorSpan(Color.GRAY);
+            }
+
+            @Override
+            public boolean getClearOldSpan() {
+                return false;
+            }
+        });
+
+//for the library to know how to remove span
+highlight.addSpanType(BackgroundColorSpan.class);
+...
+```
+
+## Performance
+
+## Add to project
 
 Add the jitpack to project in build.gradle or settings.gradle (gradle 7+)
 ``` groovy
