@@ -35,19 +35,22 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        configToolbar();
-        initHighlightExample();
+
+        highlightExample();
+        highlightListenerExample();
     }
 
-    private void configToolbar() {
+    private void highlightExample() {
 
         Highlight highlight = new Highlight();
 
+        //add scheme
         highlight.addScheme(
                 new StyleScheme(
                         Pattern.compile("Highlight"),
                         StyleScheme.STYLE.BOLD_ITALIC
                 ).addScopeScheme(
+                        //add scheme scheme
                         new ColorScheme(
                                 Pattern.compile("light"),
                                 Color.parseColor("#FF03DAC5")
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void initHighlightExample() {
+    private void highlightListenerExample() {
         HighlightTextWatcher highlightTextWatcher =
                 new HighlightTextWatcher();
 
@@ -85,82 +88,101 @@ public class MainActivity extends AppCompatActivity {
                 )
         );
 
+        //StrikethroughSpan custom scheme example
+        Scheme strikeScheme = new Scheme() {
+
+            final Pattern pattern =
+                    Pattern.compile(".+");
+
+            @Override
+            public Pattern getRegex() {
+                return pattern;
+            }
+
+            @Override
+            public Object getSpan(@NonNull CharSequence text) {
+                return new StrikethroughSpan();
+            }
+
+            @Override
+            public boolean getClearOldSpan() {
+                return false;
+            }
+
+            @Override
+            public Scheme setClearOldSpan(boolean clearOldSpan) {
+                return this;
+            }
+        };
         highlightTextWatcher.addScheme(
                 new ColorScheme(
                         Pattern.compile("\\b([Jj])ava([Ss])cript\\b"),
                         Color.parseColor("#F5E200")
+                ).addScopeScheme(
+                        //add in ColorScheme scope
+                        strikeScheme
                 )
         );
+
+        //UnderlineSpan custom scheme example
+        Scheme underlineScheme = new Scheme() {
+            final Pattern pattern =
+                    Pattern.compile(".+");
+
+            @Override
+            public Pattern getRegex() {
+                return pattern;
+            }
+
+            @Override
+            public Object getSpan(@NonNull CharSequence text) {
+                return new UnderlineSpan();
+            }
+
+            @Override
+            public boolean getClearOldSpan() {
+                return false;
+            }
+
+            @Override
+            public Scheme setClearOldSpan(boolean clearOldSpan) {
+                return this;
+            }
+        };
 
         highlightTextWatcher.addScheme(
                 new ColorScheme(
                         Pattern.compile("\\b([Aa])ndroid\\b"),
                         Color.parseColor("#00CA0E")
+                ).addScopeScheme(
+                        //add in ColorScheme scope
+                        underlineScheme
                 )
         );
 
+        //scheme scope example
         highlightTextWatcher.addScheme(
                 new StyleScheme(
                         Pattern.compile("\\b([Hh])ighlight\\b"),
                         StyleScheme.STYLE.BOLD_ITALIC
+                ).addScopeScheme(
+                        //add OnClickScheme in StyleScheme scope
+                        new OnClickScheme(
+                                Pattern.compile(".+"),
+                                (CharSequence text) -> showToast()
+                        ),
+                        //add ColorScheme in StyleScheme scope
+                        new ColorScheme(
+                                Pattern.compile("light"),
+                                Color.parseColor("#FF03DAC5")
+                        ).addScopeScheme(
+                                //add ColorScheme in ColorScheme scope
+                                new ColorScheme(
+                                        Pattern.compile("gh"),
+                                        Color.RED
+                                )
+                        )
                 )
-        );
-
-        //custom example
-        highlightTextWatcher.addScheme(
-                new Scheme() {
-
-                    final Pattern pattern =
-                            Pattern.compile("\\b([Jj])ava([Ss])cript\\b");
-
-                    @Override
-                    public Pattern getRegex() {
-                        return pattern;
-                    }
-
-                    @Override
-                    public Object getSpan(@NonNull CharSequence text) {
-                        return new StrikethroughSpan();
-                    }
-
-                    @Override
-                    public boolean getClearOldSpan() {
-                        return false;
-                    }
-
-                    @Override
-                    public Scheme setClearOldSpan(boolean clearOldSpan) {
-                        return this;
-                    }
-                }
-        );
-
-        //custom example 2
-        highlightTextWatcher.addScheme(
-                new Scheme() {
-                    final Pattern pattern =
-                            Pattern.compile("\\b([Hh])ighlight\\b");
-
-                    @Override
-                    public Pattern getRegex() {
-                        return pattern;
-                    }
-
-                    @Override
-                    public Object getSpan(@NonNull CharSequence text) {
-                        return new UnderlineSpan();
-                    }
-
-                    @Override
-                    public boolean getClearOldSpan() {
-                        return false;
-                    }
-
-                    @Override
-                    public Scheme setClearOldSpan(boolean clearOldSpan) {
-                        return this;
-                    }
-                }
         );
 
         highlightTextWatcher.addSpanType(StrikethroughSpan.class);
@@ -173,16 +195,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding.edittext.setMovementMethod(LinkMovementMethod.getInstance());
 
-        //add click scheme
-
-        highlightTextWatcher.addScheme(
-                new OnClickScheme(Pattern.compile("[hH]ighlight"), (CharSequence text) -> showToast())
-        );
-
         highlightTextWatcher.addScheme(
                 new OnClickScheme(Pattern.compile("Irineu A\\. Silva"), (CharSequence text) ->
                         goToMyGithub()
-                ).setPainTextColor(Color.GRAY)
+                ).setPainTextColor(
+                        Color.GREEN
+                ).setPainTextUnderline(true)
         );
 
         binding.edittext.addTextChangedListener(highlightTextWatcher);

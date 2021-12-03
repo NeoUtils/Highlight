@@ -146,17 +146,17 @@ public class Highlight implements HighlightContract {
 
             Pattern regex = scheme.getRegex();
 
-            Matcher matcher = regex.matcher(spannableString);
+            Matcher matcher = regex.matcher(subText);
 
             while (matcher.find()) {
 
-                int scopeEnd = matcher.end();
-                int scopeStart = matcher.start();
-
                 CharSequence matcherText = subText.subSequence(
-                        scopeStart,
-                        scopeEnd
+                        matcher.start(),
+                        matcher.end()
                 );
+
+                int scopeStart = start + matcher.start();
+                int scopeEnd = start + matcher.end();
 
                 if (scheme.getClearOldSpan()) {
                     removeSpan(
