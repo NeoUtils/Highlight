@@ -1,16 +1,31 @@
 package com.neo.highlight.core;
 
 import android.text.Editable;
+import android.text.SpannableString;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import java.util.List;
 
 public interface HighlightContract {
+
+    //setSpan EditText
     void setSpan(Editable editable, int start, int end);
     void setSpan(Editable editable);
-    void removeSpan(Editable editable);
+
+    //setSpan TextView
+    void setSpan(TextView textView, int start, int end);
+    void setSpan(TextView textView);
+
+    //setSpan Spannable
+    void setSpan(SpannableString spannableString, int start, int end);
+    void setSpan(SpannableString spannableString);
+
+    //removeSpan EditText
     void removeSpan(Editable editable, int start, int end);
+    void removeSpan(Editable editable);
+
     List<Scheme> getSchemes();
     void setSchemes(@NonNull List<Scheme> schemes);
     void addScheme(@NonNull Scheme scheme);

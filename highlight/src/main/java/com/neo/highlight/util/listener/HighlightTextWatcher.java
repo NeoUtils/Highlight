@@ -3,6 +3,8 @@ package com.neo.highlight.util.listener;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -83,6 +85,26 @@ public class HighlightTextWatcher extends LinesTextWatcher implements HighlightC
     @Override
     public void setSpan(Editable editable) {
         this.highlight.setSpan(editable);
+    }
+
+    @Override
+    public void setSpan(TextView textView, int start, int end) {
+        this.highlight.setSpan(textView, start, end);
+    }
+
+    @Override
+    public void setSpan(TextView textView) {
+        this.highlight.setSpan(textView);
+    }
+
+    @Override
+    public void setSpan(SpannableString spannableString, int start, int end) {
+        this.highlight.setSpan(spannableString, start, end);
+    }
+
+    @Override
+    public void setSpan(SpannableString spannableString) {
+        this.setSpan(spannableString);
     }
 
     @Override
