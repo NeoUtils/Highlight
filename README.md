@@ -64,5 +64,5 @@ maven { url 'https://jitpack.io' }
 
 Add the dependence to module (normally app)
 ``` groovy
-implementation 'com.github.Irineu333:Highlight:$highlight_version'
+implementation "com.github.Irineu333:Highlight:$highlight_version"
 ```
