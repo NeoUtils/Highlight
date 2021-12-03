@@ -50,13 +50,14 @@ public class LinkScheme implements Scheme {
         };
     }
 
-    public LinkScheme setPainText(boolean painText) {
-        this.painText = painText;
+    @Override
+    public LinkScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
         return this;
     }
 
-    public LinkScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
+    public LinkScheme setPainText(boolean painText) {
+        this.painText = painText;
         return this;
     }
 

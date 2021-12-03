@@ -43,6 +43,7 @@ public class ColorScheme implements Scheme {
         return clearOldSpan;
     }
 
+    @Override
     public ColorScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
         return this;

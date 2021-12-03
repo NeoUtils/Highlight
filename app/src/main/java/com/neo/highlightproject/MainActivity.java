@@ -128,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
                     public boolean getClearOldSpan() {
                         return false;
                     }
+
+                    @Override
+                    public Scheme setClearOldSpan(boolean clearOldSpan) {
+                        return this;
+                    }
                 }
         );
 
@@ -150,6 +155,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean getClearOldSpan() {
                         return false;
+                    }
+
+                    @Override
+                    public Scheme setClearOldSpan(boolean clearOldSpan) {
+                        return this;
                     }
                 }
         );

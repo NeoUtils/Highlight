@@ -44,6 +44,7 @@ public class StyleScheme implements Scheme {
         return clearOldSpan;
     }
 
+    @Override
     public StyleScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
         return this;

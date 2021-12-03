@@ -1,6 +1,9 @@
 package com.neo.highlight.core;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+
+import com.neo.highlight.util.scheme.OnClickScheme;
 
 import java.util.regex.Pattern;
 
@@ -15,5 +18,7 @@ public interface Scheme {
     Object getSpan(@NonNull CharSequence text);
 
     boolean getClearOldSpan();
+
+    Scheme setClearOldSpan(boolean clearOldSpan);
 
 }

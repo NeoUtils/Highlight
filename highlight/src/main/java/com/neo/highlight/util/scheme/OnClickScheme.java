@@ -69,13 +69,14 @@ public class OnClickScheme implements Scheme {
         return clearOldSpan;
     }
 
-    public OnClickScheme setPainText(boolean painText) {
-        this.painText = painText;
+    @Override
+    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
         return this;
     }
 
-    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
+    public OnClickScheme setPainText(boolean painText) {
+        this.painText = painText;
         return this;
     }
 
