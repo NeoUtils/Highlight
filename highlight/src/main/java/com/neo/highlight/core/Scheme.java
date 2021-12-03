@@ -16,4 +16,6 @@ public interface Scheme {
 
     boolean getClearOldSpan();
 
+    Scheme setClearOldSpan(boolean clearOldSpan);
+
 }

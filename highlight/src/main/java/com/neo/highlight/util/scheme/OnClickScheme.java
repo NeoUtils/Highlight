@@ -6,12 +6,20 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
+import com.neo.highlight.core.SchemeScope;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
-public class OnClickScheme implements Scheme {
+public class OnClickScheme implements Scheme, SchemeScope {
+
+    @Nullable
+    private List<Scheme> scopeSchemes;
 
     @NonNull
     private final OnClickListener onClickListener;
@@ -69,13 +77,14 @@ public class OnClickScheme implements Scheme {
         return clearOldSpan;
     }
 
-    public OnClickScheme setPainText(boolean painText) {
-        this.painText = painText;
+    @Override
+    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
+        this.clearOldSpan = clearOldSpan;
         return this;
     }
 
-    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
+    public OnClickScheme setPainText(boolean painText) {
+        this.painText = painText;
         return this;
     }
 
@@ -86,6 +95,41 @@ public class OnClickScheme implements Scheme {
 
     public OnClickScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
+        return this;
+    }
+
+
+    //override ScopeScheme
+
+    @Nullable
+    @Override
+    public List<Scheme> getScopeSchemes() {
+        return scopeSchemes;
+    }
+
+    @Override
+    public OnClickScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
+        scopeSchemes = schemes;
+        return this;
+    }
+
+    @Override
+    public OnClickScheme addScopeScheme(@NonNull Scheme... scheme) {
+
+        if (scopeSchemes == null) {
+            scopeSchemes = new ArrayList<>();
+        }
+
+        scopeSchemes.addAll(Arrays.asList(scheme));
+
+        return this;
+    }
+
+    @Override
+    public OnClickScheme clearScopeSchemes() {
+        if (scopeSchemes != null) {
+            scopeSchemes.clear();
+        }
         return this;
     }
 

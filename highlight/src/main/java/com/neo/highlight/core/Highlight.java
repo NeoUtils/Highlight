@@ -40,9 +40,20 @@ public class Highlight implements HighlightContract {
         configDefaultSpanTypes();
     }
 
+    //setSpan EdiText
+
+    @Override
+    public void setSpan(Editable editable) {
+        setSpan(editable, 0, editable.length());
+    }
+
     @Override
     public void setSpan(Editable editable, int start, int end) {
+        setSpan(editable, schemes, start, end);
+    }
 
+    //EDITTEXT PROCESS
+    private void setSpan(Editable editable, List<Scheme> schemes, int start, int end) {
         CharSequence subText = editable.subSequence(start, end);
 
         for (Scheme scheme : schemes) {
@@ -58,53 +69,120 @@ public class Highlight implements HighlightContract {
                         matcher.end()
                 );
 
+                int scopeStart = start + matcher.start();
+                int scopeEnd = start + matcher.end();
+
                 if (scheme.getClearOldSpan()) {
                     removeSpan(
                             editable,
-                            start + matcher.start(),
-                            start + matcher.end()
+                            scopeStart,
+                            scopeEnd
                     );
                 }
 
                 SpanUtils.setSpan(
                         editable,
                         scheme.getSpan(matcherText),
-                        start + matcher.start(),
-                        start + matcher.end()
+                        scopeStart,
+                        scopeEnd
                 );
+
+                //scope scheme
+                if (scheme instanceof SchemeScope) {
+
+                    SchemeScope schemeScope = (SchemeScope) scheme;
+                    List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
+
+                    if (schemeScopes != null) {
+                        setSpan(editable, schemeScopes,
+                                scopeStart,
+                                scopeEnd
+                        );
+                    }
+                }
             }
         }
     }
 
+    //setSpan TextView
+
     @Override
-    public void setSpan(Editable editable) {
+    public void setSpan(TextView textView) {
+        setSpan(textView, 0, textView.length());
+    }
+
+    @Override
+    public void setSpan(TextView textView, int start, int end) {
+        if (textView instanceof EditText) {
+            setSpan((Editable) textView.getText(), start, end);
+        } else {
+
+            SpannableString spannableString =
+                    new SpannableString(textView.getText());
+
+            setSpan(spannableString, start, end);
+
+            textView.setText(spannableString);
+        }
+    }
+
+    //setSpan Spannable
+
+    @Override
+    public void setSpan(SpannableString spannableString) {
+        setSpan(spannableString,0, spannableString.length());
+    }
+
+    @Override
+    public void setSpan(SpannableString spannableString, int start, int end) {
+        setSpan(spannableString, schemes, start, end);
+    }
+
+    //SPANNABLE PROCESS
+    private void setSpan(SpannableString spannableString, List<Scheme> schemes, int start, int end) {
+        CharSequence subText = spannableString.subSequence(start, end);
+
         for (Scheme scheme : schemes) {
 
             Pattern regex = scheme.getRegex();
 
-            Matcher matcher = regex.matcher(editable);
+            Matcher matcher = regex.matcher(subText);
 
             while (matcher.find()) {
 
-                CharSequence matcherText = editable.subSequence(
+                CharSequence matcherText = subText.subSequence(
                         matcher.start(),
                         matcher.end()
                 );
+
+                int scopeStart = start + matcher.start();
+                int scopeEnd = start + matcher.end();
 
                 if (scheme.getClearOldSpan()) {
                     removeSpan(
-                            editable,
-                            matcher.start(),
-                            matcher.end()
+                            spannableString,
+                            scopeStart,
+                            scopeEnd
                     );
                 }
 
-                SpanUtils.setSpan(
-                        editable,
+                spannableString.setSpan(
                         scheme.getSpan(matcherText),
-                        matcher.start(),
-                        matcher.end()
+                        scopeStart,
+                        scopeEnd,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                 );
+
+                //scope scheme
+                if (scheme instanceof SchemeScope) {
+
+                    SchemeScope schemeScope = (SchemeScope) scheme;
+                    List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
+
+                    if (schemeScopes != null && !schemeScopes.isEmpty()) {
+                        setSpan(spannableString, schemeScopes, scopeStart, scopeEnd);
+                    }
+                }
             }
         }
     }
@@ -175,35 +253,7 @@ public class Highlight implements HighlightContract {
         SpannableString spannableString =
                 new SpannableString(text);
 
-        for (Scheme scheme : schemes) {
-
-            Pattern regex = scheme.getRegex();
-
-            Matcher matcher = regex.matcher(spannableString);
-
-            while (matcher.find()) {
-
-                CharSequence matcherText = text.subSequence(
-                        matcher.start(),
-                        matcher.end()
-                );
-
-                if (scheme.getClearOldSpan()) {
-                    removeSpan(
-                            spannableString,
-                            matcher.start(),
-                            matcher.end()
-                    );
-                }
-
-                spannableString.setSpan(
-                        scheme.getSpan(matcherText),
-                        matcher.start(),
-                        matcher.end(),
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                );
-            }
-        }
+        setSpan(spannableString);
 
         return spannableString;
     }
@@ -214,15 +264,6 @@ public class Highlight implements HighlightContract {
             for (Object span : spannableString.getSpans(start, end, spanClass)) {
                 spannableString.removeSpan(span);
             }
-        }
-    }
-
-    public void setSpan(TextView textView) {
-
-        if (textView instanceof EditText) {
-            setSpan((Editable) textView.getText());
-        } else {
-            textView.setText(getSpannable(textView.getText()));
         }
     }
 
