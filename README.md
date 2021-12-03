@@ -1,4 +1,4 @@
-# Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight)
+# Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight) [![Android CI](https://github.com/Irineu333/Highlight/actions/workflows/android.yml/badge.svg)](https://github.com/Irineu333/Highlight/actions/workflows/android.yml)
 
 Uma biblioteca completa e performática para destacar trechos de textos usando `Spannable` com Expressões Regulares (Regex) para Android totalmente em Java.
 
