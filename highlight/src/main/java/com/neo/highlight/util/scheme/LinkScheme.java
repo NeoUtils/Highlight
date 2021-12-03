@@ -8,10 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
+import com.neo.highlight.core.SchemeScope;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
-public class LinkScheme implements Scheme {
+public class LinkScheme implements Scheme, SchemeScope {
+
+    @Nullable
+    private List<Scheme> scopeSchemes;
 
     @Nullable
     private final Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
@@ -70,6 +77,41 @@ public class LinkScheme implements Scheme {
         this.painTextUnderline = painTextUnderline;
         return this;
     }
+
+    //override ScopeScheme
+
+    @Nullable
+    @Override
+    public List<Scheme> getScopeSchemes() {
+        return scopeSchemes;
+    }
+
+    @Override
+    public LinkScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
+        scopeSchemes = schemes;
+        return this;
+    }
+
+    @Override
+    public LinkScheme addScopeScheme(@NonNull Scheme... scheme) {
+
+        if (scopeSchemes == null) {
+            scopeSchemes = new ArrayList<>();
+        }
+
+        scopeSchemes.addAll(Arrays.asList(scheme));
+
+        return this;
+    }
+
+    @Override
+    public LinkScheme clearScopeSchemes() {
+        if (scopeSchemes != null) {
+            scopeSchemes.clear();
+        }
+        return this;
+    }
+
 
     public boolean getClearOldSpan() {
         return clearOldSpan;

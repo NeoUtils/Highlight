@@ -1,9 +1,6 @@
 package com.neo.highlight.core;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-
-import com.neo.highlight.util.scheme.OnClickScheme;
 
 import java.util.regex.Pattern;
 

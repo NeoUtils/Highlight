@@ -7,13 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
+import com.neo.highlight.core.SchemeScope;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
  * @author Irineu A. Silva
  */
-public class ColorScheme implements Scheme {
+public class ColorScheme implements Scheme, SchemeScope {
+
+    @Nullable
+    private List<Scheme> scopeSchemes;
 
     @NonNull
     private final Pattern pattern;
@@ -48,4 +55,39 @@ public class ColorScheme implements Scheme {
         this.clearOldSpan = clearOldSpan;
         return this;
     }
+
+    //override ScopeScheme
+
+    @Nullable
+    @Override
+    public List<Scheme> getScopeSchemes() {
+        return scopeSchemes;
+    }
+
+    @Override
+    public ColorScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
+        scopeSchemes = schemes;
+        return this;
+    }
+
+    @Override
+    public ColorScheme addScopeScheme(@NonNull Scheme... scheme) {
+
+        if (scopeSchemes == null) {
+            scopeSchemes = new ArrayList<>();
+        }
+
+        scopeSchemes.addAll(Arrays.asList(scheme));
+
+        return this;
+    }
+
+    @Override
+    public ColorScheme clearScopeSchemes() {
+        if (scopeSchemes != null) {
+            scopeSchemes.clear();
+        }
+        return this;
+    }
+
 }

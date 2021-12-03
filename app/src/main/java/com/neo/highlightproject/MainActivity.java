@@ -47,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
                 new StyleScheme(
                         Pattern.compile("Highlight"),
                         StyleScheme.STYLE.BOLD_ITALIC
-                )
-        );
-
-        highlight.addScheme(
-                new ColorScheme(
-                        Pattern.compile("light"),
-                        Color.parseColor("#FF03DAC5")
+                ).addScopeScheme(
+                        new ColorScheme(
+                                Pattern.compile("light"),
+                                Color.parseColor("#FF03DAC5")
+                        )
                 )
         );
 
@@ -111,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         //custom example
         highlightTextWatcher.addScheme(
                 new Scheme() {
+
                     final Pattern pattern =
                             Pattern.compile("\\b([Jj])ava([Ss])cript\\b");
 
