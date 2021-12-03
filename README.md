@@ -1,85 +1,68 @@
 # Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight) [![Android CI](https://github.com/Irineu333/Highlight/actions/workflows/android.yml/badge.svg)](https://github.com/Irineu333/Highlight/actions/workflows/android.yml)
 
-Uma biblioteca completa e performática para destacar trechos de textos usando `Spannable` com Expressões Regulares (Regex) para Android totalmente em Java.
+A complete and performing library to highlight text snippets (EditText/Editable and TextView) using `Spannable` with Regular Expressions (Regex) for Android.
 
-### Processamento por linhas alteradas (opcional)
-Quando ativado (por padrão é), a classe ``HighlightTextWatcher`` processa apenas as linhas alteradas e não todo o texto, melhorando consideravelmente a performance. Mas você pode desabilitar essa funcionalidade com ``setRange(HighlightTextWatcher.RANGE_PROCESS.MODIFIED);``
+## Highlight a text
+To highlight a text, just create an instance of `Highlight`, add the Schemes and use `setSpan()` method to add to a `TextView` or `EditText`.
 
-### Por que em Java?
-Para maior compatibilidade... Mas você pode utilizar em Kotlin.
-
-## Como usar
-
-A forma mais básica de utilizar a lib é com as implementações padrões, como ``HighlightTextWatcher`` e os ``Scheme`` (``ColorScheme``, ``StyleScheme`` etc.)
 ``` java
-//crie uma instância de Hightlight
+//create an instance of Highlight
 Highlight highlight = new Highlight();
 
-//adicione seus Scheme, a lib possui alguns prontos
+//add Schemes
 highlight.addScheme(
         new ColorScheme(
-                "\\b(J|j)ava\\b",
+                Pattern.compile("\\b([Jj])ava\\b"),
                 Color.parseColor("#FC0400")
         )
 );
 
 highlight.addScheme(
         new ColorScheme(
-                "\\b(K|k)otlin\\b",
+                Pattern.compile("\\b([Kk])otlin\\b"),
                 Color.parseColor("#FC8500")
         )
 );
 
-//crie uma HighlightTextWatcher passando a instância de Highlight pelo construtor
-HighlightTextWatcher textWatcher = new HighlightTextWatcher(highlight);
+//highlight the text
+highlight.setSpan(binding.edittext);
+highlight.setSpan(binding.textview);
+```
 
-//adicione o HighlightTextWatcher ao EditText
-binding.edittext.addTextChangedListener(textWatcher);
- ```
- 
- Mais você pode fazer suas próprias implementações, por exemplo estendendo a classe ``LinesTextWatcher`` que fornece o processamento por linhas alteradas ou criar seus próprios ``Scheme``, apenas estendendo a interface Scheme e implementando os métodos.
+## Continuously highlight
+To continuously highlight an `EditText` whenever it is edited, create an instance of `HighlightTextWatcher`, add the Schemes and add the listener to the `EditText`.
+
 ``` java
-//custom scheme example
-highlight.addScheme(
-        new Scheme() {
-            final Pattern pattern =
-                    Pattern.compile("\\b([Jj])ava([Ss])cript\\b");
+//create an instance of HighlightTextWatcher
+HighlightTextWatcher highlightTextWatcher = new HighlightTextWatcher();
 
-            @Override
-            public Pattern getRegex() {
-                return pattern;
-            }
-
-            @Override
-            public Object getSpan() {
-                return new StrikethroughSpan();
-            }
-        }
+//add schemes
+highlightTextWatcher.addScheme(
+        new StyleScheme(
+                Pattern.compile("\\b([Jj])ava\\b"),
+                StyleScheme.STYLE.BOLD_ITALIC
+        ).setClearOldSpan(true)
 );
 
-//para que a classe Hightlight saiba remover esse span
-highlight.addSpanType(StrikethroughSpan.class);
+highlightTextWatcher.addScheme(
+        new StyleScheme(
+                Pattern.compile("\\b([Kk])otlin\\b"),
+                StyleScheme.STYLE.BOLD_ITALIC
+        ).setClearOldSpan(true)
+);
+
+//add the listener
+binding.edittext.addTextChangedListener(highlightTextWatcher);
 ```
-
-A classe ``Highlight`` possui as implementaçõs de adicionar e remover spans em todo ``Editable`` ou apenas em trechos específicos, você pode usá-la idividualmente também.
-
-``` java
-highlight.removeSpan(editable, start, end);
-highlight.setSpan(editable, start, end);
-
-highlight.removeSpan(editable);
-highlight.setSpan(editable);
-```
-
-## Adicionar a seu projeto
+## Add to project
 
 
-Adicione o jitpack a seu projeto em settings.gradle
+Add the jitpack to project in settings.gradle or build.gradle (gradle 7+)
 ``` groovy
 maven { url 'https://jitpack.io' }
 ```
 
-Adicione a dependencia ao gradle do módulo (geralmente o módulo app)
+Add the dependence to module (normally app)
 ``` groovy
-implementation 'com.github.Irineu333:Highlight:version'
+implementation 'com.github.Irineu333:Highlight:$highlight_version'
 ```
