@@ -7,13 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
+import com.neo.highlight.core.SchemeScope;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
  * @author Irineu A. Silva
  */
-public class StyleScheme implements Scheme {
+public class StyleScheme implements Scheme, SchemeScope {
+
+    @Nullable
+    private List<Scheme> scopedSchemes;
 
     @NonNull
     private final Pattern pattern;
@@ -44,6 +51,7 @@ public class StyleScheme implements Scheme {
         return clearOldSpan;
     }
 
+    @Override
     public StyleScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
         return this;
@@ -63,6 +71,40 @@ public class StyleScheme implements Scheme {
         }
 
         return Typeface.NORMAL;
+    }
+
+    //override ScopeScheme
+
+    @Override
+    @Nullable
+    public List<Scheme> getScopeSchemes() {
+        return scopedSchemes;
+    }
+
+    @Override
+    public StyleScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
+        scopedSchemes = schemes;
+        return this;
+    }
+
+    @Override
+    public StyleScheme addScopeScheme(@NonNull Scheme... scheme) {
+
+        if (scopedSchemes == null) {
+            scopedSchemes = new ArrayList<>();
+        }
+
+        scopedSchemes.addAll(Arrays.asList(scheme));
+
+        return this;
+    }
+
+    @Override
+    public StyleScheme clearScopeSchemes() {
+        if (scopedSchemes != null) {
+            scopedSchemes.clear();
+        }
+        return this;
     }
 
     public enum STYLE {
