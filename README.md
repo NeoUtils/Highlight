@@ -57,7 +57,7 @@ binding.edittext.addTextChangedListener(highlightTextWatcher);
 ## Add to project
 
 
-Add the jitpack to project in settings.gradle or build.gradle (gradle 7+)
+Add the jitpack to project in build.gradle or settings.gradle (gradle 7+)
 ``` groovy
 maven { url 'https://jitpack.io' }
 ```
