@@ -35,6 +35,7 @@ public class StyleScheme implements Scheme, ScopeSchemeContract {
         this.style = style;
     }
 
+    @NonNull
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -51,6 +52,7 @@ public class StyleScheme implements Scheme, ScopeSchemeContract {
         return clearOldSpan;
     }
 
+    @NonNull
     @Override
     public StyleScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;

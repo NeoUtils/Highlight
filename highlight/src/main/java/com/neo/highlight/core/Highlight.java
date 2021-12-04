@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -222,8 +223,8 @@ public class Highlight implements HighlightContract {
     }
 
     @Override
-    public void addScheme(@NonNull Scheme scheme) {
-        this.schemes.add(scheme);
+    public void addScheme(@NonNull Scheme... scheme) {
+        this.schemes.addAll(Arrays.asList(scheme));
     }
 
     @Override

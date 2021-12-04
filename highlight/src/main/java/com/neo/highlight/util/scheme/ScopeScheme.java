@@ -45,6 +45,7 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
         return clearOldSpan;
     }
 
+    @NonNull
     @Override
     public ScopeScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
@@ -72,7 +73,7 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
 
         scopeSchemes.addAll(Arrays.asList(scheme));
 
-        return null;
+        return this;
     }
 
     @Override

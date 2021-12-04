@@ -44,6 +44,7 @@ public class OnClickScheme implements Scheme, ScopeSchemeContract {
         this.onClickListener = onClickListener;
     }
 
+    @NonNull
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -80,6 +81,7 @@ public class OnClickScheme implements Scheme, ScopeSchemeContract {
         return clearOldSpan;
     }
 
+    @NonNull
     @Override
     public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;

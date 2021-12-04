@@ -35,6 +35,7 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
     @ColorInt
     private int painTextColor = -1;
 
+    @NonNull
     @Override
     public Pattern getRegex() {
         return pattern;
@@ -60,6 +61,7 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
         };
     }
 
+    @NonNull
     @Override
     public LinkScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;

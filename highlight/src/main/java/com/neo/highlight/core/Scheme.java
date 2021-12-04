@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  */
 public interface Scheme {
 
+    @NonNull
     Pattern getRegex();
 
     @Nullable
@@ -17,6 +18,7 @@ public interface Scheme {
 
     boolean getClearOldSpan();
 
+    @NonNull
     Scheme setClearOldSpan(boolean clearOldSpan);
 
 }
