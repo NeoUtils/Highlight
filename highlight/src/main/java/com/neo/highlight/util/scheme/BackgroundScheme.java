@@ -4,6 +4,8 @@ import android.text.style.BackgroundColorSpan;
 
 import androidx.annotation.NonNull;
 
+import com.neo.highlight.util.scheme.base.BaseColorScheme;
+
 import java.util.regex.Pattern;
 
 /**

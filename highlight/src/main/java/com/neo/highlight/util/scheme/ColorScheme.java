@@ -4,13 +4,9 @@ import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.neo.highlight.core.Scheme;
+import com.neo.highlight.util.scheme.base.BaseColorScheme;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
