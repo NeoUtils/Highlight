@@ -10,6 +10,7 @@ import com.neo.highlight.util.scheme.base.BaseScheme;
 import java.util.regex.Pattern;
 
 /**
+ * Pain text style
  * @author Irineu A. Silva
  */
 final public class StyleScheme extends BaseScheme {

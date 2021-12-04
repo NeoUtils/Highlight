@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Base to schemes
+ * @author Irineu A. Silva
+ */
 abstract public class BaseScheme implements Scheme, ScopeScheme {
 
     @Nullable

@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Apply schemes
  * @author Irineu A. Silva
  */
 final public class Highlight implements HighlightContract {
@@ -190,7 +191,13 @@ final public class Highlight implements HighlightContract {
     }
 
     //SPANNABLE PROCESS
-    private void process(SpannableString spannableString, Scheme scheme, CharSequence matcherText, int scopeStart, int scopeEnd) {
+    private void process(
+            SpannableString spannableString,
+            Scheme scheme,
+            CharSequence matcherText,
+            int scopeStart,
+            int scopeEnd
+    ) {
         if (scheme.getClearOldSpan()) {
             removeSpan(
                     spannableString,
