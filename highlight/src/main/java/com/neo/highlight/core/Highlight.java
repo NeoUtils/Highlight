@@ -81,7 +81,7 @@ public class Highlight implements HighlightContract {
                     );
                 }
 
-                Object span = scheme.getSpan(matcherText);
+                Object span = scheme.getSpan(matcherText, scopeStart, scopeEnd);
 
                 if (span != null) {
                     SpanUtils.setSpan(
@@ -171,7 +171,7 @@ public class Highlight implements HighlightContract {
                     );
                 }
 
-                Object span = scheme.getSpan(matcherText);
+                Object span = scheme.getSpan(matcherText, scopeStart, scopeEnd);
                 if (span != null) {
                     spannableString.setSpan(
                             span,
@@ -223,8 +223,8 @@ public class Highlight implements HighlightContract {
     }
 
     @Override
-    public void addScheme(@NonNull Scheme... scheme) {
-        this.schemes.addAll(Arrays.asList(scheme));
+    public void addScheme(@NonNull Scheme... schemes) {
+        this.schemes.addAll(Arrays.asList(schemes));
     }
 
     @Override

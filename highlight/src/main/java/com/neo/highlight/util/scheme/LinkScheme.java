@@ -42,7 +42,7 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
     }
 
     @Override
-    public Object getSpan(@NonNull CharSequence text) {
+    public Object getSpan(@NonNull CharSequence text, int start, int end) {
         return new URLSpan(text.toString()) {
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {

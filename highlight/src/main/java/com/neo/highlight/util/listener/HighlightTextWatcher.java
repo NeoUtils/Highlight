@@ -128,8 +128,8 @@ public class HighlightTextWatcher extends LinesTextWatcher implements HighlightC
     }
 
     @Override
-    public void addScheme(@NonNull Scheme... scheme) {
-        highlight.addScheme(scheme);
+    public void addScheme(@NonNull Scheme... schemes) {
+        highlight.addScheme(schemes);
     }
 
     @Override

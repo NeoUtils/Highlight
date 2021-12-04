@@ -43,7 +43,7 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
 
     @Override
     @NonNull
-    public Object getSpan(@NonNull CharSequence text) {
+    public Object getSpan(@NonNull CharSequence text, int start, int end) {
         return new ForegroundColorSpan(color);
     }
 

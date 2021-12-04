@@ -14,7 +14,7 @@ public interface Scheme {
     Pattern getRegex();
 
     @Nullable
-    Object getSpan(@NonNull CharSequence text);
+    Object getSpan(@NonNull CharSequence text, int start, int end);
 
     boolean getClearOldSpan();
 

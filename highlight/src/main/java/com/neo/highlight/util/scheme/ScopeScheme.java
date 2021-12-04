@@ -36,7 +36,7 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
 
     @Override
     @Nullable
-    public Object getSpan(@NonNull CharSequence text) {
+    public Object getSpan(@NonNull CharSequence text, int start, int end) {
         return null;
     }
 

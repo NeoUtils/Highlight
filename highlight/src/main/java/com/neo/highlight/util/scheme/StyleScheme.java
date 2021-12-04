@@ -43,7 +43,7 @@ public class StyleScheme implements Scheme, ScopeSchemeContract {
 
     @NonNull
     @Override
-    public Object getSpan(@NonNull CharSequence text) {
+    public Object getSpan(@NonNull CharSequence text, int start, int end) {
         return new StyleSpan(getType());
     }
 

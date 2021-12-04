@@ -51,12 +51,12 @@ public class OnClickScheme implements Scheme, ScopeSchemeContract {
     }
 
     @Override
-    public Object getSpan(@NonNull final CharSequence text) {
+    public Object getSpan(@NonNull final CharSequence text, final int start, final int end) {
         return new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
-                onClickListener.onClick(text);
+                onClickListener.onClick(text, start, end);
             }
 
             @Override
@@ -139,6 +139,6 @@ public class OnClickScheme implements Scheme, ScopeSchemeContract {
     }
 
     public interface OnClickListener {
-        void onClick(CharSequence text);
+        void onClick(CharSequence text, int start, int end);
     }
 }
