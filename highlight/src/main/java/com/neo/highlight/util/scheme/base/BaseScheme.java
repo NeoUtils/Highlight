@@ -63,7 +63,7 @@ abstract public class BaseScheme implements Scheme, ScopeScheme {
         if (scopeSchemes != null) {
             scopeSchemes.addAll(Arrays.asList(scheme));
         }
-        return null;
+        return this;
     }
 
     @Override
