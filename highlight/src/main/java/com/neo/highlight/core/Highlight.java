@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 /**
  * @author Irineu A. Silva
  */
-public class Highlight implements HighlightContract {
+final public class Highlight implements HighlightContract {
 
     @NonNull
     private List<Scheme> schemes;

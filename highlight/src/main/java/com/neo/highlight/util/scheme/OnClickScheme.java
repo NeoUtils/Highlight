@@ -7,8 +7,6 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
-import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.ScopeScheme;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 import com.neo.highlight.util.scheme.contract.LinkSchemeContract;
 

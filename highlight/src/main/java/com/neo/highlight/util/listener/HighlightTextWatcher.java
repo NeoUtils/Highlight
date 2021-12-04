@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Irineu A. Silva
  */
-public class HighlightTextWatcher extends LinesTextWatcher implements HighlightContract {
+final public class HighlightTextWatcher extends LinesTextWatcher implements HighlightContract {
 
     @NonNull
     private RANGE range = RANGE.MODIFIED;
