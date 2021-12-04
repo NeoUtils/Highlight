@@ -16,6 +16,7 @@ import com.neo.highlight.core.Scheme;
 import java.util.List;
 
 /**
+ * Apply schemes to EditText
  * @author Irineu A. Silva
  */
 final public class HighlightTextWatcher extends LinesTextWatcher implements HighlightContract {

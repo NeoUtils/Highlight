@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 /**
+ * Process edits in EdiText
  * @author Irineu A. Silva
  */
 public abstract class LinesTextWatcher implements TextWatcher {
