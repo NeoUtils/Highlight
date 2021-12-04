@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
 import com.neo.highlight.core.ScopeScheme;
+import com.neo.highlight.util.scheme.contract.LinkSchemeContract;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 /**
  * @author Irineu A. Silva
  */
-public class OnClickScheme implements Scheme, ScopeScheme {
+public class OnClickScheme implements Scheme, ScopeScheme, LinkSchemeContract {
 
     @Nullable
     private List<Scheme> scopeSchemes;
@@ -93,16 +94,21 @@ public class OnClickScheme implements Scheme, ScopeScheme {
         return this;
     }
 
+    //override LinkSchemeContract
+
+    @Override
     public OnClickScheme setPainText(boolean painText) {
         this.painText = painText;
         return this;
     }
 
+    @Override
     public OnClickScheme setPainTextColor(@ColorInt int painTextColor) {
         this.painTextColor = painTextColor;
         return setPainText(true);
     }
 
+    @Override
     public OnClickScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
         return this;

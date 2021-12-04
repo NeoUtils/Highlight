@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.neo.highlight.util.scheme.base.BaseScheme;
+import com.neo.highlight.util.scheme.contract.LinkSchemeContract;
 
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  * Pain and makes clickable links
  * @author Irineu A. Silva
  */
-final public class LinkScheme extends BaseScheme {
+final public class LinkScheme extends BaseScheme implements LinkSchemeContract {
 
     private boolean painText = true;
 
@@ -47,16 +48,20 @@ final public class LinkScheme extends BaseScheme {
         };
     }
 
+    //override LinkSchemeContract
+    @Override
     public LinkScheme setPainText(boolean painText) {
         this.painText = painText;
         return this;
     }
 
+    @Override
     public LinkScheme setPainTextColor(@ColorInt int painTextColor) {
         this.painTextColor = painTextColor;
         return setPainText(true);
     }
 
+    @Override
     public LinkScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
         return this;
