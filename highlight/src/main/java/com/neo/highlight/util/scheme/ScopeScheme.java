@@ -1,8 +1,5 @@
 package com.neo.highlight.util.scheme;
 
-import android.text.style.ForegroundColorSpan;
-
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -17,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * @author Irineu A. Silva
  */
-public class ColorScheme implements Scheme, ScopeSchemeContract {
+final public class ScopeScheme implements Scheme, ScopeSchemeContract {
 
     @Nullable
     private List<Scheme> scopeSchemes;
@@ -25,14 +22,10 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
     @NonNull
     private final Pattern pattern;
 
-    @ColorInt
-    private final int color;
-
     private boolean clearOldSpan = false;
 
-    public ColorScheme(@NonNull Pattern pattern, @ColorInt int color) {
+    public ScopeScheme(@NonNull Pattern pattern) {
         this.pattern = pattern;
-        this.color = color;
     }
 
     @Override
@@ -42,9 +35,9 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
     }
 
     @Override
-    @NonNull
+    @Nullable
     public Object getSpan(@NonNull CharSequence text) {
-        return new ForegroundColorSpan(color);
+        return null;
     }
 
     @Override
@@ -53,13 +46,10 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
     }
 
     @Override
-    @NonNull
-    public ColorScheme setClearOldSpan(boolean clearOldSpan) {
+    public ScopeScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
         return this;
     }
-
-    //override ScopeScheme
 
     @Nullable
     @Override
@@ -68,14 +58,13 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
     }
 
     @Override
-    @NonNull
-    public ColorScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
+    public ScopeScheme setScopeSchemes(List<Scheme> schemes) {
         scopeSchemes = schemes;
         return this;
     }
 
     @Override
-    public ColorScheme addScopeScheme(@NonNull Scheme... scheme) {
+    public ScopeScheme addScopeScheme(@NonNull Scheme... scheme) {
 
         if (scopeSchemes == null) {
             scopeSchemes = new ArrayList<>();
@@ -83,15 +72,16 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
 
         scopeSchemes.addAll(Arrays.asList(scheme));
 
-        return this;
+        return null;
     }
 
     @Override
-    public ColorScheme clearScopeSchemes() {
+    public ScopeScheme clearScopeSchemes() {
+
         if (scopeSchemes != null) {
             scopeSchemes.clear();
         }
+
         return this;
     }
-
 }

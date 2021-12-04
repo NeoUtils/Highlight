@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author Irineu A. Silva
  */
-public interface SchemeScope {
+public interface ScopeSchemeContract {
 
     @Nullable
     List<Scheme> getScopeSchemes();

@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.SchemeScope;
+import com.neo.highlight.core.ScopeSchemeContract;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * @author Irineu A. Silva
  */
-public class StyleScheme implements Scheme, SchemeScope {
+public class StyleScheme implements Scheme, ScopeSchemeContract {
 
     @Nullable
     private List<Scheme> scopedSchemes;

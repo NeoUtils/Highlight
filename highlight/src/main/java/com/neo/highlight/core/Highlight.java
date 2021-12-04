@@ -80,17 +80,21 @@ public class Highlight implements HighlightContract {
                     );
                 }
 
-                SpanUtils.setSpan(
-                        editable,
-                        scheme.getSpan(matcherText),
-                        scopeStart,
-                        scopeEnd
-                );
+                Object span = scheme.getSpan(matcherText);
+
+                if (span != null) {
+                    SpanUtils.setSpan(
+                            editable,
+                            span,
+                            scopeStart,
+                            scopeEnd
+                    );
+                }
 
                 //scope scheme
-                if (scheme instanceof SchemeScope) {
+                if (scheme instanceof ScopeSchemeContract) {
 
-                    SchemeScope schemeScope = (SchemeScope) scheme;
+                    ScopeSchemeContract schemeScope = (ScopeSchemeContract) scheme;
                     List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
 
                     if (schemeScopes != null) {
@@ -166,17 +170,20 @@ public class Highlight implements HighlightContract {
                     );
                 }
 
-                spannableString.setSpan(
-                        scheme.getSpan(matcherText),
-                        scopeStart,
-                        scopeEnd,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                );
+                Object span = scheme.getSpan(matcherText);
+                if (span != null) {
+                    spannableString.setSpan(
+                            span,
+                            scopeStart,
+                            scopeEnd,
+                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    );
+                }
 
                 //scope scheme
-                if (scheme instanceof SchemeScope) {
+                if (scheme instanceof ScopeSchemeContract) {
 
-                    SchemeScope schemeScope = (SchemeScope) scheme;
+                    ScopeSchemeContract schemeScope = (ScopeSchemeContract) scheme;
                     List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
 
                     if (schemeScopes != null && !schemeScopes.isEmpty()) {

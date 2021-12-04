@@ -9,14 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.SchemeScope;
+import com.neo.highlight.core.ScopeSchemeContract;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class OnClickScheme implements Scheme, SchemeScope {
+/**
+ * @author Irineu A. Silva
+ */
+public class OnClickScheme implements Scheme, ScopeSchemeContract {
 
     @Nullable
     private List<Scheme> scopeSchemes;

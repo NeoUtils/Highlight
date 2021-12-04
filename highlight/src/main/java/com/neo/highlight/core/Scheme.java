@@ -1,17 +1,18 @@
 package com.neo.highlight.core;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.regex.Pattern;
 
+/**
+ * @author Irineu A. Silva
+ */
 public interface Scheme {
 
     Pattern getRegex();
 
-    /**
-     * @return Um span novo deve ser gerado sempre que getSpan é chamado
-     * @param text trecho destacado
-     */
+    @Nullable
     Object getSpan(@NonNull CharSequence text);
 
     boolean getClearOldSpan();
