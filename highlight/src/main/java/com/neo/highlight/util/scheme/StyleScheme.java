@@ -22,7 +22,7 @@ public class StyleScheme implements Scheme, ScopeSchemeContract {
     @Nullable
     private List<Scheme> scopedSchemes;
 
-    @NonNull
+    @Nullable
     private final Pattern pattern;
 
     @NonNull
@@ -35,7 +35,12 @@ public class StyleScheme implements Scheme, ScopeSchemeContract {
         this.style = style;
     }
 
-    @NonNull
+    public StyleScheme(@NonNull STYLE style) {
+        this.pattern = null;
+        this.style = style;
+    }
+
+    @Nullable
     @Override
     public Pattern getRegex() {
         return pattern;

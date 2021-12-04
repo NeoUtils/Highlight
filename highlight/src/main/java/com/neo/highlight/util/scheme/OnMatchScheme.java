@@ -12,7 +12,7 @@ public class OnMatchScheme implements Scheme {
     @NonNull
     private final OnMatchListener onMatchListener;
 
-    @NonNull
+    @Nullable
     private final Pattern pattern;
 
     private boolean clearOldSpan = false;
@@ -22,7 +22,12 @@ public class OnMatchScheme implements Scheme {
         this.onMatchListener = onMatchListener;
     }
 
-    @NonNull
+    public OnMatchScheme( @NonNull OnMatchListener onMatchListener) {
+        this.pattern = null;
+        this.onMatchListener = onMatchListener;
+    }
+
+    @Nullable
     @Override
     public Pattern getRegex() {
         return pattern;

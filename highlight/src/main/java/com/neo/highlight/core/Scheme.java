@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public interface Scheme {
 
-    @NonNull
+    @Nullable
     Pattern getRegex();
 
     @Nullable

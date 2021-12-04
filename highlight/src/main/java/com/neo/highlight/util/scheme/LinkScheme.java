@@ -23,7 +23,7 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
     @Nullable
     private List<Scheme> scopeSchemes;
 
-    @Nullable
+    @NonNull
     private final Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
 
     private boolean clearOldSpan = true;

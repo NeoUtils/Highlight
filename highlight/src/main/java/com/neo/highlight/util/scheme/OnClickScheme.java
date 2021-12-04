@@ -27,7 +27,7 @@ public class OnClickScheme implements Scheme, ScopeSchemeContract {
     @NonNull
     private final OnClickListener onClickListener;
 
-    @NonNull
+    @Nullable
     private final Pattern pattern;
 
     private boolean painText = false;
@@ -44,7 +44,12 @@ public class OnClickScheme implements Scheme, ScopeSchemeContract {
         this.onClickListener = onClickListener;
     }
 
-    @NonNull
+    public OnClickScheme(@NonNull OnClickListener onClickListener) {
+        this.pattern = null;
+        this.onClickListener = onClickListener;
+    }
+
+    @Nullable
     @Override
     public Pattern getRegex() {
         return pattern;

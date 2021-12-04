@@ -22,7 +22,7 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
     @Nullable
     private List<Scheme> scopeSchemes;
 
-    @NonNull
+    @Nullable
     private final Pattern pattern;
 
     @ColorInt
@@ -35,8 +35,13 @@ public class ColorScheme implements Scheme, ScopeSchemeContract {
         this.color = color;
     }
 
+    public ColorScheme(@ColorInt int color) {
+        this.pattern = null;
+        this.color = color;
+    }
+
     @Override
-    @NonNull
+    @Nullable
     public Pattern getRegex() {
         return pattern;
     }
