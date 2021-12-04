@@ -40,7 +40,7 @@ abstract public class BaseScheme implements Scheme, ScopeScheme {
 
     @NonNull
     @Override
-    public Scheme setClearOldSpan(boolean clearOldSpan) {
+    public BaseScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
         return this;
     }
@@ -54,13 +54,13 @@ abstract public class BaseScheme implements Scheme, ScopeScheme {
     }
 
     @Override
-    public Scheme setScopeSchemes(List<Scheme> schemes) {
+    public BaseScheme setScopeSchemes(List<Scheme> schemes) {
         this.scopeSchemes = schemes;
         return this;
     }
 
     @Override
-    public Scheme addScopeScheme(@NonNull Scheme... scheme) {
+    public BaseScheme addScopeScheme(@NonNull Scheme... scheme) {
         if (scopeSchemes != null) {
             scopeSchemes.addAll(Arrays.asList(scheme));
         }
@@ -68,7 +68,7 @@ abstract public class BaseScheme implements Scheme, ScopeScheme {
     }
 
     @Override
-    public Scheme clearScopeSchemes() {
+    public BaseScheme clearScopeSchemes() {
         if (scopeSchemes != null) {
             scopeSchemes.clear();
         }
