@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.neo.highlight.util.scheme.contract.ScopeScheme;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

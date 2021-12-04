@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.ScopeScheme;
+import com.neo.highlight.util.scheme.contract.ScopeScheme;
 
 import java.util.Arrays;
 import java.util.List;

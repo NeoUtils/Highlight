@@ -1,7 +1,9 @@
-package com.neo.highlight.core;
+package com.neo.highlight.util.scheme.contract;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.neo.highlight.core.Scheme;
 
 import java.util.List;
 
