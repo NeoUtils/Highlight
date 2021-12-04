@@ -54,9 +54,8 @@ abstract public class BaseScheme implements Scheme, ScopeScheme {
     }
 
     @Override
-    public BaseScheme setScopeSchemes(List<Scheme> schemes) {
+    public void setScopeSchemes(@Nullable List<Scheme> schemes) {
         this.scopeSchemes = schemes;
-        return this;
     }
 
     @Override

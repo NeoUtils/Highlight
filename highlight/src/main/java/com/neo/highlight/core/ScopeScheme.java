@@ -12,7 +12,7 @@ public interface ScopeScheme {
 
     @Nullable
     List<Scheme> getScopeSchemes();
-    public Scheme setScopeSchemes(List<Scheme> schemes);
+    public void setScopeSchemes(List<Scheme> schemes);
     public Scheme addScopeScheme(@NonNull Scheme... scheme);
     public Scheme clearScopeSchemes();
 }
