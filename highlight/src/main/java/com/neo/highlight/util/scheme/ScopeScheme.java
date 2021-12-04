@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 final public class ScopeScheme implements Scheme, ScopeSchemeContract {
 
-    @Nullable
+    @NonNull
     private List<Scheme> scopeSchemes;
 
     @NonNull
@@ -24,8 +24,9 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
 
     private boolean clearOldSpan = false;
 
-    public ScopeScheme(@NonNull Pattern pattern) {
+    public ScopeScheme(@NonNull Pattern pattern, @NonNull Scheme... scopeSchemes) {
         this.pattern = pattern;
+        this.scopeSchemes = Arrays.asList(scopeSchemes);
     }
 
     @Override
@@ -52,7 +53,7 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
         return this;
     }
 
-    @Nullable
+    @NonNull
     @Override
     public List<Scheme> getScopeSchemes() {
         return scopeSchemes;
@@ -66,23 +67,13 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
 
     @Override
     public ScopeScheme addScopeScheme(@NonNull Scheme... scheme) {
-
-        if (scopeSchemes == null) {
-            scopeSchemes = new ArrayList<>();
-        }
-
         scopeSchemes.addAll(Arrays.asList(scheme));
-
         return this;
     }
 
     @Override
     public ScopeScheme clearScopeSchemes() {
-
-        if (scopeSchemes != null) {
-            scopeSchemes.clear();
-        }
-
+        scopeSchemes.clear();
         return this;
     }
 }
