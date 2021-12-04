@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.ScopeSchemeContract;
+import com.neo.highlight.core.ScopeScheme;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-abstract public class BaseScheme implements Scheme, ScopeSchemeContract {
+abstract public class BaseScheme implements Scheme, ScopeScheme {
 
     @Nullable
     private List<Scheme> scopeSchemes;

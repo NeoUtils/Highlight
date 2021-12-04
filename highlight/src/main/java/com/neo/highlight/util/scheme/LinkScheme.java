@@ -5,15 +5,9 @@ import android.text.style.URLSpan;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.ScopeSchemeContract;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**

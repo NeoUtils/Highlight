@@ -110,9 +110,9 @@ public class Highlight implements HighlightContract {
         }
 
         //scope scheme
-        if (scheme instanceof ScopeSchemeContract) {
+        if (scheme instanceof ScopeScheme) {
 
-            ScopeSchemeContract schemeScope = (ScopeSchemeContract) scheme;
+            ScopeScheme schemeScope = (ScopeScheme) scheme;
             List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
 
             if (schemeScopes != null) {
@@ -208,9 +208,9 @@ public class Highlight implements HighlightContract {
         }
 
         //scope scheme
-        if (scheme instanceof ScopeSchemeContract) {
+        if (scheme instanceof ScopeScheme) {
 
-            ScopeSchemeContract schemeScope = (ScopeSchemeContract) scheme;
+            ScopeScheme schemeScope = (ScopeScheme) scheme;
             List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
 
             if (schemeScopes != null && !schemeScopes.isEmpty()) {
