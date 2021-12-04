@@ -3,34 +3,27 @@ package com.neo.highlight.util.scheme;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.neo.highlight.core.Scheme;
+import com.neo.highlight.util.scheme.base.BaseScheme;
 
 import java.util.regex.Pattern;
 
-public class OnMatchScheme implements Scheme {
+/**
+ * Execute action when match
+ * @author Irineu A. Silva
+ */
+final public class OnMatchScheme extends BaseScheme {
 
     @NonNull
     private final OnMatchListener onMatchListener;
 
-    @Nullable
-    private final Pattern pattern;
-
-    private boolean clearOldSpan = false;
-
     public OnMatchScheme(@NonNull Pattern pattern, @NonNull OnMatchListener onMatchListener) {
-        this.pattern = pattern;
+        super(pattern);
         this.onMatchListener = onMatchListener;
     }
 
-    public OnMatchScheme( @NonNull OnMatchListener onMatchListener) {
-        this.pattern = null;
+    public OnMatchScheme(@NonNull OnMatchListener onMatchListener) {
+        super(null);
         this.onMatchListener = onMatchListener;
-    }
-
-    @Nullable
-    @Override
-    public Pattern getRegex() {
-        return pattern;
     }
 
     @Nullable
@@ -40,19 +33,7 @@ public class OnMatchScheme implements Scheme {
         return null;
     }
 
-    @Override
-    public boolean getClearOldSpan() {
-        return clearOldSpan;
-    }
-
-    @NonNull
-    @Override
-    public Scheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
-    }
-
-    public interface OnMatchListener{
+    public interface OnMatchListener {
         void onMatch(CharSequence text, int start, int end);
     }
 }
