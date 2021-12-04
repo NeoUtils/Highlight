@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
 import com.neo.highlight.core.ScopeSchemeContract;
+import com.neo.highlight.util.scheme.base.BaseScheme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,17 +17,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Pain and makes clickable links
  * @author Irineu A. Silva
  */
-public class LinkScheme implements Scheme, ScopeSchemeContract {
-
-    @Nullable
-    private List<Scheme> scopeSchemes;
-
-    @NonNull
-    private final Pattern pattern = Pattern.compile("\\bhttps?://[^\\s]+\\b/?");
-
-    private boolean clearOldSpan = true;
+final public class LinkScheme extends BaseScheme {
 
     private boolean painText = true;
 
@@ -35,10 +29,8 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
     @ColorInt
     private int painTextColor = -1;
 
-    @NonNull
-    @Override
-    public Pattern getRegex() {
-        return pattern;
+    public LinkScheme() {
+        super(Pattern.compile("\\bhttps?://[^\\s]+\\b/?"));
     }
 
     @Override
@@ -61,13 +53,6 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
         };
     }
 
-    @NonNull
-    @Override
-    public LinkScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
-    }
-
     public LinkScheme setPainText(boolean painText) {
         this.painText = painText;
         return this;
@@ -81,44 +66,5 @@ public class LinkScheme implements Scheme, ScopeSchemeContract {
     public LinkScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
         return this;
-    }
-
-    //override ScopeScheme
-
-    @Nullable
-    @Override
-    public List<Scheme> getScopeSchemes() {
-        return scopeSchemes;
-    }
-
-    @Override
-    public LinkScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
-        scopeSchemes = schemes;
-        return this;
-    }
-
-    @Override
-    public LinkScheme addScopeScheme(@NonNull Scheme... scheme) {
-
-        if (scopeSchemes == null) {
-            scopeSchemes = new ArrayList<>();
-        }
-
-        scopeSchemes.addAll(Arrays.asList(scheme));
-
-        return this;
-    }
-
-    @Override
-    public LinkScheme clearScopeSchemes() {
-        if (scopeSchemes != null) {
-            scopeSchemes.clear();
-        }
-        return this;
-    }
-
-
-    public boolean getClearOldSpan() {
-        return clearOldSpan;
     }
 }
