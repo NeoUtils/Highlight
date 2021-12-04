@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
 import com.neo.highlight.core.ScopeScheme;
+import com.neo.highlight.util.scheme.base.BaseScheme;
 import com.neo.highlight.util.scheme.contract.LinkSchemeContract;
 
 import java.util.ArrayList;
@@ -18,42 +19,29 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Pain and makes clickable any text
  * @author Irineu A. Silva
  */
-public class OnClickScheme implements Scheme, ScopeScheme, LinkSchemeContract {
-
-    @Nullable
-    private List<Scheme> scopeSchemes;
+final public class OnClickScheme extends BaseScheme implements LinkSchemeContract {
 
     @NonNull
     private final OnClickListener onClickListener;
-
-    @Nullable
-    private final Pattern pattern;
 
     private boolean painText = false;
 
     @ColorInt
     private int painTextColor = -1;
 
-    private boolean clearOldSpan = false;
-
     private boolean painTextUnderline = false;
 
     public OnClickScheme(@NonNull Pattern pattern, @NonNull OnClickListener onClickListener) {
-        this.pattern = pattern;
+        super(pattern);
         this.onClickListener = onClickListener;
     }
 
     public OnClickScheme(@NonNull OnClickListener onClickListener) {
-        this.pattern = null;
+        super(null);
         this.onClickListener = onClickListener;
-    }
-
-    @Nullable
-    @Override
-    public Pattern getRegex() {
-        return pattern;
     }
 
     @Override
@@ -82,18 +70,6 @@ public class OnClickScheme implements Scheme, ScopeScheme, LinkSchemeContract {
         };
     }
 
-    @Override
-    public boolean getClearOldSpan() {
-        return clearOldSpan;
-    }
-
-    @NonNull
-    @Override
-    public OnClickScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
-    }
-
     //override LinkSchemeContract
 
     @Override
@@ -111,41 +87,6 @@ public class OnClickScheme implements Scheme, ScopeScheme, LinkSchemeContract {
     @Override
     public OnClickScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
-        return this;
-    }
-
-
-    //override ScopeScheme
-
-    @Nullable
-    @Override
-    public List<Scheme> getScopeSchemes() {
-        return scopeSchemes;
-    }
-
-    @Override
-    public OnClickScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
-        scopeSchemes = schemes;
-        return this;
-    }
-
-    @Override
-    public OnClickScheme addScopeScheme(@NonNull Scheme... scheme) {
-
-        if (scopeSchemes == null) {
-            scopeSchemes = new ArrayList<>();
-        }
-
-        scopeSchemes.addAll(Arrays.asList(scheme));
-
-        return this;
-    }
-
-    @Override
-    public OnClickScheme clearScopeSchemes() {
-        if (scopeSchemes != null) {
-            scopeSchemes.clear();
-        }
         return this;
     }
 
