@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import com.neo.highlight.core.Scheme;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -17,7 +18,7 @@ final public class Scope extends BaseScheme {
 
     public Scope(@NonNull Pattern pattern, @NonNull Scheme... scopeSchemes) {
         super(pattern);
-        super.setScopeSchemes(Arrays.asList(scopeSchemes));
+        super.setScopeSchemes(new ArrayList<>(Arrays.asList(scopeSchemes)));
     }
 
     @Override
