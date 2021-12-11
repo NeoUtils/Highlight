@@ -1,8 +1,7 @@
 package com.neo.highlight.util.scheme;
 
-import android.text.style.ForegroundColorSpan;
+import android.text.style.BackgroundColorSpan;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.neo.highlight.util.scheme.base.BaseColorScheme;
@@ -10,22 +9,22 @@ import com.neo.highlight.util.scheme.base.BaseColorScheme;
 import java.util.regex.Pattern;
 
 /**
- * Paint the text
+ * Paint the background
  * @author Irineu A. Silva
  */
-final public class ColorScheme extends BaseColorScheme {
+final public class BackgroundScheme extends BaseColorScheme {
 
-    public ColorScheme(@NonNull Pattern pattern, @ColorInt int color) {
+    public BackgroundScheme(@NonNull Pattern pattern, int color) {
         super(pattern, color);
     }
 
-    public ColorScheme(@ColorInt int color) {
+    public BackgroundScheme(int color) {
         super(color);
     }
 
-    @Override
     @NonNull
+    @Override
     public Object getSpan(@NonNull CharSequence text, int start, int end) {
-        return new ForegroundColorSpan(color);
+        return new BackgroundColorSpan(super.color);
     }
 }

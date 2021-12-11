@@ -10,13 +10,15 @@ import java.util.regex.Pattern;
  */
 public interface Scheme {
 
+    @Nullable
     Pattern getRegex();
 
     @Nullable
-    Object getSpan(@NonNull CharSequence text);
+    Object getSpan(@NonNull CharSequence text, int start, int end);
 
     boolean getClearOldSpan();
 
+    @NonNull
     Scheme setClearOldSpan(boolean clearOldSpan);
 
 }

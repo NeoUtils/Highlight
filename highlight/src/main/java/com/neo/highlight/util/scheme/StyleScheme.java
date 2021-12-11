@@ -4,57 +4,34 @@ import android.graphics.Typeface;
 import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.ScopeSchemeContract;
+import com.neo.highlight.util.scheme.base.BaseScheme;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Pain text style
  * @author Irineu A. Silva
  */
-public class StyleScheme implements Scheme, ScopeSchemeContract {
-
-    @Nullable
-    private List<Scheme> scopedSchemes;
-
-    @NonNull
-    private final Pattern pattern;
+final public class StyleScheme extends BaseScheme {
 
     @NonNull
     private final STYLE style;
 
-    private boolean clearOldSpan = false;
-
     public StyleScheme(@NonNull Pattern pattern, @NonNull STYLE style) {
-        this.pattern = pattern;
+        super(pattern);
         this.style = style;
     }
 
-    @Override
-    public Pattern getRegex() {
-        return pattern;
+    public StyleScheme(@NonNull STYLE style) {
+        super(null);
+        this.style = style;
     }
 
     @NonNull
     @Override
-    public Object getSpan(@NonNull CharSequence text) {
+    public Object getSpan(@NonNull CharSequence text, int start, int end) {
         return new StyleSpan(getType());
-    }
-
-    @Override
-    public boolean getClearOldSpan() {
-        return clearOldSpan;
-    }
-
-    @Override
-    public StyleScheme setClearOldSpan(boolean clearOldSpan) {
-        this.clearOldSpan = clearOldSpan;
-        return this;
     }
 
     private int getType() {
@@ -71,40 +48,6 @@ public class StyleScheme implements Scheme, ScopeSchemeContract {
         }
 
         return Typeface.NORMAL;
-    }
-
-    //override ScopeScheme
-
-    @Override
-    @Nullable
-    public List<Scheme> getScopeSchemes() {
-        return scopedSchemes;
-    }
-
-    @Override
-    public StyleScheme setScopeSchemes(@Nullable List<Scheme> schemes) {
-        scopedSchemes = schemes;
-        return this;
-    }
-
-    @Override
-    public StyleScheme addScopeScheme(@NonNull Scheme... scheme) {
-
-        if (scopedSchemes == null) {
-            scopedSchemes = new ArrayList<>();
-        }
-
-        scopedSchemes.addAll(Arrays.asList(scheme));
-
-        return this;
-    }
-
-    @Override
-    public StyleScheme clearScopeSchemes() {
-        if (scopedSchemes != null) {
-            scopedSchemes.clear();
-        }
-        return this;
     }
 
     public enum STYLE {

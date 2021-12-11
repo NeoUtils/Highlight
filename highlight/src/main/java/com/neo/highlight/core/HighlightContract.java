@@ -32,7 +32,7 @@ public interface HighlightContract {
     //schemes
     List<Scheme> getSchemes();
     void setSchemes(@NonNull List<Scheme> schemes);
-    void addScheme(@NonNull Scheme scheme);
+    void addScheme(@NonNull Scheme... scheme);
     void clearScheme();
 
     //types

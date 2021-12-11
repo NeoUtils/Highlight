@@ -6,7 +6,9 @@ import android.text.Spanned;
 /**
  * @author Irineu A. Silva
  */
-public class SpanUtils {
+final public class SpanUtils {
+
+    private SpanUtils() {}
 
     public static void setSpan(Editable editable, Object span, int start, int end) {
         editable.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

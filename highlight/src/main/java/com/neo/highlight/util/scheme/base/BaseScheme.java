@@ -1,10 +1,10 @@
-package com.neo.highlight.util.scheme;
+package com.neo.highlight.util.scheme.base;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
-import com.neo.highlight.core.ScopeSchemeContract;
+import com.neo.highlight.util.scheme.contract.ScopeScheme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,44 +12,45 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Base to schemes
  * @author Irineu A. Silva
  */
-final public class ScopeScheme implements Scheme, ScopeSchemeContract {
+abstract public class BaseScheme implements Scheme, ScopeScheme {
 
     @Nullable
     private List<Scheme> scopeSchemes;
 
-    @NonNull
+    @Nullable
     private final Pattern pattern;
 
     private boolean clearOldSpan = false;
 
-    public ScopeScheme(@NonNull Pattern pattern) {
+    public BaseScheme(@Nullable Pattern pattern) {
         this.pattern = pattern;
     }
 
+    //override Scheme
+
+    @Nullable
     @Override
-    @NonNull
     public Pattern getRegex() {
         return pattern;
     }
 
-    @Override
-    @Nullable
-    public Object getSpan(@NonNull CharSequence text) {
-        return null;
-    }
 
     @Override
     public boolean getClearOldSpan() {
         return clearOldSpan;
     }
 
+    @NonNull
     @Override
-    public ScopeScheme setClearOldSpan(boolean clearOldSpan) {
+    public BaseScheme setClearOldSpan(boolean clearOldSpan) {
         this.clearOldSpan = clearOldSpan;
         return this;
     }
+
+    //override ScopeSchemeContract
 
     @Nullable
     @Override
@@ -58,30 +59,25 @@ final public class ScopeScheme implements Scheme, ScopeSchemeContract {
     }
 
     @Override
-    public ScopeScheme setScopeSchemes(List<Scheme> schemes) {
-        scopeSchemes = schemes;
-        return this;
+    public void setScopeSchemes(@Nullable List<Scheme> schemes) {
+        this.scopeSchemes = schemes;
     }
 
     @Override
-    public ScopeScheme addScopeScheme(@NonNull Scheme... scheme) {
-
+    public BaseScheme addScopeScheme(@NonNull Scheme... schemes) {
         if (scopeSchemes == null) {
             scopeSchemes = new ArrayList<>();
         }
 
-        scopeSchemes.addAll(Arrays.asList(scheme));
-
-        return null;
+        scopeSchemes.addAll(Arrays.asList(schemes));
+        return this;
     }
 
     @Override
-    public ScopeScheme clearScopeSchemes() {
-
+    public BaseScheme clearScopeSchemes() {
         if (scopeSchemes != null) {
             scopeSchemes.clear();
         }
-
         return this;
     }
 }
