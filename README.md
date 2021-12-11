@@ -9,8 +9,7 @@ To highlight a text, just create an instance of `Highlight`, add the Schemes and
 //create an instance of Highlight
 Highlight highlight = new Highlight();
 
-//add Schemes![Screenshot_1639251552](https://user-images.githubusercontent.com/45833588/145689701-f7e9d728-c95f-4832-85e4-79435d51fc45.png)
-
+//add Schemes
 highlight.addScheme(
         new ColorScheme(
                 Pattern.compile("\\b([Jj])ava\\b"),
@@ -49,6 +48,7 @@ highlightTextWatcher.addScheme(
 //add the listener
 binding.edittext.addTextChangedListener(highlightTextWatcher);
 ```
+
 ## Schemes
 Use the default schemes; `ColorScheme`, `OnBackgroundScheme`, `StyleScheme`, `FontScheme`, `LinkScheme` and `OnClickScheme`, or implement the `Scheme` interface to create a custom scheme.
 
