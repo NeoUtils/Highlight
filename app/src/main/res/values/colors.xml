@@ -12,6 +12,8 @@
     <color name="keyword">#0033B3</color>
     <color name="function">#00627A</color>
     <color name="string">#067D17</color>
+    <color name="annotation">#93880D</color>
+
 
 
 </resources>
