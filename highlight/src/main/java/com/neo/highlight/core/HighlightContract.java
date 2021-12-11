@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
+/**
+ * @author Irineu A. Silva
+ */
 public interface HighlightContract {
 
     //setSpan EditText
@@ -26,10 +29,13 @@ public interface HighlightContract {
     void removeSpan(Editable editable, int start, int end);
     void removeSpan(Editable editable);
 
+    //schemes
     List<Scheme> getSchemes();
     void setSchemes(@NonNull List<Scheme> schemes);
-    void addScheme(@NonNull Scheme scheme);
+    void addScheme(@NonNull Scheme... scheme);
     void clearScheme();
+
+    //types
     List<Class<?>> getSpanTypes();
     void setSpanTypes(@NonNull List<Class<?>> spanTypes);
     void addSpanType(Class<?> span);

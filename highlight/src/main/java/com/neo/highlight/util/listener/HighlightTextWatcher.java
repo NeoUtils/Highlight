@@ -16,9 +16,10 @@ import com.neo.highlight.core.Scheme;
 import java.util.List;
 
 /**
+ * Apply schemes to EditText
  * @author Irineu A. Silva
  */
-public class HighlightTextWatcher extends LinesTextWatcher implements HighlightContract {
+final public class HighlightTextWatcher extends LinesTextWatcher implements HighlightContract {
 
     @NonNull
     private RANGE range = RANGE.MODIFIED;
@@ -128,8 +129,8 @@ public class HighlightTextWatcher extends LinesTextWatcher implements HighlightC
     }
 
     @Override
-    public void addScheme(@NonNull Scheme scheme) {
-        highlight.addScheme(scheme);
+    public void addScheme(@NonNull Scheme... schemes) {
+        highlight.addScheme(schemes);
     }
 
     @Override

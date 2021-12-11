@@ -26,6 +26,8 @@
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
+        android:textSize="15sp"
+        android:fontFamily="@font/jetbrains_mono_regular"
         android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="0dp"
