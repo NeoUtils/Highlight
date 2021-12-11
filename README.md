@@ -102,6 +102,35 @@ highlight.addScheme(
 
 ## SchemeScope
 
+Every schema has a scope to which other schemas can be added via the `addScopeScheme (...)` method. Schemes added to a scope will run only within that scope, saving processing and creating possibilities for smarter highlights.
+
+``` java
+Highlight highlight = new Highlight();
+
+highlight.addScheme(
+        new StyleScheme(
+                Pattern.compile("Highlight"),
+                StyleScheme.STYLE.BOLD_ITALIC
+        ).addScopeScheme(
+                //add scheme scope in any scheme
+                new ColorScheme(
+                        Pattern.compile("light"),
+                        Color.parseColor("#FF03DAC5")
+                )
+        )
+);
+
+highlight.addScheme(
+        //use scope to group schemes
+        new Scope(Pattern.compile("Project"),
+                new ColorScheme(Color.BLACK),
+                new FontScheme(FontScheme.getFont(this, R.font.pacifico_regular))
+        )
+);
+
+highlight.setSpan(binding.toolbarTitle);
+```
+
 ## Add to project
 
 Add the jitpack to project in build.gradle or settings.gradle (gradle 7+)
