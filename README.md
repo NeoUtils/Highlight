@@ -132,7 +132,7 @@ highlight.addScheme(
 highlight.setSpan(binding.toolbarTitle);
 ```
 
-## Scheenshot
+## Screenshots
 
 | Simple Highlighting | Kotlin Highlighting | Kotlin Highlighting |
 | ------------- |------------- |------------- |
