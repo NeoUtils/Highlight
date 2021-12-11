@@ -9,7 +9,8 @@ To highlight a text, just create an instance of `Highlight`, add the Schemes and
 //create an instance of Highlight
 Highlight highlight = new Highlight();
 
-//add Schemes
+//add Schemes![Screenshot_1639251552](https://user-images.githubusercontent.com/45833588/145689701-f7e9d728-c95f-4832-85e4-79435d51fc45.png)
+
 highlight.addScheme(
         new ColorScheme(
                 Pattern.compile("\\b([Jj])ava\\b"),
@@ -130,6 +131,12 @@ highlight.addScheme(
 
 highlight.setSpan(binding.toolbarTitle);
 ```
+
+## Scheenshot
+
+| Simple Highlighting | Kotlin Highlighting | Kotlin Highlighting |
+| ------------- |------------- |------------- |
+| ![](screenshots/Screenshot_1639251552.png?raw=true "Simple Highlight v1.0.1") |![](screenshots/Screenshot_1639249920.png?raw=true "Kotlin Highlighting Dark v1.0.4") | ![](screenshots/Screenshot_1639249938.png?raw=true "Kotlin Highlighting Light v1.0.4") |
 
 ## Add to project
 
