@@ -9,17 +9,21 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.neo.highlight.core.Highlight;
 import com.neo.highlight.core.Scheme;
+import com.neo.highlight.core.SpanUtils;
 import com.neo.highlight.util.listener.HighlightTextWatcher;
 import com.neo.highlight.util.scheme.ColorScheme;
+import com.neo.highlight.util.scheme.FontScheme;
 import com.neo.highlight.util.scheme.Scope;
 import com.neo.highlight.util.scheme.StyleScheme;
 import com.neo.highlightproject.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 new ColorScheme(
                         Pattern.compile("Project"),
                         Color.BLACK
+                ).addScopeScheme(
+                        new FontScheme(
+                                FontScheme.getFont(this, R.font.pacifico_regular)
+                        )
                 )
         );
 
@@ -83,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
         edittext.setText(
                 "fun main() {\n" +
-                "    println(\"Olá, mundo!\")\n" +
-                "}"
+                        "    println(\"Olá, mundo!\")\n" +
+                        "}"
         );
     }
 
