@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.neo.highlight.util.scheme.contract.ScopeScheme;
+import com.neo.highlight.util.scheme.contract.SchemeScope;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,9 +114,9 @@ final public class Highlight implements HighlightContract {
         }
 
         //scope scheme
-        if (scheme instanceof ScopeScheme) {
+        if (scheme instanceof SchemeScope) {
 
-            ScopeScheme schemeScope = (ScopeScheme) scheme;
+            SchemeScope schemeScope = (SchemeScope) scheme;
             List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
 
             if (schemeScopes != null) {
@@ -218,9 +218,9 @@ final public class Highlight implements HighlightContract {
         }
 
         //scope scheme
-        if (scheme instanceof ScopeScheme) {
+        if (scheme instanceof SchemeScope) {
 
-            ScopeScheme schemeScope = (ScopeScheme) scheme;
+            SchemeScope schemeScope = (SchemeScope) scheme;
             List<Scheme> schemeScopes = schemeScope.getScopeSchemes();
 
             if (schemeScopes != null && !schemeScopes.isEmpty()) {

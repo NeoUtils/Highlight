@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Irineu A. Silva
  */
-public interface ScopeScheme {
+public interface SchemeScope {
 
     @Nullable
     List<Scheme> getScopeSchemes();
