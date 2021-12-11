@@ -14,10 +14,7 @@ highlight.addScheme(
         new ColorScheme(
                 Pattern.compile("\\b([Jj])ava\\b"),
                 Color.parseColor("#FC0400")
-        )
-);
-
-highlight.addScheme(
+        ),
         new ColorScheme(
                 Pattern.compile("\\b([Kk])otlin\\b"),
                 Color.parseColor("#FC8500")
@@ -41,10 +38,7 @@ highlightTextWatcher.addScheme(
         new StyleScheme(
                 Pattern.compile("\\b([Jj])ava\\b"),
                 StyleScheme.STYLE.BOLD_ITALIC
-        ).setClearOldSpan(true)
-);
-
-highlightTextWatcher.addScheme(
+        ).setClearOldSpan(true),
         new StyleScheme(
                 Pattern.compile("\\b([Kk])otlin\\b"),
                 StyleScheme.STYLE.BOLD_ITALIC
@@ -55,34 +49,31 @@ highlightTextWatcher.addScheme(
 binding.edittext.addTextChangedListener(highlightTextWatcher);
 ```
 ## Schemes
-Use the default schemes; `ColorScheme`, `StyleScheme`, `LinkScheme` and `OnClickScheme`, or implement the `Scheme` interface to create a custom scheme.
+Use the default schemes; `ColorScheme`, `OnBackgroundScheme`, `StyleScheme`, `FontScheme`, `LinkScheme` and `OnClickScheme`, or implement the `Scheme` interface to create a custom scheme.
 
 ``` java
 ...
 
 highlight.addScheme(
-        //modify the style
         new StyleScheme(
                 Pattern.compile("Highlight"),
                 StyleScheme.STYLE.BOLD_ITALIC
+        ).addScopeScheme(
+                //scheme in scope of other schemes
+                new ColorScheme(
+                        Pattern.compile("light"),
+                        Color.parseColor("#FF03DAC5")
+                )
         )
 );
 
 highlight.addScheme(
-        //modify the text color
-        new ColorScheme(
-                Pattern.compile("light"),
-                Color.parseColor("#FF03DAC5")
-        )
-);
-
-highlight.addScheme(
-        //make the links clickable
+        //clickable links
         new LinkScheme().setPainTextUnderline(false)
 );
 
 highlight.addScheme(
-        //make a clickable text
+        //clickable text
         new OnClickScheme(
                 Pattern.compile("Highlight"),
                 new OnClickScheme.OnClickListener() {
@@ -95,30 +86,21 @@ highlight.addScheme(
 );
 
 highlight.addScheme(
-        //create the custom scheme
-        new Scheme() {
-            @Override
-            public Pattern getRegex() {
-                return Pattern.compile("Highlight");
-            }
+        new ColorScheme(
+                Pattern.compile("Project"),
+                Color.BLACK
+        ).addScopeScheme(
+                //font scheme
+                new FontScheme(
+                        FontScheme.getFont(this, R.font.pacifico_regular)
+                )
+        )
+);
 
-            @Override
-            public Object getSpan(@NonNull CharSequence text) {
-                return new BackgroundColorSpan(Color.GRAY);
-            }
-
-            @Override
-            public boolean getClearOldSpan() {
-                return false;
-            }
-        });
-
-//for the library to know how to remove span
-highlight.addSpanType(BackgroundColorSpan.class);
 ...
 ```
 
-## Performance
+## SchemeScope
 
 ## Add to project
 
