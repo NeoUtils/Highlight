@@ -6,5 +6,6 @@
     <color name="keyword">#CC7832</color>
     <color name="function">#FFC66D</color>
     <color name="string">#5A8759</color>
+    <color name="annotation">#93880D</color>
 
 </resources>

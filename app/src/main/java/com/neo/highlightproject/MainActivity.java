@@ -1,10 +1,12 @@
 package com.neo.highlightproject;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.neo.highlight.core.SpanUtils;
 import com.neo.highlight.util.listener.HighlightTextWatcher;
 import com.neo.highlight.util.scheme.ColorScheme;
 import com.neo.highlight.util.scheme.FontScheme;
+import com.neo.highlight.util.scheme.OnClickScheme;
 import com.neo.highlight.util.scheme.Scope;
 import com.neo.highlight.util.scheme.StyleScheme;
 import com.neo.highlightproject.databinding.ActivityMainBinding;
@@ -87,12 +90,24 @@ public class MainActivity extends AppCompatActivity {
 
         highlight.setSchemes(getKotlinScheme());
 
+        highlight.addScheme(
+                new OnClickScheme(
+                        Pattern.compile("The best highlight lib!"),
+                        (text, start, end) -> {
+                            goToUrl("https://github.com/Irineu333/Highlight");
+                        }
+                )
+        );
+
+        edittext.setMovementMethod(LinkMovementMethod.getInstance());
+
         edittext.addTextChangedListener(highlight);
 
         edittext.setText(
+                "\n@Author(\"Irineu A. Silva\")\n"+
                 "fun main() {\n" +
-                        "    println(\"Olá, mundo!\")\n" +
-                        "}"
+                "    println(\"The best highlight lib!\")\n" +
+                "}"
         );
     }
 
@@ -108,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 )
         );
 
-        //function
+        //function declaration
         schemes.add(
                 new Scope(
                         Pattern.compile("\\b(fun)\\b\\s*\\b\\w+\\b\\([^()]*\\)")
@@ -117,6 +132,14 @@ public class MainActivity extends AppCompatActivity {
                                 Pattern.compile("\\w*(?=\\()"),
                                 ContextCompat.getColor(this, R.color.function)
                         )
+                )
+        );
+
+        //annotations
+        schemes.add(
+                new ColorScheme(
+                        Pattern.compile("@.+"),
+                        ContextCompat.getColor(this, R.color.annotation)
                 )
         );
 
