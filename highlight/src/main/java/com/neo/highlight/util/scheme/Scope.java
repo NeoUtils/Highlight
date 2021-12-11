@@ -18,7 +18,7 @@ final public class Scope extends BaseScheme {
 
     public Scope(@NonNull Pattern pattern, @NonNull Scheme... scopeSchemes) {
         super(pattern);
-        super.setScopeSchemes(new ArrayList<>(Arrays.asList(scopeSchemes)));
+        setScopeSchemes(new ArrayList<>(Arrays.asList(scopeSchemes)));
     }
 
     @Override

@@ -64,12 +64,12 @@ abstract public class BaseScheme implements Scheme, ScopeScheme {
     }
 
     @Override
-    public BaseScheme addScopeScheme(@NonNull Scheme... scheme) {
+    public BaseScheme addScopeScheme(@NonNull Scheme... schemes) {
         if (scopeSchemes == null) {
             scopeSchemes = new ArrayList<>();
         }
 
-        scopeSchemes.addAll(Arrays.asList(scheme));
+        scopeSchemes.addAll(Arrays.asList(schemes));
         return this;
     }
 

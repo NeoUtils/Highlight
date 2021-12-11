@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    kotlin colors-->
+
+    <color name="keyword">#CC7832</color>
+    <color name="function">#FFC66D</color>
+    <color name="string">#5A8759</color>
+
+</resources>
