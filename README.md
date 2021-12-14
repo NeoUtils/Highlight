@@ -132,6 +132,10 @@ highlight.addScheme(
 highlight.setSpan(binding.toolbarTitle);
 ```
 
+## Performance 
+
+This lib was born out of a solution. One of the problems you will face if you try to create a syntax highlighting is the bottleneck for editing very large code. This lib was born from a simple but ingenious solution (in my opinion) that I arrived together with some friends, which is the processing by altered lines. Basically, when activated (in by default it is), this lib will only process the lines that undergo some change, no matter how many.
+
 ## Screenshots
 
 | Simple Highlighting | Kotlin Highlighting | Kotlin Highlighting |
