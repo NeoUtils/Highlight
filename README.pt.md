@@ -1,1 +1,0 @@
-README em português
