@@ -46,11 +46,7 @@ final public class OnClickScheme extends BaseScheme implements LinkSchemeContrac
             @Override
             public void onClick(@NonNull View widget) {
 
-                CharSequence text = scopeResult.getText();
-                int start = scopeResult.getStart();
-                int end = scopeResult.getEnd();
-
-                onClickListener.onClick(text, start, end);
+                onClickListener.onClick(scopeResult);
             }
 
             @Override
@@ -91,6 +87,6 @@ final public class OnClickScheme extends BaseScheme implements LinkSchemeContrac
     }
 
     public interface OnClickListener {
-        void onClick(CharSequence text, int start, int end);
+        void onClick(@NonNull ScopeResult scopeResult);
     }
 }

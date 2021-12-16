@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         highlight.addScheme(
                 new OnClickScheme(
                         Pattern.compile("The best highlight lib!"),
-                        (text, start, end) -> {
+                        (result) -> {
                             goToUrl("https://github.com/Irineu333/Highlight");
                         }
                 )
