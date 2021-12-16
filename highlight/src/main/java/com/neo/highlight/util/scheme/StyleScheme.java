@@ -5,6 +5,7 @@ import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
 
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ final public class StyleScheme extends BaseScheme {
 
     @NonNull
     @Override
-    public Object getSpan(@NonNull CharSequence text, int start, int end) {
+    public Object getSpan(@NonNull ScopeResult scopeResult) {
         return new StyleSpan(getType());
     }
 

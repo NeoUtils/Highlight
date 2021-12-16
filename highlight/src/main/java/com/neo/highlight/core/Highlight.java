@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 
 import com.neo.highlight.util.scheme.contract.SchemeScope;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +48,16 @@ final public class Highlight implements HighlightContract {
     }
 
     //setSpan EdiText
+
+    @Override
+    public void setSpan(EditText editText, int start, int end) {
+        setSpan(editText.getText(), start, end);
+    }
+
+    @Override
+    public void setSpan(EditText editText) {
+        setSpan(editText.getText());
+    }
 
     @Override
     public void setSpan(Editable editable) {
@@ -102,7 +114,7 @@ final public class Highlight implements HighlightContract {
             );
         }
 
-        Object span = scheme.getSpan(matcherText, scopeStart, scopeEnd);
+        Object span = scheme.getSpan(new ScopeResult(matcherText, scopeStart, scopeEnd));
 
         if (span != null) {
             SpanUtils.setSpan(
@@ -207,7 +219,8 @@ final public class Highlight implements HighlightContract {
             );
         }
 
-        Object span = scheme.getSpan(matcherText, scopeStart, scopeEnd);
+        Object span = scheme.getSpan(new ScopeResult(matcherText, scopeStart, scopeEnd));
+
         if (span != null) {
             spannableString.setSpan(
                     span,
@@ -231,6 +244,36 @@ final public class Highlight implements HighlightContract {
 
     //removeSpan
 
+
+    @Override
+    public void removeSpan(TextView textView) {
+        removeSpan(textView, 0, textView.length());
+    }
+
+    @Override
+    public void removeSpan(TextView textView, int start, int end) {
+        if (textView instanceof EditText) {
+            removeSpan((Editable) textView.getText(), start, end);
+        } else {
+
+            if (start == 0 && end == textView.length()) {
+                textView.setText(textView.getText());
+            } else {
+                throw new IllegalArgumentException("Impossible to recycle span from a TextView");
+            }
+        }
+    }
+
+    @Override
+    public void removeSpan(EditText editText) {
+        removeSpan(editText.getText());
+    }
+
+    @Override
+    public void removeSpan(EditText editText, int start, int end) {
+        removeSpan(editText.getText(), start, end);
+    }
+
     @Override
     public void removeSpan(Editable editable) {
 
@@ -247,7 +290,13 @@ final public class Highlight implements HighlightContract {
         }
     }
 
-    private void removeSpan(SpannableString spannableString, int start, int end) {
+    @Override
+    public void removeSpan(SpannableString spannableString) {
+        removeSpan(spannableString, 0, spannableString.length());
+    }
+
+    @Override
+    public void removeSpan(SpannableString spannableString, int start, int end) {
 
         for (Class<?> spanClass : spanTypes) {
             for (Object span : spannableString.getSpans(start, end, spanClass)) {

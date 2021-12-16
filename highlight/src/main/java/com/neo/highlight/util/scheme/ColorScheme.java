@@ -5,6 +5,7 @@ import android.text.style.ForegroundColorSpan;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseColorScheme;
 
 import java.util.regex.Pattern;
@@ -25,7 +26,7 @@ final public class ColorScheme extends BaseColorScheme {
 
     @Override
     @NonNull
-    public Object getSpan(@NonNull CharSequence text, int start, int end) {
+    public Object getSpan(@NonNull ScopeResult scopeResult) {
         return new ForegroundColorSpan(color);
     }
 }

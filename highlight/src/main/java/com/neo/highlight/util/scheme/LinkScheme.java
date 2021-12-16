@@ -6,6 +6,7 @@ import android.text.style.URLSpan;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 import com.neo.highlight.util.scheme.contract.LinkSchemeContract;
 
@@ -29,8 +30,8 @@ final public class LinkScheme extends BaseScheme implements LinkSchemeContract {
     }
 
     @Override
-    public Object getSpan(@NonNull CharSequence text, int start, int end) {
-        return new URLSpan(text.toString()) {
+    public Object getSpan(@NonNull ScopeResult scopeResult) {
+        return new URLSpan(scopeResult.getText().toString()) {
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
 

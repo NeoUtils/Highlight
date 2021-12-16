@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.SpannableString;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -89,6 +90,16 @@ final public class HighlightTextWatcher extends LinesTextWatcher implements High
     }
 
     @Override
+    public void setSpan(EditText editText, int start, int end) {
+        this.highlight.setSpan(editText, start, end);
+    }
+
+    @Override
+    public void setSpan(EditText editText) {
+        this.highlight.setSpan(editText);
+    }
+
+    @Override
     public void setSpan(TextView textView, int start, int end) {
         this.highlight.setSpan(textView, start, end);
     }
@@ -111,6 +122,36 @@ final public class HighlightTextWatcher extends LinesTextWatcher implements High
     @Override
     public void removeSpan(Editable editable) {
         this.highlight.removeSpan(editable);
+    }
+
+    @Override
+    public void removeSpan(EditText editText, int start, int end) {
+        this.highlight.removeSpan(editText, start, end);
+    }
+
+    @Override
+    public void removeSpan(EditText editText) {
+        this.highlight.removeSpan(editText);
+    }
+
+    @Override
+    public void removeSpan(TextView textView, int start, int end) {
+        this.highlight.removeSpan(textView, start, end);
+    }
+
+    @Override
+    public void removeSpan(TextView textView) {
+        this.highlight.removeSpan(textView);
+    }
+
+    @Override
+    public void removeSpan(SpannableString spannableString, int start, int end) {
+        this.highlight.removeSpan(spannableString, start, end);
+    }
+
+    @Override
+    public void removeSpan(SpannableString spannableString) {
+        this.highlight.removeSpan(spannableString);
     }
 
     @Override

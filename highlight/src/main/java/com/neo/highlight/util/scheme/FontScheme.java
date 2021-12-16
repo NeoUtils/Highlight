@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 
 import java.util.Objects;
@@ -35,7 +36,7 @@ final public class FontScheme extends BaseScheme {
 
     @NonNull
     @Override
-    public Object getSpan(@NonNull CharSequence text, int start, int end) {
+    public Object getSpan(@NonNull ScopeResult scopeResult) {
         return new TypefaceSpan("") {
 
             @Override

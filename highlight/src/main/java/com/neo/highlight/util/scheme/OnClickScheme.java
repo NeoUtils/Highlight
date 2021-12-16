@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 import com.neo.highlight.util.scheme.contract.LinkSchemeContract;
 
@@ -39,11 +40,16 @@ final public class OnClickScheme extends BaseScheme implements LinkSchemeContrac
     }
 
     @Override
-    public Object getSpan(@NonNull final CharSequence text, final int start, final int end) {
+    public Object getSpan(@NonNull final ScopeResult scopeResult) {
         return new ClickableSpan() {
 
             @Override
             public void onClick(@NonNull View widget) {
+
+                CharSequence text = scopeResult.getText();
+                int start = scopeResult.getStart();
+                int end = scopeResult.getEnd();
+
                 onClickListener.onClick(text, start, end);
             }
 

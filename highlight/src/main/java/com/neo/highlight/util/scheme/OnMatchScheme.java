@@ -3,6 +3,7 @@ package com.neo.highlight.util.scheme;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 
 import java.util.regex.Pattern;
@@ -28,12 +29,12 @@ final public class OnMatchScheme extends BaseScheme {
 
     @Nullable
     @Override
-    public Object getSpan(@NonNull CharSequence text, int start, int end) {
-        onMatchListener.onMatch(text, start, end);
+    public Object getSpan(@NonNull ScopeResult scopeResult) {
+        onMatchListener.onMatch(scopeResult);
         return null;
     }
 
     public interface OnMatchListener {
-        void onMatch(CharSequence text, int start, int end);
+        void onMatch(@NonNull ScopeResult scopeResult);
     }
 }

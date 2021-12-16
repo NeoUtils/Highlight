@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.neo.highlight.core.Scheme;
+import com.neo.highlight.core.ScopeResult;
 import com.neo.highlight.util.scheme.base.BaseScheme;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ final public class Scope extends BaseScheme {
 
     @Override
     @Nullable
-    public Object getSpan(@NonNull CharSequence text, int start, int end) {
+    public Object getSpan(@NonNull ScopeResult scopeResult) {
         return null;
     }
 
