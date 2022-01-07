@@ -40,6 +40,10 @@ final public class Highlight implements HighlightContract {
         this(new ArrayList<Scheme>());
     }
 
+    public Highlight(@NonNull Scheme... schemes) {
+        this(new ArrayList<>(Arrays.asList(schemes)));
+    }
+
     public Highlight(@NonNull List<Scheme> schemes) {
         this.schemes = schemes;
 

@@ -83,7 +83,7 @@ final public class OnClickScheme extends BaseScheme implements LinkSchemeContrac
     @Override
     public OnClickScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
-        return this;
+        return setPainText(true);
     }
 
     public interface OnClickListener {

@@ -65,6 +65,6 @@ final public class LinkScheme extends BaseScheme implements LinkSchemeContract {
     @Override
     public LinkScheme setPainTextUnderline(boolean painTextUnderline) {
         this.painTextUnderline = painTextUnderline;
-        return this;
+        return setPainText(true);
     }
 }
