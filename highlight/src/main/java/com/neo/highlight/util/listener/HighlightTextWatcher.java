@@ -32,6 +32,14 @@ final public class HighlightTextWatcher extends LinesTextWatcher implements High
         highlight = new Highlight();
     }
 
+    public HighlightTextWatcher(@NonNull Scheme... schemes) {
+        highlight = new Highlight(schemes);
+    }
+
+    public HighlightTextWatcher(@NonNull List<Scheme> schemes) {
+        highlight = new Highlight(schemes);
+    }
+
     public HighlightTextWatcher(@NonNull Highlight highlight) {
         this.highlight = highlight;
     }
