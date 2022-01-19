@@ -142,6 +142,9 @@ This lib was born out of a solution. One of the problems you will face if you tr
 | ------------- |------------- |------------- |
 | ![](screenshots/Screenshot_1639251552.png?raw=true "Simple Highlight v1.0.1") |![](screenshots/Screenshot_1639249920.png?raw=true "Kotlin Highlighting Dark v1.0.4") | ![](screenshots/Screenshot_1639249938.png?raw=true "Kotlin Highlighting Light v1.0.4") |
 
+## Kotlin
+In projects that support Kotlin, use the version optimized for Kotlin, [Highlight-KT](https://github.com/Irineu333/Highlight-KT).
+
 ## Add to project
 
 Add the jitpack to project in build.gradle or settings.gradle (gradle 7+)
