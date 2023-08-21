@@ -7,6 +7,5 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "HighlightProject"
-include ':app'
+rootProject.name = "Highlight"
 include ':highlight'
