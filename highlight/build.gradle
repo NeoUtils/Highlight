@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 31
-        versionCode 3
-        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -26,6 +24,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+    namespace 'com.neo.highlight'
 }
 
 dependencies {
