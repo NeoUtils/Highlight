@@ -1,5 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":example:view-based")
+include(":highlight:view-based")
+include(":highlight:core")
+
 pluginManagement {
     repositories {
         google()
@@ -14,7 +18,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
-include(":highlight")
 
 rootProject.name = "Highlight"

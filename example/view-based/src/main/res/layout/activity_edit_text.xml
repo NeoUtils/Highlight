@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.neoutils.hightlight.example.view.exemple.CodeHighlightExample
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@null"
+        android:gravity="top|start"
+        android:scrollbars="vertical"
+        android:padding="8dp"
+        android:fontFamily="@font/roboto_mono"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
