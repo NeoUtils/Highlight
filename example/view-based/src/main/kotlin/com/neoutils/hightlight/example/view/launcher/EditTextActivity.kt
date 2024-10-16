@@ -1,4 +1,4 @@
-package com.neoutils.hightlight.example.view
+package com.neoutils.hightlight.example.view.launcher
 
 import android.annotation.SuppressLint
 import android.os.Bundle

@@ -6,7 +6,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
-import com.neoutils.highlight.core.scheme.ForegroundColorScheme
+import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.scheme.StyleTextScheme
 
 fun <T : Any> Scheme<T>.toSpans(): List<ParcelableSpan?> {
@@ -21,7 +21,7 @@ fun <T : Any> Scheme<T>.toSpans(): List<ParcelableSpan?> {
             }
         }
 
-        is ForegroundColorScheme -> {
+        is TextColorScheme -> {
             values.map {
                 it?.let {
                     ForegroundColorSpan(

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.neoutils.hightlight.example.view.exemple.CodeHighlightExample
+<com.neoutils.hightlight.example.view.example.CodeHighlightExample
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="@null"
         android:gravity="top|start"

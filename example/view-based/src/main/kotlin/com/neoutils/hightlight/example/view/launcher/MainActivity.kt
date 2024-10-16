@@ -1,4 +1,4 @@
-package com.neoutils.hightlight.example.view
+package com.neoutils.hightlight.example.view.launcher
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnEditText.setOnClickListener {
-            startActivity(Intent(this,EditTextActivity::class.java))
+            startActivity(Intent(this, EditTextActivity::class.java))
         }
 
         binding.btnTextView.setOnClickListener {
-            startActivity(Intent(this,TextViewActivity::class.java))
+            startActivity(Intent(this, TextViewActivity::class.java))
         }
     }
 }

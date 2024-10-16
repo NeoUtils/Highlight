@@ -6,24 +6,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".TextViewActivity">
+        tools:context=".launcher.TextViewActivity">
 
-    <com.neoutils.hightlight.example.view.exemple.ForegroundColorSchemeExample
+    <com.neoutils.hightlight.example.view.example.TextColorSchemeExample
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    <com.neoutils.hightlight.example.view.exemple.BackgroundSchemeExample
+    <com.neoutils.hightlight.example.view.example.BackgroundSchemeExample
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    <com.neoutils.hightlight.example.view.exemple.StyleSchemeExample
+    <com.neoutils.hightlight.example.view.example.StyleSchemeExample
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    <com.neoutils.hightlight.example.view.exemple.CaptureGroupsExample
+    <com.neoutils.hightlight.example.view.example.CaptureGroupsExample
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

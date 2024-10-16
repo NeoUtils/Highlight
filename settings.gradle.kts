@@ -1,8 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":example:view-based")
+include(":example:compose")
+
+
 include(":highlight:view-based")
+include(":highlight:compose")
 include(":highlight:core")
+include(":example:view-based")
 
 pluginManagement {
     repositories {

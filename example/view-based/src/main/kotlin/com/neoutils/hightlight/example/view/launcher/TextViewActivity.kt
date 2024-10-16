@@ -1,4 +1,4 @@
-package com.neoutils.hightlight.example.view
+package com.neoutils.hightlight.example.view.launcher
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
