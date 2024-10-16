@@ -1,30 +1,32 @@
-package com.neoutils.hightlight.example.view.exemple
+package com.neoutils.hightlight.example.view.example
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.scheme.ForegroundColorScheme
+import com.neoutils.highlight.core.scheme.StyleTextScheme
 import com.neoutils.highlight.core.utils.Match
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.utils.UiStyle
 import com.neoutils.highlight.view.extension.toSpannedString
 
-class ForegroundColorSchemeExample(
-    context: Context,
+class StyleSchemeExample(
+    content: Context,
     attr: AttributeSet? = null,
-) : AppCompatTextView(context, attr) {
+) : AppCompatTextView(
+    content,
+    attr
+) {
 
     init {
-
         text = Highlight(
-            ForegroundColorScheme(
-                regex = Regex(pattern = "foreground color"),
+            StyleTextScheme(
+                regex = "style".toRegex(),
                 values = Match.full(
-                    UiColor.Blue
+                    UiStyle(UiStyle.Style.BOLD)
                 )
             )
         ).toSpannedString(
-            text = "Example of foreground color."
+            text = "Example of style."
         )
     }
 }
