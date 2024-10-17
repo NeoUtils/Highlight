@@ -25,7 +25,7 @@ class EditTextActivity : AppCompatActivity() {
         @Language("kotlin")
         val code = """
             fun main() {
-                println("Hello, World!")
+                print("Hello, World!")
             }
         """.trimIndent()
 

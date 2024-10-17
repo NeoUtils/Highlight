@@ -1,9 +1,10 @@
 package com.neoutils.highlight.core.scheme
 
 import com.neoutils.highlight.core.Scheme
+import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiStyle
 
 data class StyleTextScheme(
     override val regex: Regex,
-    override val values: List<UiStyle?>,
+    override val match: Match<UiStyle>,
 ) : Scheme<UiStyle>
