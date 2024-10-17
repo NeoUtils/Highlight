@@ -51,7 +51,7 @@ class LinesHighlightTextWatcher(
             Highlight(
                 BackgroundColorScheme(
                     regex = "[^\n]+".toRegex(),
-                    values = Match.full(
+                    match = Match.fully(
                         UiColor.Rgb(
                             Random.nextInt(255),
                             Random.nextInt(255),

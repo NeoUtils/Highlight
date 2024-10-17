@@ -21,7 +21,7 @@ class StyleSchemeExample(
         text = Highlight(
             StyleTextScheme(
                 regex = "style".toRegex(),
-                values = Match.full(
+                match = Match.fully(
                     UiStyle(UiStyle.Style.BOLD)
                 )
             )

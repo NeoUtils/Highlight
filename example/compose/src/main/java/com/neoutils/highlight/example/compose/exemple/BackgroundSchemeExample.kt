@@ -18,13 +18,13 @@ fun BackgroundScreenExample() {
         Highlight(
             BackgroundColorScheme(
                 regex = "background color".toRegex(),
-                values = Match.full(
+                match = Match.fully(
                     UiColor.Blue
                 )
             ),
             TextColorScheme(
                 regex = "background color".toRegex(),
-                values = Match.full(
+                match = Match.fully(
                     UiColor.White
                 )
             )

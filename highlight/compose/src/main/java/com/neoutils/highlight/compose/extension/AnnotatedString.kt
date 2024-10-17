@@ -8,8 +8,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
-import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.scheme.StyleTextScheme
+import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.core.utils.UiStyle
 
@@ -45,43 +45,49 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 }
 
 private fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
+
     return when (this) {
         is BackgroundColorScheme -> {
-            values.map {
-                it?.let {
-                    SpanStyle(
-                        background = it.toColor()
-                    )
-                }
+            match.values.map {
+
+                if (it == null) return@map null
+
+                SpanStyle(
+                    background = it.toColor()
+                )
             }
         }
 
         is TextColorScheme -> {
-            values.map {
-                it?.let {
-                    SpanStyle(
-                        color = it.toColor()
-                    )
-                }
+            match.values.map {
+
+                if (it == null) return@map null
+
+                SpanStyle(
+                    color = it.toColor()
+                )
+
             }
         }
 
         is StyleTextScheme -> {
-            values.map {
-                it?.let {
-                    when (it.style) {
-                        UiStyle.Style.BOLD -> {
-                            SpanStyle(
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
+            match.values.map {
 
-                        UiStyle.Style.ITALIC -> {
-                            SpanStyle(
-                                fontStyle = FontStyle.Italic
-                            )
-                        }
+                if (it == null) return@map null
+
+                when (it.style) {
+                    UiStyle.Style.BOLD -> {
+                        SpanStyle(
+                            fontWeight = FontWeight.Bold
+                        )
                     }
+
+                    UiStyle.Style.ITALIC -> {
+                        SpanStyle(
+                            fontStyle = FontStyle.Italic
+                        )
+                    }
+
                 }
             }
         }

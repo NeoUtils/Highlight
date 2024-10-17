@@ -21,26 +21,26 @@ class CodeHighlightExample(
         val highlight = Highlight(
             TextColorScheme(
                 regex = "\\b(fun)\\b".toRegex(),
-                values = Match.full(
+                match = Match.fully(
                     UiColor.Hex(hex = "#0033B3")
                 )
             ),
             TextColorScheme(
                 regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)".toRegex(),
-                values = Match.group(
+                match = Match.groups(
                     UiColor.Hex(hex = "#0033B3"),
                     UiColor.Hex(hex = "#00627A")
                 )
             ),
             TextColorScheme(
                 regex = "@.+".toRegex(),
-                values = Match.full(
+                match = Match.fully(
                     UiColor.Hex(hex = "#93880D")
                 )
             ),
             TextColorScheme(
                 regex = "\"[^\"]*\"".toRegex(),
-                values = Match.full(
+                match = Match.fully(
                     UiColor.Hex(hex = "#067D17")
                 )
             )

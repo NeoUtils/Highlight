@@ -17,7 +17,7 @@ fun TextColorSchemeExample() {
         Highlight(
             TextColorScheme(
                 regex = Regex(pattern = "foreground color"),
-                values = Match.full(
+                match = Match.fully(
                     UiColor.Blue
                 )
             )

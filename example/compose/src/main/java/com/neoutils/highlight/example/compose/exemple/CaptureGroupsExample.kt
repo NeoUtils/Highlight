@@ -17,7 +17,7 @@ fun CaptureGroupsExample() {
         Highlight(
             TextColorScheme(
                 regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")".toRegex(),
-                values = Match.group(
+                match = Match.groups(
                     UiColor.Blue,
                     UiColor.Green
                 )

@@ -14,7 +14,7 @@ fun Highlight.applyTo(
 
         for (result in scheme.regex.findAll(text.subSequence(0, end), start)) {
 
-            val spans = scheme.toSpans()
+            val spans = scheme.toParcelableSpans()
 
             for ((index, group) in result.groups.withIndex()) {
 
