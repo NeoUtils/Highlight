@@ -2,7 +2,7 @@
 
 include(":example:compose")
 
-
+include(":highlight:core-ktx")
 include(":highlight:view-based")
 include(":highlight:compose")
 include(":highlight:core")

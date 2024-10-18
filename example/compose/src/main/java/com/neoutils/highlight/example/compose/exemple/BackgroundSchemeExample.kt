@@ -10,25 +10,27 @@ import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.extension.highlight
 
 @Composable
 fun BackgroundScreenExample() {
 
     val text = remember {
-        Highlight(
-            BackgroundColorScheme(
-                regex = "background color".toRegex(),
-                match = Match.fully(
-                    UiColor.Blue
+        highlight {
+            backgroundColor {
+                fully(
+                    regex = "background color",
+                    value = UiColor.Blue
                 )
-            ),
-            TextColorScheme(
-                regex = "background color".toRegex(),
-                match = Match.fully(
-                    UiColor.White
+            }
+
+            textColor {
+                fully(
+                    regex = "background color",
+                    value = UiColor.White
                 )
-            )
-        ).toAnnotatedString(
+            }
+        }.toAnnotatedString(
             text = "Example of background color."
         )
     }
