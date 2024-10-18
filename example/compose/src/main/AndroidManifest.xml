@@ -8,7 +8,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Highlight">
         <activity
-                android:name=".launcher.MainActivity"
+                android:name=".launcher.CodeHighlightExample"
                 android:exported="true"
                 android:label="@string/title_activity_main"
                 android:theme="@style/Theme.Highlight">
