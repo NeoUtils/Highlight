@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
+import com.neoutils.highlight.core.ktx.highlight
 import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.example.compose.theme.HighlightTheme
-import com.neoutils.highlight.extension.highlight
 import org.intellij.lang.annotations.Language
 
 class CodeHighlightExample : ComponentActivity() {
@@ -41,9 +41,9 @@ class CodeHighlightExample : ComponentActivity() {
                             }
                         ) {
                             if (highlightOn.value) {
-                                Text("Off")
+                                Text(text = "OFF")
                             } else {
-                                Text("On")
+                                Text(text = "ON")
                             }
                         }
                     }
@@ -66,7 +66,9 @@ class CodeHighlightExample : ComponentActivity() {
                     }
 
                     BasicTextField(
-                        modifier = Modifier.padding(innerPadding),
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .fillMaxSize(),
                         value = textFieldValue.copy(
                             composition = null
                         ),

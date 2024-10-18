@@ -3,11 +3,8 @@ package com.neoutils.hightlight.example.view.example
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
-import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.scheme.TextColorScheme
-import com.neoutils.highlight.core.utils.Match
+import com.neoutils.highlight.core.ktx.highlight
 import com.neoutils.highlight.core.utils.UiColor
-import com.neoutils.highlight.extension.highlight
 import com.neoutils.highlight.view.text.LinesHighlightTextWatcher
 
 private val CodeHighlight = highlight {
@@ -43,7 +40,6 @@ class CodeHighlightExample(
     attr
 ) {
     init {
-
         addTextChangedListener(
             LinesHighlightTextWatcher(
                 CodeHighlight,
