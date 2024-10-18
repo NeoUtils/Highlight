@@ -1,7 +1,7 @@
-package com.neoutils.highlight.extension
+package com.neoutils.highlight.core.ktx
 
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.extension.scope.HighlightScope
+import com.neoutils.highlight.core.ktx.scope.HighlightScope
 
 fun highlight(
     scope: HighlightScope.() -> Unit

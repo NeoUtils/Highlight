@@ -20,7 +20,7 @@ import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.example.compose.theme.HighlightTheme
-import com.neoutils.highlight.extension.highlight
+import com.neoutils.highlight.ktx.highlight
 import org.intellij.lang.annotations.Language
 
 class CodeHighlightExample : ComponentActivity() {

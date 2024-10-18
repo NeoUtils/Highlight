@@ -5,11 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.neoutils.highlight.compose.extension.toAnnotatedString
-import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.scheme.TextColorScheme
-import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiColor
-import com.neoutils.highlight.extension.highlight
+import com.neoutils.highlight.ktx.highlight
 
 @Composable
 fun CaptureGroupsExample() {

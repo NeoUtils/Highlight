@@ -1,4 +1,4 @@
-package com.neoutils.highlight.extension.scope
+package com.neoutils.highlight.core.ktx.scope
 
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.utils.Match
