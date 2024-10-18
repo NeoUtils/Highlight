@@ -6,22 +6,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.neoutils.highlight.compose.extension.toAnnotatedString
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.scheme.StyleTextScheme
+import com.neoutils.highlight.core.scheme.TextStyleScheme
 import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiStyle
+import com.neoutils.highlight.extension.highlight
 
 @Composable
 fun StyleSchemeExample() {
 
     val text = remember {
-        Highlight(
-            StyleTextScheme(
-                regex = "style".toRegex(),
-                match = Match.fully(
-                    UiStyle(UiStyle.Style.BOLD)
+
+        highlight {
+            textStyle {
+                fully(
+                    regex = "style",
+                    value = UiStyle(UiStyle.Style.BOLD)
                 )
-            )
-        ).toAnnotatedString(
+            }
+        }.toAnnotatedString(
             text = "Example of style."
         )
     }

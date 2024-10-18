@@ -9,20 +9,21 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.extension.highlight
 
 @Composable
 fun CaptureGroupsExample() {
 
     val text = remember {
-        Highlight(
-            TextColorScheme(
-                regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")".toRegex(),
-                match = Match.groups(
+        highlight {
+            textColor {
+                groups(
+                    regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")",
                     UiColor.Blue,
                     UiColor.Green
                 )
-            ),
-        ).toAnnotatedString(
+            }
+        }.toAnnotatedString(
             text = "\"name\" = \"Irineu\""
         )
     }

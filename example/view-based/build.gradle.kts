@@ -39,11 +39,12 @@ android {
 
 dependencies {
 
+    implementation(project(":highlight:core"))
+    implementation(project(":highlight:view-based"))
+    implementation(project(":highlight:core-ktx"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.material)
-
-    implementation(project(":highlight:core"))
-    implementation(project(":highlight:view-based"))
 }

@@ -12,39 +12,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neoutils.highlight.compose.remember.rememberHighlightTextField
-import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.scheme.TextColorScheme
-import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.extension.highlight
 import org.intellij.lang.annotations.Language
 
-private val CodeHighlight = Highlight(
-    TextColorScheme(
-        regex = "\\b(fun)\\b".toRegex(),
-        match = Match.fully(
+private val CodeHighlight = highlight {
+    textColor {
+        fully(
+            regex = "\\b(fun)\\b",
             UiColor.Hex(hex = "#0033B3")
         )
-    ),
-    TextColorScheme(
-        regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)".toRegex(),
-        match = Match.groups(
+
+        groups(
+            regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)",
             UiColor.Hex(hex = "#0033B3"),
             UiColor.Hex(hex = "#00627A")
         )
-    ),
-    TextColorScheme(
-        regex = "@.+".toRegex(),
-        match = Match.fully(
+
+        fully(
+            regex = "@.+",
             UiColor.Hex(hex = "#93880D")
         )
-    ),
-    TextColorScheme(
-        regex = "\"[^\"]*\"".toRegex(),
-        match = Match.fully(
+
+        fully(
+            regex = "\"[^\"]*\"",
             UiColor.Hex(hex = "#067D17")
         )
-    )
-)
+    }
+}
 
 @Language("kotlin")
 private val code = """

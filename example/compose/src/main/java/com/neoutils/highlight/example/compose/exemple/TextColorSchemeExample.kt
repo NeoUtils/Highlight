@@ -9,19 +9,20 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.extension.highlight
 
 @Composable
 fun TextColorSchemeExample() {
 
     val text = remember {
-        Highlight(
-            TextColorScheme(
-                regex = Regex(pattern = "foreground color"),
-                match = Match.fully(
+        highlight {
+            textColor {
+                fully(
+                    regex = "foreground color",
                     UiColor.Blue
                 )
-            )
-        ).toAnnotatedString(
+            }
+        }.toAnnotatedString(
             text = "Example of foreground color."
         )
     }
