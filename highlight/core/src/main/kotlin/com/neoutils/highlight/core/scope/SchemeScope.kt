@@ -1,12 +1,9 @@
 package com.neoutils.highlight.core.scope
 
-import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.utils.Match
 import org.intellij.lang.annotations.Language
 
-abstract class SchemeScope<T : Any>(
-    val schemes: MutableList<Scheme<T>> = mutableListOf()
-) {
+abstract class SchemeScope<T : Any> {
 
     abstract fun match(
         @Language("RegExp") regex: String,

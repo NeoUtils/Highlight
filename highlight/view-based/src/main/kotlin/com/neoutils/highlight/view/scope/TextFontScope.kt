@@ -2,10 +2,12 @@ package com.neoutils.highlight.view.scope
 
 import com.neoutils.highlight.core.scope.SchemeScope
 import com.neoutils.highlight.core.utils.Match
-import com.neoutils.highlight.view.util.UiFont
 import com.neoutils.highlight.view.scheme.TextFontScheme
+import com.neoutils.highlight.view.util.UiFont
 
-class TextFontScope internal constructor() : SchemeScope<UiFont>() {
+class TextFontScope internal constructor(
+    val schemes: MutableList<TextFontScheme> = mutableListOf()
+) : SchemeScope<UiFont>() {
 
     override fun match(
         regex: String,
