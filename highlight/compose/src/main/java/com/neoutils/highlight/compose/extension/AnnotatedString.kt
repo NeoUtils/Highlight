@@ -3,13 +3,16 @@ package com.neoutils.highlight.compose.extension
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
-import com.neoutils.highlight.core.scheme.TextStyleScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
+import com.neoutils.highlight.core.scheme.TextFontScheme
+import com.neoutils.highlight.core.scheme.TextStyleScheme
 import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.core.utils.UiStyle
 
@@ -89,6 +92,17 @@ private fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
                     }
 
                 }
+            }
+        }
+
+        is TextFontScheme -> {
+            match.values.map {
+
+                if (it == null) return@map null
+
+                SpanStyle(
+                    fontFamily = FontFamily(Font(it.fontResId))
+                )
             }
         }
 

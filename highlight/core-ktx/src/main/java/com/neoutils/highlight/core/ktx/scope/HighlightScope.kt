@@ -22,4 +22,10 @@ class HighlightScope internal constructor(
             TextStyleScope().apply(scope).schemes
         )
     }
+
+    fun textFont(scope: TextFontScope.() -> Unit) {
+        schemes.addAll(
+            TextFontScope().apply(scope).schemes
+        )
+    }
 }

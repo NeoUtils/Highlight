@@ -28,4 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+    <com.neoutils.hightlight.example.view.example.TextFontSchemeExample
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

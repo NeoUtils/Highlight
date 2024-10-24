@@ -4,25 +4,24 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.ktx.highlight
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.utils.UiFont
 import com.neoutils.highlight.view.extension.toSpannedString
+import com.neoutils.hightlight.example.view.R
 
-class TextColorSchemeExample(
+class TextFontSchemeExample(
     context: Context,
     attr: AttributeSet? = null,
 ) : AppCompatTextView(context, attr) {
-
     init {
-
         text = highlight {
-            textColor {
+            textFont {
                 fully(
-                    regex = "color",
-                    value = UiColor.Blue
+                    regex = "font",
+                    UiFont(R.font.pacifico_regular)
                 )
             }
         }.toSpannedString(
-            text = "Example of foreground color."
+            text = "Example of font style."
         )
     }
 }

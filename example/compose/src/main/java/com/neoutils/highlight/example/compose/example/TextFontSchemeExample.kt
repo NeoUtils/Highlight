@@ -1,4 +1,4 @@
-package com.neoutils.highlight.example.compose.example
+package com.neoutils.highlight.example.compose.exemple
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -6,28 +6,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.neoutils.highlight.compose.extension.toAnnotatedString
 import com.neoutils.highlight.core.ktx.highlight
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.utils.UiFont
+import com.neoutils.highlight.example.compose.R
 
 @Composable
-fun BackgroundSchemeExample() {
-
+fun TextFontSchemeExample() {
+    
     val text = remember {
         highlight {
-            backgroundColor {
+            textFont {
                 fully(
                     regex = "font",
-                    value = UiColor.Blue
-                )
-            }
-
-            textColor {
-                fully(
-                    regex = "color",
-                    value = UiColor.White
+                    UiFont(R.font.pacifico_regular)
                 )
             }
         }.toAnnotatedString(
-            text = "Example of background color."
+            text = "Example of font style."
         )
     }
 
@@ -37,5 +31,5 @@ fun BackgroundSchemeExample() {
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    BackgroundSchemeExample()
+    TextFontSchemeExample()
 }
