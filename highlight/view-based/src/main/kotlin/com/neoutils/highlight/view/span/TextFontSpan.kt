@@ -4,7 +4,7 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.text.style.TypefaceSpan
 
-data class FontSpan(
+data class TextFontSpan(
     private val typeface: Typeface
 ) : TypefaceSpan(null) {
 

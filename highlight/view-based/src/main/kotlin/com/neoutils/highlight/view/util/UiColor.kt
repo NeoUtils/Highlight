@@ -1,34 +1,38 @@
 package com.neoutils.highlight.view.util
 
+import android.graphics.Color
 import androidx.annotation.ColorInt
 
-sealed class UiColor {
-
-    data class Hex(
-        val hex: String
-    ) : UiColor()
-
-    data class Rgb(
-        val red: Int = 0,
-        val green: Int = 0,
-        val blue: Int = 0,
-        val alpha: Float = 1f
-    ) : UiColor()
-
-    data class Raw(
-        @ColorInt
-        val value: Int
-    ) : UiColor()
-
+@JvmInline
+value class UiColor(
+    @ColorInt
+    val colorInt: Int
+) {
     companion object {
-        val Blue = Rgb(blue = 255)
 
-        val Red = Rgb(red = 255)
+        val Red = rgb(red = 255)
 
-        val Green = Rgb(green = 255)
+        val Green = rgb(green = 255)
 
-        val White = Rgb(red = 255, green = 255, blue = 255)
+        val Blue = rgb(blue = 255)
 
-        val Black = Rgb()
+        val White = rgb(red = 255, green = 255, blue = 255)
+
+        val Black = rgb()
+
+        fun rgb(
+            red: Int = 0,
+            green: Int = 0,
+            blue: Int = 0,
+            alpha: Float = 1f
+        ): UiColor {
+
+            return UiColor(Color.argb((alpha * 255).toInt(), red, green, blue))
+        }
+
+        fun hex(hex: String): UiColor {
+
+            return UiColor(Color.parseColor(hex))
+        }
     }
 }

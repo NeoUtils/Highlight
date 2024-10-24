@@ -21,7 +21,7 @@ class StyleSchemeExample(
             textStyle {
                 fully(
                     regex = "style",
-                    value = UiStyle(UiStyle.Style.BOLD)
+                    value = UiStyle.BOLD
                 )
             }
         }.toSpannedString(
