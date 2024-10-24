@@ -6,11 +6,11 @@ plugins {
 group = "example"
 
 android {
-    namespace = "com.neoutils.hightlight.example.view"
+    namespace = "com.neoutils.highlight.example.view"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.neoutils.hightlight.example.view"
+        applicationId = "com.neoutils.highlight.example.view"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

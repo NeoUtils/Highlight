@@ -1,9 +1,9 @@
-package com.neoutils.hightlight.example.view.launcher
+package com.neoutils.highlight.example.view.launcher
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.neoutils.hightlight.example.view.databinding.ActivityEditTextBinding
+import com.neoutils.highlight.example.view.databinding.ActivityEditTextBinding
 import org.intellij.lang.annotations.Language
 
 class EditTextActivity : AppCompatActivity() {

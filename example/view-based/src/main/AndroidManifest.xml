@@ -8,7 +8,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Highlight">
         <activity
-                android:name=".launcher.MainActivity"
+                android:name="com.neoutils.highlight.example.view.launcher.MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,7 +19,7 @@
 
         <activity
                 android:label="TextView Example"
-                android:name=".launcher.TextViewActivity"
+                android:name="com.neoutils.highlight.example.view.launcher.TextViewActivity"
                 android:exported="true"/>
 
         <activity

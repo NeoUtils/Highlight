@@ -1,13 +1,13 @@
-package com.neoutils.hightlight.example.view.example
+package com.neoutils.highlight.example.view.example
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.neoutils.highlight.core.extension.highlight
+import com.neoutils.highlight.example.view.R
 import com.neoutils.highlight.view.extension.textFont
 import com.neoutils.highlight.view.extension.toSpannedString
-import com.neoutils.hightlight.example.view.R
 
 class TextFontSchemeExample(
     context: Context,

@@ -1,31 +1,39 @@
-package com.neoutils.hightlight.example.view.example
+package com.neoutils.highlight.example.view.example
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.extension.highlight
+import com.neoutils.highlight.view.extension.backgroundColor
 import com.neoutils.highlight.view.extension.textColor
 import com.neoutils.highlight.view.extension.toSpannedString
 import com.neoutils.highlight.view.util.UiColor
 
-class CaptureGroupsExample(
+class BackgroundSchemeExample(
     context: Context,
     attr: AttributeSet? = null,
 ) : AppCompatTextView(
     context,
     attr
 ) {
+
     init {
+
         text = highlight {
+            backgroundColor {
+                fully(
+                    regex = "color",
+                    UiColor.Blue
+                )
+            }
             textColor {
-                groups(
-                    regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")",
-                    UiColor.Blue,
-                    UiColor.Green
+                fully(
+                    regex = "color",
+                    UiColor.White
                 )
             }
         }.toSpannedString(
-            text = "\"name\" = \"Irineu\""
+            text = "Example of background color."
         )
     }
 }

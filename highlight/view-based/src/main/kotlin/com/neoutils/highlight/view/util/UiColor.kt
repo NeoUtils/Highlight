@@ -3,8 +3,7 @@ package com.neoutils.highlight.view.util
 import android.graphics.Color
 import androidx.annotation.ColorInt
 
-@JvmInline
-value class UiColor(
+data class UiColor(
     @ColorInt
     val colorInt: Int
 ) {

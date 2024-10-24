@@ -1,9 +1,9 @@
-package com.neoutils.hightlight.example.view.launcher
+package com.neoutils.highlight.example.view.launcher
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.neoutils.hightlight.example.view.databinding.ActivityMainBinding
+import com.neoutils.highlight.example.view.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

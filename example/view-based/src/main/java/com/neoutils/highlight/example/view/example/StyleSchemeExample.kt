@@ -1,4 +1,4 @@
-package com.neoutils.hightlight.example.view.example
+package com.neoutils.highlight.example.view.example
 
 import android.content.Context
 import android.util.AttributeSet
