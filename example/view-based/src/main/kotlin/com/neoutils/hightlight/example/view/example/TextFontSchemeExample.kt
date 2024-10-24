@@ -3,6 +3,7 @@ package com.neoutils.hightlight.example.view.example
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.res.ResourcesCompat
 import com.neoutils.highlight.core.ktx.highlight
 import com.neoutils.highlight.core.utils.UiFont
 import com.neoutils.highlight.view.extension.toSpannedString
@@ -17,7 +18,14 @@ class TextFontSchemeExample(
             textFont {
                 fully(
                     regex = "font",
-                    UiFont(R.font.pacifico_regular)
+                    UiFont(
+                        checkNotNull(
+                            ResourcesCompat.getFont(
+                                context,
+                                R.font.pacifico_regular
+                            )
+                        )
+                    )
                 )
             }
         }.toSpannedString(

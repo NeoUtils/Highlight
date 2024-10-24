@@ -1,9 +1,8 @@
 package com.neoutils.highlight.core.utils
 
-import androidx.annotation.FontRes
+import android.graphics.Typeface
 
 @JvmInline
 value class UiFont(
-    @FontRes
-    val fontResId: Int
+    val typeface: Typeface
 )

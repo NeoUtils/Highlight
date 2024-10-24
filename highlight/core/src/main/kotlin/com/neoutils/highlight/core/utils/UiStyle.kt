@@ -1,6 +1,7 @@
 package com.neoutils.highlight.core.utils
 
-data class UiStyle(
+@JvmInline
+value class UiStyle(
     val style: Style,
 ) {
 

@@ -9,6 +9,7 @@ import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.scheme.TextFontScheme
 import com.neoutils.highlight.core.scheme.TextStyleScheme
+import com.neoutils.highlight.view.span.FontSpan
 
 fun <T : Any> Scheme<T>.toParcelableSpans(): List<ParcelableSpan?> {
 
@@ -46,7 +47,14 @@ fun <T : Any> Scheme<T>.toParcelableSpans(): List<ParcelableSpan?> {
             }
         }
 
-        is TextFontScheme -> emptyList() // TODO: not support
+        is TextFontScheme -> {
+            match.values.map {
+
+                if (it == null) return@map null
+
+                FontSpan(it.typeface)
+            }
+        }
 
         else -> error("Unknown scheme type")
     }
