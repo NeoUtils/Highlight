@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.res.ResourcesCompat
 import com.neoutils.highlight.compose.extension.toAnnotatedString
-import com.neoutils.highlight.core.ktx.highlight
+import com.neoutils.highlight.core.extension.highlight
 import com.neoutils.highlight.core.utils.UiFont
 import com.neoutils.highlight.example.compose.R
 

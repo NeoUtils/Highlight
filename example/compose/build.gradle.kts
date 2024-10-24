@@ -48,8 +48,6 @@ android {
 
 dependencies {
 
-    implementation(project(":highlight:core-ktx"))
-    implementation(project(":highlight:core"))
     implementation(project(":highlight:compose"))
 
     implementation(libs.androidx.core.ktx)

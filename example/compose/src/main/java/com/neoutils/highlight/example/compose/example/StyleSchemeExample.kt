@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.neoutils.highlight.compose.extension.toAnnotatedString
-import com.neoutils.highlight.core.ktx.highlight
+import com.neoutils.highlight.core.extension.highlight
 import com.neoutils.highlight.core.utils.UiStyle
 
 @Composable

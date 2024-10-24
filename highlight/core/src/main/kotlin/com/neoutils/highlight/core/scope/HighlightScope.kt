@@ -1,4 +1,4 @@
-package com.neoutils.highlight.core.ktx.scope
+package com.neoutils.highlight.core.scope
 
 import com.neoutils.highlight.core.Scheme
 

@@ -1,12 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":example:compose")
-
-include(":highlight:core-ktx")
 include(":highlight:view-based")
 include(":highlight:compose")
 include(":highlight:core")
+
 include(":example:view-based")
+include(":example:compose")
 
 pluginManagement {
     repositories {
