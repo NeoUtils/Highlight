@@ -5,10 +5,10 @@ import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import com.neoutils.highlight.core.Scheme
-import com.neoutils.highlight.core.scheme.BackgroundColorScheme
-import com.neoutils.highlight.core.scheme.TextColorScheme
-import com.neoutils.highlight.core.scheme.TextFontScheme
-import com.neoutils.highlight.core.scheme.TextStyleScheme
+import com.neoutils.highlight.view.scheme.BackgroundColorScheme
+import com.neoutils.highlight.view.scheme.TextColorScheme
+import com.neoutils.highlight.view.scheme.TextStyleScheme
+import com.neoutils.highlight.view.scheme.TextFontScheme
 import com.neoutils.highlight.view.span.FontSpan
 
 fun <T : Any> Scheme<T>.toParcelableSpans(): List<ParcelableSpan?> {

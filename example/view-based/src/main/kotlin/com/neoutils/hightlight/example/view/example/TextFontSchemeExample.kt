@@ -5,7 +5,8 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.neoutils.highlight.core.extension.highlight
-import com.neoutils.highlight.core.utils.UiFont
+import com.neoutils.highlight.view.util.UiFont
+import com.neoutils.highlight.view.extension.textFont
 import com.neoutils.highlight.view.extension.toSpannedString
 import com.neoutils.hightlight.example.view.R
 

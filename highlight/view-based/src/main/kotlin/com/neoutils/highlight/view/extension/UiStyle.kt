@@ -1,7 +1,7 @@
 package com.neoutils.highlight.view.extension
 
 import android.graphics.Typeface
-import com.neoutils.highlight.core.utils.UiStyle
+import com.neoutils.highlight.view.util.UiStyle
 
 fun UiStyle.toTypeface(): Int {
 

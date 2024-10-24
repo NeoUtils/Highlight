@@ -3,29 +3,5 @@ package com.neoutils.highlight.core.scope
 import com.neoutils.highlight.core.Scheme
 
 class HighlightScope internal constructor(
-    internal val schemes: MutableList<Scheme<*>> = mutableListOf()
-) {
-    fun textColor(scope: TextColorScope.() -> Unit) {
-        schemes.addAll(
-            TextColorScope().apply(scope).schemes
-        )
-    }
-
-    fun backgroundColor(scope: BackgroundColorScope.() -> Unit) {
-        schemes.addAll(
-            BackgroundColorScope().apply(scope).schemes
-        )
-    }
-
-    fun textStyle(scope: TextStyleScope.() -> Unit) {
-        schemes.addAll(
-            TextStyleScope().apply(scope).schemes
-        )
-    }
-
-    fun textFont(scope: TextFontScope.() -> Unit) {
-        schemes.addAll(
-            TextFontScope().apply(scope).schemes
-        )
-    }
-}
+    val schemes: MutableList<Scheme<*>> = mutableListOf()
+)

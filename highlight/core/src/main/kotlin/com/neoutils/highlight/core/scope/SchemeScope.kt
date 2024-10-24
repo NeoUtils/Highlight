@@ -4,8 +4,8 @@ import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.utils.Match
 import org.intellij.lang.annotations.Language
 
-abstract class SchemeScope<T : Any> internal constructor(
-    internal val schemes: MutableList<Scheme<T>> = mutableListOf()
+abstract class SchemeScope<T : Any>(
+    val schemes: MutableList<Scheme<T>> = mutableListOf()
 ) {
 
     abstract fun match(

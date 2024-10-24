@@ -4,7 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.neoutils.highlight.core.extension.highlight
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.view.extension.textColor
+import com.neoutils.highlight.view.util.UiColor
 import com.neoutils.highlight.view.text.LinesHighlightTextWatcher
 
 private val CodeHighlight = highlight {

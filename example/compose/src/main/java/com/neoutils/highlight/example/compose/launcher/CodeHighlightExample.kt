@@ -12,14 +12,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.neoutils.highlight.compose.extension.invoke
+import com.neoutils.highlight.compose.extension.spanStyle
 import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.highlight
-import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.example.compose.theme.HighlightTheme
 import org.intellij.lang.annotations.Language
 
@@ -91,26 +94,26 @@ class CodeHighlightExample : ComponentActivity() {
 }
 
 private val CodeHighlight = highlight {
-    textColor {
+    spanStyle {
         fully(
             regex = "\\b(fun)\\b",
-            UiColor.Hex(hex = "#0033B3")
+            SpanStyle(color = Color(hex = "#0033B3"))
         )
 
         groups(
             regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)",
-            UiColor.Hex(hex = "#0033B3"),
-            UiColor.Hex(hex = "#00627A")
+            SpanStyle(color = Color(hex = "#0033B3")),
+            SpanStyle(color = Color(hex = "#00627A"))
         )
 
         fully(
             regex = "@.+",
-            UiColor.Hex(hex = "#93880D")
+            SpanStyle(color = Color(hex = "#93880D"))
         )
 
         fully(
             regex = "\"[^\"]*\"",
-            UiColor.Hex(hex = "#067D17")
+            SpanStyle(color = Color(hex = "#067D17"))
         )
     }
 }

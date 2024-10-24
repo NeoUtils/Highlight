@@ -25,7 +25,7 @@ fun SpanStyleSchemeExample() {
                         color = Color.White,
                         background = Color.Black,
                         fontStyle = FontStyle.Italic,
-                        textDecoration = TextDecoration.LineThrough
+                        textDecoration = TextDecoration.LineThrough,
                     ),
                 )
             )
