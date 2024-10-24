@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.Typeface
+import com.neoutils.highlight.compose.scheme.SpanStyleScheme
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
@@ -105,6 +106,8 @@ private fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
                 )
             }
         }
+
+        is SpanStyleScheme -> match.values
 
         else -> error("Unknown scheme type")
     }
