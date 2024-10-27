@@ -8,14 +8,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import com.neoutils.highlight.compose.extension.spanStyle
-import com.neoutils.highlight.compose.remember.rememberHighlightedString
+import com.neoutils.highlight.compose.remember.rememberAnnotatedString
+import com.neoutils.highlight.compose.remember.rememberHighlight
 
 @Composable
 fun SpanStyleSchemeExample() {
 
-    val highlighted = rememberHighlightedString(
-        text = "Example of styled text."
-    ) {
+    val annotatedString = rememberHighlight {
         spanStyle {
             fully(
                 regex = "(styled)",
@@ -27,9 +26,11 @@ fun SpanStyleSchemeExample() {
                 )
             )
         }
-    }
+    }.rememberAnnotatedString(
+        text = "Example of styled text."
+    )
 
-    Text(text = highlighted)
+    Text(text = annotatedString)
 }
 
 @Preview(showBackground = true)

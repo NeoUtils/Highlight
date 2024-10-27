@@ -5,15 +5,14 @@ import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.view.scheme.TextColorScheme
 import com.neoutils.highlight.view.util.UiColor
 
-class TextColorScope internal constructor(
-    val schemes: MutableList<TextColorScheme> = mutableListOf()
-) : SchemeScope<UiColor>() {
+class TextColorScope internal constructor() :
+    SchemeScope<UiColor, TextColorScheme>() {
 
     override fun match(
         regex: String,
         match: Match<UiColor>
     ) {
-        schemes.add(
+        builder.add(
             TextColorScheme(
                 regex.toRegex(),
                 match

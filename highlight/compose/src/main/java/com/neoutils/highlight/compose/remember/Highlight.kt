@@ -2,10 +2,26 @@ package com.neoutils.highlight.compose.remember
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.neoutils.highlight.core.extension.highlight
+import androidx.compose.ui.text.input.TextFieldValue
+import com.neoutils.highlight.compose.extension.toAnnotatedString
+import com.neoutils.highlight.core.Highlight
+import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.core.scope.HighlightScope
 
 @Composable
 fun rememberHighlight(
+    vararg keys: Any?,
     scope: HighlightScope.() -> Unit
-) = remember { highlight(scope) }
+) = remember(*keys) { highlight(scope) }
+
+@Composable
+fun Highlight.rememberAnnotatedString(
+    text: String,
+) = remember(this, text) { toAnnotatedString(text) }
+
+@Composable
+fun Highlight.rememberTextFieldValue(
+    value: TextFieldValue,
+) = remember(this, value) {
+    value.copy(toAnnotatedString(value.text))
+}

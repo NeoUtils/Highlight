@@ -5,15 +5,14 @@ import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.view.scheme.TextStyleScheme
 import com.neoutils.highlight.view.util.UiStyle
 
-class TextStyleScope internal constructor(
-    val schemes: MutableList<TextStyleScheme> = mutableListOf()
-) : SchemeScope<UiStyle>() {
+class TextStyleScope internal constructor() :
+    SchemeScope<UiStyle, TextStyleScheme>() {
 
     override fun match(
         regex: String,
         match: Match<UiStyle>
     ) {
-        schemes.add(
+        builder.add(
             TextStyleScheme(
                 regex.toRegex(),
                 match

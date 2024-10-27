@@ -6,7 +6,7 @@ import com.neoutils.highlight.compose.scheme.SpanStyleScheme
 import com.neoutils.highlight.core.scope.SchemeScope
 import com.neoutils.highlight.core.utils.Match
 
-class TextColorScope internal constructor() :
+class BackgroundScope internal constructor() :
     SchemeScope<Color, SpanStyleScheme>() {
 
     override fun match(
@@ -19,7 +19,7 @@ class TextColorScope internal constructor() :
                 match = Match(
                     match.values.map {
                         SpanStyle(
-                            color = it ?: return@map null
+                            background = it ?: return@map null
                         )
                     }
                 )

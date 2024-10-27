@@ -21,7 +21,7 @@ import com.neoutils.highlight.compose.extension.invoke
 import com.neoutils.highlight.compose.extension.textColor
 import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.extension.highlight
+import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.example.compose.theme.HighlightTheme
 import org.intellij.lang.annotations.Language
 
@@ -32,17 +32,17 @@ class CodeHighlightExample : ComponentActivity() {
         setContent {
             HighlightTheme(darkTheme = false) {
 
-                val highlightOn = remember { mutableStateOf(true) }
+                val highlightEnabled = remember { mutableStateOf(true) }
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     floatingActionButton = {
                         FloatingActionButton(
                             onClick = {
-                                highlightOn.value = !highlightOn.value
+                                highlightEnabled.value = !highlightEnabled.value
                             }
                         ) {
-                            if (highlightOn.value) {
+                            if (highlightEnabled.value) {
                                 Text(text = "OFF")
                             } else {
                                 Text(text = "ON")
@@ -52,7 +52,7 @@ class CodeHighlightExample : ComponentActivity() {
                 ) { innerPadding ->
 
                     val highlightModel = rememberHighlightModel(
-                        if (highlightOn.value) {
+                        if (highlightEnabled.value) {
                             CodeHighlight
                         } else {
                             Highlight()

@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/highlight" />
             <option value="$PROJECT_DIR$/highlight/compose" />
             <option value="$PROJECT_DIR$/highlight/core" />
-            <option value="$PROJECT_DIR$/highlight/core-ktx" />
             <option value="$PROJECT_DIR$/highlight/view-based" />
           </set>
         </option>

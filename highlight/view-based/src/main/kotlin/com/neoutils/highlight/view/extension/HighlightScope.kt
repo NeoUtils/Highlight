@@ -7,25 +7,17 @@ import com.neoutils.highlight.view.scope.TextFontScope
 import com.neoutils.highlight.view.scope.TextStyleScope
 
 fun HighlightScope.textFont(scope: TextFontScope.() -> Unit) {
-    schemes.addAll(
-        TextFontScope().apply(scope).schemes
-    )
+    addSchemes(TextFontScope().apply(scope).schemes)
 }
 
 fun HighlightScope.textStyle(scope: TextStyleScope.() -> Unit) {
-    schemes.addAll(
-        TextStyleScope().apply(scope).schemes
-    )
+    addSchemes(TextStyleScope().apply(scope).schemes)
 }
 
 fun HighlightScope.textColor(scope: TextColorScope.() -> Unit) {
-    schemes.addAll(
-        TextColorScope().apply(scope).schemes
-    )
+    addSchemes(TextColorScope().apply(scope).schemes)
 }
 
 fun HighlightScope.backgroundColor(scope: BackgroundColorScope.() -> Unit) {
-    schemes.addAll(
-        BackgroundColorScope().apply(scope).schemes
-    )
+    addSchemes(BackgroundColorScope().apply(scope).schemes)
 }

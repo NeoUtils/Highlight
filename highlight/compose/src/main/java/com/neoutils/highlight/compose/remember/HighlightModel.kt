@@ -16,20 +16,16 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 
-class HighlightModel(
-    highlight: Highlight
-) {
+class HighlightModel internal constructor() {
 
-    internal val scope = CoroutineScope(
-        context = SupervisorJob() + Dispatchers.Main.immediate
-    )
+    internal val scope = CoroutineScope(context = SupervisorJob() + Dispatchers.Main.immediate)
 
-    internal val highlight = MutableStateFlow(highlight)
+    internal val highlight = MutableStateFlow(Highlight())
 
     private val textFieldValue = MutableStateFlow(TextFieldValue())
 
     val state = combine(
-        this.highlight,
+        highlight,
         textFieldValue
     ) { highlight, value ->
         value.copy(
@@ -54,7 +50,7 @@ fun rememberHighlightModel(
 ): HighlightModel {
 
     val highlightModel = remember {
-        HighlightModel(highlight)
+        HighlightModel()
     }
 
     LaunchedEffect(highlight) {
