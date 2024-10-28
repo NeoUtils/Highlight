@@ -15,7 +15,7 @@ The central class is `Highlight`, from which highlighted texts are generated in 
 ``` kotlin
 val highlight = Highlight(
     TextColorScheme(
-        regex = "\\bcolor\\b".toRegex(),
+        regex = "\\b(color)\\b".toRegex(),
         match = Match.fully(UiColor.Black)
     )
 )
@@ -30,10 +30,10 @@ val text = highlight.toSpannedString("Example of foreground color.")
 You can also use extensions to simplify the creation of highlights:
 
 ``` kotlin
-val highlight = highlight {
+val highlight = Highlight {
     textColor {
         fully(
-            regex = "\\bcolor\\b",
+            regex = "\\b(color)\\b",
             UiColor.Black
         )
     }
@@ -50,7 +50,7 @@ In Jetpack Compose, work with `AnnotatedString` or `TextFieldValue` to integrate
 val highlight = rememberHighlight {
     spanStyle {
          fully(
-            regex = "\\bstyled\\b",
+            regex = "\\b(styled)\\b",
             SpanStyle(
                 color = Color.White,
                 background = Color.Black,
@@ -89,16 +89,16 @@ In View-based environments, work with `SpannedString`, `Editable`, or `Spannable
 **Usage Example**
 
 ``` kotlin
-val highlight = highlight {
+val highlight = Highlight {
     backgroundColor {
         fully(
-            regex = "\\bcolor\\b",
+            regex = "\\b(color)\\b",
             UiColor.Blue
         )
     }
     textColor {
         fully(
-            regex = "\\bcolor\\b",
+            regex = "\\b(color)\\b",
             UiColor.White
         )
     }
@@ -122,7 +122,7 @@ Although the library was rewritten in Kotlin, it can be used in Java without any
 ``` java
 Highlight highlight = new Highlight(
     new TextColorScheme(
-        new Regex("\\bjava\\b"),
+        new Regex("\\b(java)\\b"),
         Match.fully(new UiColor.Integer(Color.RED))
     )
 );
@@ -145,7 +145,7 @@ Instead of applying the highlight to the entire match using `Match.fully(..)`, y
 val highlight = rememberHighlight {
     textColor {
         groups(
-            regex = "(\w+)\s*=\s*(\w+)",
+            regex = "(\\w+)\\s*=\\s*(\\w+)",
             UiColor.Blue,
             UiColor.Green
         )

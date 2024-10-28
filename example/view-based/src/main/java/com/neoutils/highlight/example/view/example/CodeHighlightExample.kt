@@ -3,12 +3,12 @@ package com.neoutils.highlight.example.view.example
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.view.text.LinesHighlightTextWatcher
 
-private val CodeHighlight = highlight {
+private val CodeHighlight = Highlight {
     textColor {
         fully(
             regex = "\\b(fun)\\b",

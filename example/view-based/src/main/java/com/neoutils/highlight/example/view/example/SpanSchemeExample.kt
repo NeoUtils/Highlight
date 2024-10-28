@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.neoutils.highlight.core.highlight
+import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.view.extension.span
 import com.neoutils.highlight.view.extension.toSpannedString
 
@@ -17,7 +17,7 @@ class SpanSchemeExample(
     attr
 ) {
     init {
-        text = highlight {
+        text = Highlight {
             span {
                 fully(
                     regex = "\\bspan\\b",

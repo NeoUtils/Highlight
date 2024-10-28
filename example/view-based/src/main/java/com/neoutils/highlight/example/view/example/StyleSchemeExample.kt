@@ -3,7 +3,7 @@ package com.neoutils.highlight.example.view.example
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.neoutils.highlight.core.highlight
+import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.view.extension.textStyle
 import com.neoutils.highlight.view.extension.toSpannedString
 import com.neoutils.highlight.view.util.UiStyle
@@ -16,7 +16,7 @@ class StyleSchemeExample(
     attr
 ) {
     init {
-        text = highlight {
+        text = Highlight {
             textStyle {
                 fully(
                     regex = "\\bstyle\\b",

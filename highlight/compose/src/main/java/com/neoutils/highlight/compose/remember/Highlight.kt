@@ -5,14 +5,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.input.TextFieldValue
 import com.neoutils.highlight.compose.extension.toAnnotatedString
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.core.scope.HighlightScope
 
 @Composable
 fun rememberHighlight(
     vararg keys: Any?,
     scope: HighlightScope.() -> Unit
-) = remember(*keys) { highlight(scope) }
+) = remember(*keys) { Highlight(scope) }
 
 @Composable
 fun Highlight.rememberAnnotatedString(

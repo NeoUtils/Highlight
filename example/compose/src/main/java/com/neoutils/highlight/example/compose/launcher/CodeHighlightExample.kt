@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.example.compose.theme.HighlightTheme
 import org.intellij.lang.annotations.Language
@@ -91,7 +90,7 @@ class CodeHighlightExample : ComponentActivity() {
     }
 }
 
-private val CodeHighlight = highlight {
+private val CodeHighlight = Highlight {
     textColor {
         fully(
             regex = "\\b(fun)\\b",

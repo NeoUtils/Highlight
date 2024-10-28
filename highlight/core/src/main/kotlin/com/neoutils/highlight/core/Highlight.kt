@@ -8,13 +8,8 @@ data class Highlight(
     constructor(
         vararg schemes: Scheme<*>
     ) : this(schemes.toList())
-}
 
-fun highlight(
-    scope: HighlightScope.() -> Unit
-): Highlight {
-
-    return Highlight(
-        HighlightScope().apply(scope).schemes
-    )
+    constructor(
+        builder: HighlightScope.() -> Unit
+    ) : this(HighlightScope().apply(builder).schemes)
 }
