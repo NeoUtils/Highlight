@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import com.neoutils.highlight.core.Highlight;
 import com.neoutils.highlight.core.utils.Match;
+import com.neoutils.highlight.core.utils.UiColor;
 import com.neoutils.highlight.view.extension.HighlightKt;
 import com.neoutils.highlight.core.scheme.TextColorScheme;
-import com.neoutils.highlight.view.util.UiColor;
 import kotlin.text.Regex;
 
 public class JavaCaseExample extends AppCompatTextView {
@@ -19,7 +19,7 @@ public class JavaCaseExample extends AppCompatTextView {
         var highlight = new Highlight(
                 new TextColorScheme(
                         new Regex("(java)"),
-                        Match.fully(new UiColor(Color.RED))
+                        Match.fully(new UiColor.Integer(Color.RED))
                 )
         );
 

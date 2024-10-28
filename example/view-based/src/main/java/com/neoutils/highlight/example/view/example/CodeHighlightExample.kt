@@ -3,31 +3,32 @@ package com.neoutils.highlight.example.view.example
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.highlight
-import com.neoutils.highlight.view.extension.textColor
+import com.neoutils.highlight.core.utils.UiColor
 import com.neoutils.highlight.view.text.LinesHighlightTextWatcher
 
 private val CodeHighlight = highlight {
     textColor {
         fully(
             regex = "\\b(fun)\\b",
-            UiColor.hex(hex = "#0033B3")
+            UiColor.Hex(hex = "#0033B3")
         )
 
         groups(
             regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)",
-            UiColor.hex(hex = "#0033B3"),
-            UiColor.hex(hex = "#00627A")
+            UiColor.Hex(hex = "#0033B3"),
+            UiColor.Hex(hex = "#00627A")
         )
 
         fully(
             regex = "@.+",
-            UiColor.hex(hex = "#93880D")
+            UiColor.Hex(hex = "#93880D")
         )
 
         fully(
             regex = "\"[^\"]*\"",
-            UiColor.hex(hex = "#067D17")
+            UiColor.Hex(hex = "#067D17")
         )
     }
 }

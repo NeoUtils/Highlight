@@ -5,6 +5,6 @@ import com.neoutils.highlight.core.utils.UiColor
 
 fun UiColor.toColor() = when (this) {
     is UiColor.Hex -> Color(android.graphics.Color.parseColor(hex))
-    is UiColor.IntColor -> Color(colorInt)
+    is UiColor.Integer -> Color(colorInt)
     is UiColor.Rgb -> Color(red, green, blue).copy(alpha = alpha)
 }

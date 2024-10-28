@@ -27,7 +27,7 @@ sealed class UiColor {
     /**
      * Represents a color using an integer format, typically used for Android @ColorInt values.
      */
-    data class IntColor(
+    data class Integer(
         @ColorInt val colorInt: Int
     ) : UiColor()
 

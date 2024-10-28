@@ -1,30 +1,33 @@
 package com.neoutils.highlight.example.view.example
 
 import android.content.Context
+import android.graphics.Color
+import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.highlight
-import com.neoutils.highlight.view.extension.textStyle
+import com.neoutils.highlight.view.extension.span
 import com.neoutils.highlight.view.extension.toSpannedString
-import com.neoutils.highlight.view.util.UiStyle
 
-class StyleSchemeExample(
-    content: Context,
+class SpanSchemeExample(
+    context: Context,
     attr: AttributeSet? = null,
 ) : AppCompatTextView(
-    content,
+    context,
     attr
 ) {
     init {
         text = highlight {
-            textStyle {
+            span {
                 fully(
-                    regex = "style",
-                    value = UiStyle.BOLD
+                    regex = "span",
+                    ForegroundColorSpan(
+                        Color.GREEN
+                    )
                 )
             }
         }.toSpannedString(
-            text = "Example of style."
+            "Example of span"
         )
     }
 }
