@@ -14,23 +14,17 @@ The central class is `Highlight`, from which highlighted texts are generated in 
 
 ``` kotlin
 val highlight = Highlight(
-    SpanStyleScheme(
-        regex = "(styled)".toRegex(),
-        match = Match.fully(
-            SpanStyle(
-                color = Color.White,
-                background = Color.Black,
-                fontStyle = FontStyle.Italic,
-            )
-        )
+    TextColorScheme(
+        regex = "\\bcolor\\b".toRegex(),
+        match = Match.fully(UiColor.Black)
     )
 )
 
 // Jetpack Compose
-val text = highlight.toAnnotatedString("Example of styled text.")
+val text = highlight.toAnnotatedString("Example of foreground color.")
 
 // View-based
-val text = highlight.toSpannedString("Example of styled text.")
+val text = highlight.toSpannedString("Example of foreground color.")
 ```
 
 You can also use extensions to simplify the creation of highlights:
@@ -39,12 +33,8 @@ You can also use extensions to simplify the creation of highlights:
 val highlight = highlight {
     textColor {
         fully(
-            regex = "(styled)",
-            SpanStyle(
-                color = Color.White,
-                background = Color.Black,
-                fontStyle = FontStyle.Italic,
-            )
+            regex = "\\bcolor\\b",
+            UiColor.Black
         )
     }
 }
@@ -59,9 +49,13 @@ In Jetpack Compose, work with `AnnotatedString` or `TextFieldValue` to integrate
 ``` kotlin
 val highlight = rememberHighlight {
     spanStyle {
-        fully(
-            regex = "color",
-            value = UiColor.Blue
+         fully(
+            regex = "\\bstyled\\b",
+            SpanStyle(
+                color = Color.White,
+                background = Color.Black,
+                fontStyle = FontStyle.Italic,
+            )
         )
     }
 }
@@ -69,7 +63,7 @@ val highlight = rememberHighlight {
 // AnnotatedString
 Text(
     text = highlight.rememberAnnotatedString(
-        text = "Example of foreground color."
+        "Example of styled text."
     )
 )
 
@@ -78,7 +72,7 @@ val textFieldValue = rememberSaveable { mutableStateOf(TextFieldValue()) }
 
 BasicTextField(
     value = highlight.rememberTextFieldValue(
-       value = textFieldValue.value
+        textFieldValue.value
     ).copy(
         composition = null
     ),
@@ -98,13 +92,13 @@ In View-based environments, work with `SpannedString`, `Editable`, or `Spannable
 val highlight = highlight {
     backgroundColor {
         fully(
-            regex = "color",
+            regex = "\\bcolor\\b",
             UiColor.Blue
         )
     }
     textColor {
         fully(
-            regex = "color",
+            regex = "\\bcolor\\b",
             UiColor.White
         )
     }
@@ -112,7 +106,7 @@ val highlight = highlight {
 
 // TextView
 binding.tvExample.text = highlight.toSpannedString(
-    text = "Example of background color."
+    "Example of background color."
 )
 
 // EditText (Editable or Spannable)
@@ -128,8 +122,8 @@ Although the library was rewritten in Kotlin, it can be used in Java without any
 ``` java
 Highlight highlight = new Highlight(
     new TextColorScheme(
-        new Regex("(java)"),
-        Match.fully(new UiColor(Color.RED))
+        new Regex("\\bjava\\b"),
+        Match.fully(new UiColor.Integer(Color.RED))
     )
 );
 
@@ -152,15 +146,13 @@ val highlight = rememberHighlight {
     textColor {
         groups(
             regex = "(\w+)\s*=\s*(\w+)",
-            Color.Blue,
-            Color.Green
+            UiColor.Blue,
+            UiColor.Green
         )
     }
 }
 
 Text(
-    text = highlight.rememberAnnotatedString(
-        "name = Highlight"
-    )
+    text = highlight.rememberAnnotatedString("name = Highlight")
 )
 ```

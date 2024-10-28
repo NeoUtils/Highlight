@@ -16,7 +16,7 @@ class TextColorSchemeExample(
         text = highlight {
             textColor {
                 fully(
-                    regex = "color",
+                    regex = "\\bcolor\\b",
                     value = UiColor.Blue
                 )
             }

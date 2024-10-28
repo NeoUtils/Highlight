@@ -17,7 +17,7 @@ fun SpanStyleSchemeExample() {
     val annotatedString = rememberHighlight {
         spanStyle {
             fully(
-                regex = "(styled)",
+                regex = "\\bstyled\\b",
                 SpanStyle(
                     color = Color.White,
                     background = Color.Black,

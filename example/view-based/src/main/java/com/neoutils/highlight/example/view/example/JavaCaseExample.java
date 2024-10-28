@@ -18,7 +18,7 @@ public class JavaCaseExample extends AppCompatTextView {
     {
         var highlight = new Highlight(
                 new TextColorScheme(
-                        new Regex("(java)"),
+                        new Regex("\\bjava\\b"),
                         Match.fully(new UiColor.Integer(Color.RED))
                 )
         );
