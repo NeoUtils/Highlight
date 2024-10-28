@@ -1,8 +1,8 @@
-package com.neoutils.highlight.view.scheme
+package com.neoutils.highlight.core.scheme
 
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.utils.Match
-import com.neoutils.highlight.view.util.UiColor
+import com.neoutils.highlight.core.utils.UiColor
 
 data class BackgroundColorScheme(
     override val regex: Regex,

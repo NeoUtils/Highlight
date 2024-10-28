@@ -13,16 +13,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.neoutils.highlight.compose.extension.invoke
-import com.neoutils.highlight.compose.extension.textColor
 import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
+import com.neoutils.highlight.core.extension.textColor
+import com.neoutils.highlight.core.utils.UiColor
 import org.intellij.lang.annotations.Language
 
 @Language("kotlin")
@@ -34,7 +33,7 @@ private val code = """
 
 @Composable
 fun CodeHighlightExample() {
-    
+
     var highlightEnabled by rememberSaveable { mutableStateOf(true) }
 
     val highlight = rememberHighlight(highlightEnabled) {
@@ -42,23 +41,23 @@ fun CodeHighlightExample() {
             textColor {
                 fully(
                     regex = "\\b(fun)\\b",
-                    Color(hex = "#0033B3")
+                    UiColor.Hex(hex = "#0033B3")
                 )
 
                 groups(
                     regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)",
-                    Color(hex = "#0033B3"),
-                    Color(hex = "#00627A")
+                    UiColor.Hex(hex = "#0033B3"),
+                    UiColor.Hex(hex = "#00627A")
                 )
 
                 fully(
                     regex = "@.+",
-                    Color(hex = "#93880D")
+                    UiColor.Hex(hex = "#93880D")
                 )
 
                 fully(
                     regex = "\"[^\"]*\"",
-                    Color(hex = "#067D17")
+                    UiColor.Hex(hex = "#067D17")
                 )
             }
         }

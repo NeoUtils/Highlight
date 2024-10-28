@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.view.extension.textColor
 import com.neoutils.highlight.view.extension.toSpannedString
-import com.neoutils.highlight.view.util.UiColor
 
 class CaptureGroupsExample(
     context: Context,

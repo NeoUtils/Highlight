@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.neoutils.highlight.core.Highlight;
 import com.neoutils.highlight.core.utils.Match;
 import com.neoutils.highlight.view.extension.HighlightKt;
-import com.neoutils.highlight.view.scheme.TextColorScheme;
+import com.neoutils.highlight.core.scheme.TextColorScheme;
 import com.neoutils.highlight.view.util.UiColor;
 import kotlin.text.Regex;
 

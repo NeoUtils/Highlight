@@ -1,6 +1,4 @@
-package com.neoutils.highlight.core.scope
-
-import com.neoutils.highlight.core.Scheme
+package com.neoutils.highlight.core
 
 abstract class Scope<T : Scheme<*>> internal constructor(
     protected val builder: MutableList<T> = mutableListOf()

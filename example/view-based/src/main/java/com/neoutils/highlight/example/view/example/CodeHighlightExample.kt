@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.neoutils.highlight.core.highlight
 import com.neoutils.highlight.view.extension.textColor
 import com.neoutils.highlight.view.text.LinesHighlightTextWatcher
-import com.neoutils.highlight.view.util.UiColor
 
 private val CodeHighlight = highlight {
     textColor {

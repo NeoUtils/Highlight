@@ -1,6 +1,7 @@
 package com.neoutils.highlight.core.scope
 
 import com.neoutils.highlight.core.Scheme
+import com.neoutils.highlight.core.Scope
 import com.neoutils.highlight.core.utils.Match
 import org.intellij.lang.annotations.Language
 

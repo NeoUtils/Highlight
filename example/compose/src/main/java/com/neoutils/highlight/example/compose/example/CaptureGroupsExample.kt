@@ -2,11 +2,11 @@ package com.neoutils.highlight.example.compose.example
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.neoutils.highlight.compose.extension.textColor
-import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberAnnotatedString
+import com.neoutils.highlight.compose.remember.rememberHighlight
+import com.neoutils.highlight.core.extension.textColor
+import com.neoutils.highlight.core.utils.UiColor
 
 @Composable
 fun CaptureGroupsExample() {
@@ -15,8 +15,8 @@ fun CaptureGroupsExample() {
         textColor {
             groups(
                 regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")",
-                Color.Blue,
-                Color.Green
+                UiColor.Blue,
+                UiColor.Green
             )
         }
     }.rememberAnnotatedString(
