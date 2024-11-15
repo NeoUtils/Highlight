@@ -1,7 +1,11 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.mavenPublish)
 }
 
 android {
@@ -61,4 +65,52 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+mavenPublishing {
+    configure(
+        AndroidSingleVariantLibrary(
+            variant = "release",
+            sourcesJar = false,
+            publishJavadocJar = false,
+        )
+    )
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    coordinates(
+        groupId = "com.neoutils.highlight",
+        artifactId = "highlight-compose",
+        version = "2.0.0"
+    )
+
+    pom {
+        name.set("Highlight for Compose")
+        description.set("Pattern highlighter for compose.")
+        inceptionYear.set("2021")
+        url.set("https://github.com/NeoUtils/Highlight")
+
+        licenses {
+            license {
+                name.set("The MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("irineu333")
+                name.set("Irineu A. Silva")
+                url.set("https://github.com/Irineu333")
+            }
+        }
+
+        scm {
+            url.set("https://github.com/NeoUtils/Highlight")
+            connection.set("scm:git:git://github.com/NeoUtils/Highlight.git")
+            developerConnection.set("scm:git:ssh://git@github.com/NeoUtils/Highlight.git")
+        }
+    }
+
+    signAllPublications()
 }
