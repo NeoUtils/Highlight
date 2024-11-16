@@ -1,4 +1,4 @@
-# Highlight
+# Highlight ![Maven Central Version](https://img.shields.io/maven-central/v/com.neoutils.highlight/highlight-core?versionPrefix=2.0.0)
 
 Highlight text snippets in **Jetpack Compose** or **View-based** using regular expressions.
 
@@ -38,6 +38,12 @@ val highlight = Highlight {
         )
     }
 }
+
+// Jetpack Compose
+val text = highlight.toAnnotatedString("Example of foreground color.")
+
+// View-based
+val text = highlight.toSpannedString("Example of foreground color.")
 ```
 
 ## Jetpack Compose
@@ -164,7 +170,7 @@ To integrate the Highlight library into your project, you can add it directly fr
 
 Add the dependencies to your `build.gradle.kts` file:
 
-```kotlin
+``` kotlin
 dependencies {
     // For View-based highlighting
     implementation("com.neoutils.highlight:highlight-view:2.0.0")
