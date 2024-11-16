@@ -4,14 +4,30 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/build-logic" name="build-logic">
+                <projects>
+                  <project path="$PROJECT_DIR$/build-logic" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="jbr-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/example/compose" />
+            <option value="$PROJECT_DIR$/example/view-based" />
             <option value="$PROJECT_DIR$/highlight" />
+            <option value="$PROJECT_DIR$/highlight/compose" />
+            <option value="$PROJECT_DIR$/highlight/core" />
+            <option value="$PROJECT_DIR$/highlight/view-based" />
           </set>
         </option>
       </GradleProjectSettings>

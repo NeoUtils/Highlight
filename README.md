@@ -1,158 +1,188 @@
-# Highlight [![](https://jitpack.io/v/Irineu333/Highlight.svg)](https://jitpack.io/#Irineu333/Highlight) [![Android CI](https://github.com/Irineu333/Highlight/actions/workflows/android.yml/badge.svg)](https://github.com/Irineu333/Highlight/actions/workflows/android.yml)
+# Highlight ![Maven Central Version](https://img.shields.io/maven-central/v/com.neoutils.highlight/highlight-core?versionPrefix=2.0.0)
 
-A complete and performing library to highlight text snippets (EditText/Editable and TextView) using `Spannable` with Regular Expressions (Regex) for Android.
+Highlight text snippets in **Jetpack Compose** or **View-based** using regular expressions.
 
-## Highlight a text
-To highlight a text, just create an instance of `Highlight`, add the Schemes and use `setSpan()` method to add to a `TextView` or `EditText`.
+## Objective
 
-``` java
-//create an instance of Highlight
-Highlight highlight = new Highlight();
+Facilitate the creation of dynamic highlights using regular expressions, useful for creating code editors or text editors with custom formatting.
 
-//add Schemes
-highlight.addScheme(
-        new ColorScheme(
-                Pattern.compile("\\b([Jj])ava\\b"),
-                Color.parseColor("#FC0400")
-        ),
-        new ColorScheme(
-                Pattern.compile("\\b([Kk])otlin\\b"),
-                Color.parseColor("#FC8500")
-        )
-);
+## Quick Start
 
-//highlight the text
-highlight.setSpan(binding.edittext);
-highlight.setSpan(binding.textview);
+The central class is `Highlight`, from which highlighted texts are generated in formats like `SpannedString` for View-based or `AnnotatedString` for Jetpack Compose, from schemes defined by `Scheme<*>`.
+
+**Usage Example**
+
+``` kotlin
+val highlight = Highlight(
+    TextColorScheme(
+        regex = "\\b(color)\\b".toRegex(),
+        match = Match.fully(UiColor.Black)
+    )
+)
+
+// Jetpack Compose
+val text = highlight.toAnnotatedString("Example of foreground color.")
+
+// View-based
+val text = highlight.toSpannedString("Example of foreground color.")
 ```
 
-## Continuously highlight
-To continuously highlight an `EditText` whenever it is edited, create an instance of `HighlightTextWatcher`, add the Schemes and add the listener to the `EditText`.
+You can also use extensions to simplify the creation of highlights:
 
-``` java
-//create an instance of HighlightTextWatcher
-HighlightTextWatcher highlightTextWatcher = new HighlightTextWatcher();
+``` kotlin
+val highlight = Highlight {
+    textColor {
+        fully(
+            regex = "\\b(color)\\b",
+            UiColor.Black
+        )
+    }
+}
 
-//add schemes
-highlightTextWatcher.addScheme(
-        new StyleScheme(
-                Pattern.compile("\\b([Jj])ava\\b"),
-                StyleScheme.STYLE.BOLD_ITALIC
-        ).setClearOldSpan(true),
-        new StyleScheme(
-                Pattern.compile("\\b([Kk])otlin\\b"),
-                StyleScheme.STYLE.BOLD_ITALIC
-        ).setClearOldSpan(true)
-);
+// Jetpack Compose
+val text = highlight.toAnnotatedString("Example of foreground color.")
 
-//add the listener
-binding.edittext.addTextChangedListener(highlightTextWatcher);
+// View-based
+val text = highlight.toSpannedString("Example of foreground color.")
 ```
 
-## Schemes
-Use the default schemes; `ColorScheme`, `OnBackgroundScheme`, `StyleScheme`, `FontScheme`, `LinkScheme` and `OnClickScheme`, or implement the `Scheme` interface to create a custom scheme.
+## Jetpack Compose
 
-``` java
-...
+In Jetpack Compose, work with `AnnotatedString` or `TextFieldValue` to integrate the highlight into your layout.
 
-highlight.addScheme(
-        new StyleScheme(
-                Pattern.compile("Highlight"),
-                StyleScheme.STYLE.BOLD_ITALIC
-        ).addScopeScheme(
-                //scheme in scope of other schemes
-                new ColorScheme(
-                        Pattern.compile("light"),
-                        Color.parseColor("#FF03DAC5")
-                )
+**Usage Example**
+
+``` kotlin
+val highlight = rememberHighlight {
+    spanStyle {
+         fully(
+            regex = "\\b(styled)\\b",
+            SpanStyle(
+                color = Color.White,
+                background = Color.Black,
+                fontStyle = FontStyle.Italic,
+            )
         )
-);
+    }
+}
 
-highlight.addScheme(
-        //clickable links
-        new LinkScheme().setPainTextUnderline(false)
-);
+// AnnotatedString
+Text(
+    text = highlight.rememberAnnotatedString(
+        "Example of styled text."
+    )
+)
 
-highlight.addScheme(
-        //clickable text
-        new OnClickScheme(
-                Pattern.compile("Highlight"),
-                new OnClickScheme.OnClickListener() {
-                    @Override
-                    public void onClick(CharSequence text) {
-                        goToURL("https://github.com/Irineu333/Highlight");
-                    }
-                }
-        )
-);
+// TextFieldValue
+val textFieldValue = rememberSaveable { mutableStateOf(TextFieldValue()) }
 
-highlight.addScheme(
-        new ColorScheme(
-                Pattern.compile("Project"),
-                Color.BLACK
-        ).addScopeScheme(
-                //font scheme
-                new FontScheme(
-                        FontScheme.getFont(this, R.font.pacifico_regular)
-                )
-        )
-);
-
-...
+BasicTextField(
+    value = highlight.rememberTextFieldValue(
+        textFieldValue.value
+    ).copy(
+        composition = null
+    ),
+    onValueChange = {
+        textFieldValue.value = it
+    }
+)
 ```
 
-## SchemeScope
+## View-based
 
-Every schema has a scope to which other schemas can be added via the `addScopeScheme (...)` method. Schemes added to a scope will run only within that scope, saving processing and creating possibilities for smarter highlights.
+In View-based environments, work with `SpannedString`, `Editable`, or `SpannableString` to apply the highlights.
 
-``` java
-Highlight highlight = new Highlight();
+**Usage Example**
 
-highlight.addScheme(
-        new StyleScheme(
-                Pattern.compile("Highlight"),
-                StyleScheme.STYLE.BOLD_ITALIC
-        ).addScopeScheme(
-                //add scheme scope in any scheme
-                new ColorScheme(
-                        Pattern.compile("light"),
-                        Color.parseColor("#FF03DAC5")
-                )
+``` kotlin
+val highlight = Highlight {
+    backgroundColor {
+        fully(
+            regex = "\\b(color)\\b",
+            UiColor.Blue
         )
-);
-
-highlight.addScheme(
-        //use scope to group schemes
-        new Scope(Pattern.compile("Project"),
-                new ColorScheme(Color.BLACK),
-                new FontScheme(FontScheme.getFont(this, R.font.pacifico_regular))
+    }
+    textColor {
+        fully(
+            regex = "\\b(color)\\b",
+            UiColor.White
         )
-);
+    }
+}
 
-highlight.setSpan(binding.toolbarTitle);
+// TextView
+binding.tvExample.text = highlight.toSpannedString(
+    "Example of background color."
+)
+
+// EditText (Editable or Spannable)
+highlight.apply(binding.etExample)
 ```
 
-## Performance 
+## Java Support
 
-This lib was born out of a solution. One of the problems you will face if you try to create a syntax highlighting is the bottleneck for editing very large code. This lib was born from a simple but ingenious solution (in my opinion) that I arrived together with some friends, which is the processing by altered lines. Basically, when activated (in by default it is), this lib will only process the lines that undergo some change, no matter how many.
+Although the library was rewritten in Kotlin, it can be used in Java without any issues.
+
+**Usage Example**
+
+``` java
+Highlight highlight = new Highlight(
+    new TextColorScheme(
+        new Regex("\\b(java)\\b"),
+        Match.fully(new UiColor.Integer(Color.RED))
+    )
+);
+
+binding.setText(
+    HighlightKt.toSpannedString(
+        highlight,
+        "Example of java"
+    )
+);
+```
+
+## Groups
+
+Instead of applying the highlight to the entire match using `Match.fully(..)`, you can separate it by groups, allowing for more complex highlights.
+
+**Usage Example**
+
+``` kotlin
+val highlight = rememberHighlight {
+    textColor {
+        groups(
+            regex = "(\\w+)\\s*=\\s*(\\w+)",
+            UiColor.Blue,
+            UiColor.Green
+        )
+    }
+}
+
+Text(
+    text = highlight.rememberAnnotatedString("name = Highlight")
+)
+```
 
 ## Screenshots
 
-| Simple Highlighting | Kotlin Highlighting | Kotlin Highlighting |
-| ------------- |------------- |------------- |
-| ![](screenshots/Screenshot_1639251552.png?raw=true "Simple Highlight v1.0.1") |![](screenshots/Screenshot_1639249920.png?raw=true "Kotlin Highlighting Dark v1.0.4") | ![](screenshots/Screenshot_1639249938.png?raw=true "Kotlin Highlighting Light v1.0.4") |
+| Simple example                                    | Code highlight                                    |
+|---------------------------------------------------|---------------------------------------------------|
+| ![view-example.png](screenshots/view-example.png) | ![code-example.png](screenshots/code-example.png) |
 
-## Kotlin
-In projects that support Kotlin, use the version optimized for Kotlin, [Highlight-KT](https://github.com/Irineu333/Highlight-KT).
 
-## Add to project
+## Integration
 
-Add the jitpack to project in build.gradle or settings.gradle (gradle 7+)
-``` groovy
-maven { url 'https://jitpack.io' }
-```
+To integrate the Highlight library into your project, you can add it directly from the [Maven Central repository](https://central.sonatype.com/namespace/com.neoutils.highlight).
 
-Add the dependence to module (normally app)
-``` groovy
-implementation "com.github.Irineu333:Highlight:$highlight_version"
+### Gradle (Kotlin DSL)
+
+Add the dependencies to your `build.gradle.kts` file:
+
+``` kotlin
+dependencies {
+    // For View-based highlighting
+    implementation("com.neoutils.highlight:highlight-view:2.0.0")
+    // For Jetpack Compose highlighting
+    implementation("com.neoutils.highlight:highlight-compose:2.0.0")
+}
 ```
