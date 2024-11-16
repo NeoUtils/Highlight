@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
-group = "example"
-
 android {
     namespace = "com.neoutils.highlight.example.view"
     compileSdk = 34

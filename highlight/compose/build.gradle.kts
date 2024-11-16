@@ -29,16 +29,15 @@ dependencies {
 
     api(project(":highlight:core"))
 
-    // necessary compose dependencies
-    api(libs.androidx.runtime) {
+    implementation(libs.androidx.runtime) {
         because("obviously")
     }
 
-    api(libs.androidx.ui.text) {
+    implementation(libs.androidx.ui.text) {
         because("AnnotatedString, SpanStyle, TextFieldValue")
     }
 
-    api(libs.androidx.ui.graphics) {
+    implementation(libs.androidx.ui.graphics) {
         because("Color")
     }
 }
@@ -46,7 +45,7 @@ dependencies {
 mavenPublishing {
 
     coordinates(
-        artifactId = "highlight-compose"
+        artifactId = "highlight-compose",
     )
 
     pom {

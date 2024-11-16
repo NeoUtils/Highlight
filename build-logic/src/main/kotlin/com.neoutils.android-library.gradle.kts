@@ -8,9 +8,6 @@ plugins {
     kotlin("android")
 }
 
-group = config.group
-version = config.version
-
 android {
     compileSdk = config.android.compileSdk
 
@@ -44,6 +41,11 @@ mavenPublishing {
     )
 
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    coordinates(
+        groupId = config.group,
+        version = config.version.toString()
+    )
 
     pom {
         licenses {

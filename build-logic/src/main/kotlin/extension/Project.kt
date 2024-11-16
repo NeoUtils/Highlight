@@ -7,14 +7,12 @@ val config = Config(
         major = 2,
         minor = 0,
         patch = 0,
-        release = Config.Release.Snapshot(
-            number = 4
-        )
+        release = Config.Release.Snapshot(number = 5)
     ),
     android = Config.Android(
         compileSdk = 34,
         targetSdk = 34,
-        minSdk = 24
+        minSdk = 21
     ),
     group = "com.neoutils.highlight",
 )

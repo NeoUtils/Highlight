@@ -12,8 +12,7 @@ dependencies {
 
     api(project(":highlight:core"))
 
-    // androidx appcompat
-    api(libs.androidx.appcompat) {
+    implementation(libs.androidx.appcompat) {
         because("view-based utilities")
     }
 }
