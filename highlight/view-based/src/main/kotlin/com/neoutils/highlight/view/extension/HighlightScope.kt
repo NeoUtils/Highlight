@@ -1,9 +1,6 @@
 package com.neoutils.highlight.view.extension
 
 import com.neoutils.highlight.core.scope.HighlightScope
-import com.neoutils.highlight.core.scope.BackgroundColorScope
-import com.neoutils.highlight.core.scope.TextColorScope
-import com.neoutils.highlight.view.scheme.SpanScheme
 import com.neoutils.highlight.view.scope.SpanScope
 import com.neoutils.highlight.view.scope.TextFontScope
 import com.neoutils.highlight.view.scope.TextStyleScope

@@ -42,7 +42,27 @@ dependencies {
     implementation(project(":highlight:view-based"))
 
     implementation(libs.androidx.core.ktx)
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.material)
+}
+
+repositories {
+
+    google()
+    mavenCentral()
+
+    maven {
+        url = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
+
+        credentials(HttpHeaderCredentials::class) {
+            name = "Authorization"
+            value = "Bearer ${findProperty("mavenCentralToken")}"
+        }
+
+        authentication {
+            create<HttpHeaderAuthentication>("header")
+        }
+    }
 }

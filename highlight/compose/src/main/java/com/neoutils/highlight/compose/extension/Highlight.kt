@@ -1,6 +1,5 @@
 package com.neoutils.highlight.compose.extension
 
-import android.text.style.ForegroundColorSpan
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import com.neoutils.highlight.compose.scheme.SpanStyleScheme

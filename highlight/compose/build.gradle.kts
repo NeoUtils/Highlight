@@ -1,7 +1,11 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.mavenPublish)
 }
 
 android {
@@ -10,6 +14,7 @@ android {
 
     defaultConfig {
         minSdk = 24
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -29,12 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -46,19 +50,64 @@ dependencies {
 
     api(project(":highlight:core"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    // necessary compose dependencies
+    api(libs.androidx.runtime) {
+        because("obviously")
+    }
 
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    api(libs.androidx.ui.text) {
+        because("AnnotatedString, SpanStyle, TextFieldValue")
+    }
 
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    api(libs.androidx.ui.graphics) {
+        because("Color")
+    }
+}
+
+mavenPublishing {
+    configure(
+        AndroidSingleVariantLibrary(
+            variant = "release",
+            sourcesJar = true,
+            publishJavadocJar = false,
+        )
+    )
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    coordinates(
+        groupId = "com.neoutils.highlight",
+        artifactId = "highlight-compose",
+        version = "2.0.0"
+    )
+
+    pom {
+        name.set("Highlight for Jetpack Compose")
+        description.set("Jetpack Compose patterned highlighting.")
+        inceptionYear.set("2021")
+        url.set("https://github.com/NeoUtils/Highlight")
+
+        licenses {
+            license {
+                name.set("The MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("irineu333")
+                name.set("Irineu A. Silva")
+                url.set("https://github.com/Irineu333")
+            }
+        }
+
+        scm {
+            url.set("https://github.com/NeoUtils/Highlight")
+            connection.set("scm:git:git://github.com/NeoUtils/Highlight.git")
+            developerConnection.set("scm:git:ssh://git@github.com/NeoUtils/Highlight.git")
+        }
+    }
+
+    signAllPublications()
 }
