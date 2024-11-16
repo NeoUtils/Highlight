@@ -46,7 +46,7 @@ mavenPublishing {
     configure(
         AndroidSingleVariantLibrary(
             variant = "release",
-            sourcesJar = false,
+            sourcesJar = true,
             publishJavadocJar = false,
         )
     )
