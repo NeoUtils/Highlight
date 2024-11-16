@@ -82,8 +82,8 @@ mavenPublishing {
     )
 
     pom {
-        name.set("Highlight for Compose")
-        description.set("Pattern highlighter for compose.")
+        name.set("Highlight for Jetpack Compose")
+        description.set("Jetpack Compose patterned highlighting.")
         inceptionYear.set("2021")
         url.set("https://github.com/NeoUtils/Highlight")
 

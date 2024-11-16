@@ -60,7 +60,7 @@ mavenPublishing {
 
     pom {
         name.set("Highlight")
-        description.set("Pattern highlighting.")
+        description.set("Patterned highlighting.")
         inceptionYear.set("2021")
         url.set("https://github.com/NeoUtils/Highlight")
 

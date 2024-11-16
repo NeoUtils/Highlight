@@ -62,7 +62,7 @@ mavenPublishing {
 
     pom {
         name.set("Highlight for View")
-        description.set("Pattern highlighter for view-based.")
+        description.set("View-based patterned highlighting.")
         inceptionYear.set("2021")
         url.set("https://github.com/NeoUtils/Highlight")
 

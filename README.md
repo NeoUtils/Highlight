@@ -156,3 +156,19 @@ Text(
     text = highlight.rememberAnnotatedString("name = Highlight")
 )
 ```
+## Integration
+
+To integrate the Highlight library into your project, you can add it directly from the [Maven Central repository](https://central.sonatype.com/namespace/com.neoutils.highlight).
+
+### Gradle (Kotlin DSL)
+
+Add the dependencies to your `build.gradle.kts` file:
+
+```kotlin
+dependencies {
+    // For View-based highlighting
+    implementation("com.neoutils.highlight:highlight-view:2.0.0")
+    // For Jetpack Compose highlighting
+    implementation("com.neoutils.highlight:highlight-compose:2.0.0")
+}
+```
