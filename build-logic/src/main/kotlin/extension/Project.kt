@@ -7,7 +7,7 @@ val config = Config(
         major = 2,
         minor = 0,
         patch = 0,
-        release = Config.Release.Snapshot(number = 5)
+        release = Config.Release.Definitive
     ),
     android = Config.Android(
         compileSdk = 34,
