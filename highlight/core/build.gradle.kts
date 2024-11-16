@@ -34,8 +34,11 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
+
+    // androidx core
+    api(libs.androidx.core.ktx) {
+        because("utilities")
+    }
 }
 
 mavenPublishing {

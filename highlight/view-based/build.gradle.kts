@@ -37,9 +37,10 @@ dependencies {
 
     api(project(":highlight:core"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    // androidx appcompat
+    api(libs.androidx.appcompat) {
+        because("view-based utilities")
+    }
 }
 
 mavenPublishing {

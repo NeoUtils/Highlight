@@ -14,6 +14,7 @@ android {
 
     defaultConfig {
         minSdk = 24
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -33,12 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -50,21 +50,18 @@ dependencies {
 
     api(project(":highlight:core"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    // necessary compose dependencies
+    api(libs.androidx.runtime) {
+        because("obviously")
+    }
 
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    api(libs.androidx.ui.text) {
+        because("AnnotatedString, SpanStyle, TextFieldValue")
+    }
 
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    api(libs.androidx.ui.graphics) {
+        because("Color")
+    }
 }
 
 mavenPublishing {
