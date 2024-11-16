@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,20 +22,34 @@ import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.utils.UiColor
-import com.neoutils.highlight.example.compose.theme.HighlightTheme
+import com.neoutils.highlight.example.compose.R
+import com.neoutils.highlight.example.compose.theme.ExampleTheme
 import org.intellij.lang.annotations.Language
 
+@OptIn(ExperimentalMaterial3Api::class)
 class CodeHighlightExample : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            HighlightTheme(darkTheme = false) {
+            ExampleTheme {
 
                 val highlightEnabled = remember { mutableStateOf(true) }
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(stringResource(R.string.app_name))
+                            },
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = colorScheme.primary,
+                                titleContentColor = colorScheme.onPrimary
+                            )
+                        )
+                    },
                     floatingActionButton = {
                         FloatingActionButton(
                             onClick = {
@@ -76,13 +92,17 @@ class CodeHighlightExample : ComponentActivity() {
                             highlightModel.onChangeValue(it)
                         },
                         decorationBox = {
-                            Box(Modifier.padding(8.dp)) {
+                            Box(Modifier.padding(16.dp)) {
                                 it()
                             }
                         },
                         textStyle = TextStyle(
-                            fontSize = 16.sp
-                        )
+                            fontSize = 18.sp,
+                            fontFamily = FontFamily(
+                                Font(R.font.jetbrains_mono)
+                            ),
+                            letterSpacing = 0.sp,
+                        ),
                     )
                 }
             }
@@ -94,13 +114,13 @@ private val CodeHighlight = Highlight {
     textColor {
         fully(
             regex = "\\b(fun)\\b",
-            UiColor.Hex(hex = "#0033B3")
+            UiColor.Hex(hex = "#E66123")
         )
 
         groups(
-            regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)",
-            UiColor.Hex(hex = "#0033B3"),
-            UiColor.Hex(hex = "#00627A")
+            regex = "\\b(\\w+)\\b\\((\\w+\\s*=)?[^)]*\\)",
+            UiColor.Hex(hex = "#00627A"),
+            UiColor.Hex(hex = "#548AF7"),
         )
 
         fully(
@@ -117,7 +137,8 @@ private val CodeHighlight = Highlight {
 
 @Language("kotlin")
 private val code = """
-    fun main() {
-        print("Hello, World!")
+    @Composable
+    fun App() {
+        Text(text = "Hello, world!")
     }
 """.trimIndent()

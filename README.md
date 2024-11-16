@@ -162,6 +162,14 @@ Text(
     text = highlight.rememberAnnotatedString("name = Highlight")
 )
 ```
+
+## Screenshots
+
+| Simple example                                    | Code highlight                                    |
+|---------------------------------------------------|---------------------------------------------------|
+| ![view-example.png](screenshots/view-example.png) | ![code-example.png](screenshots/code-example.png) |
+
+
 ## Integration
 
 To integrate the Highlight library into your project, you can add it directly from the [Maven Central repository](https://central.sonatype.com/namespace/com.neoutils.highlight).
