@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-group = "example"
-
 android {
     namespace = "com.neoutils.highlight.example.compose"
     compileSdk = 34
@@ -55,7 +53,7 @@ android {
 
 dependencies {
 
-    implementation(project(":highlight:compose"))
+    implementation("com.neoutils.highlight:highlight-compose:2.0.0-snapshot4")
 
     implementation(libs.androidx.core.ktx)
 

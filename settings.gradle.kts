@@ -1,13 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":highlight:view-based")
-include(":highlight:compose")
-include(":highlight:core")
-
-include(":example:view-based")
-include(":example:compose")
-
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         gradlePluginPortal()
@@ -17,9 +11,20 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
-        google()
         mavenCentral()
+        google()
     }
 }
+
+include(
+    ":highlight:view-based",
+    ":highlight:compose",
+    ":highlight:core"
+)
+
+include(
+    ":example:view-based",
+    ":example:compose"
+)
 
 rootProject.name = "Highlight"
