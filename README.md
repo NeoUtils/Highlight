@@ -1,63 +1,75 @@
-# Highlight ![Maven Central Version](https://img.shields.io/maven-central/v/com.neoutils.highlight/highlight-core?versionPrefix=2.0.0)
+# Highlight ![Maven Central Version](https://img.shields.io/maven-central/v/com.neoutils.highlight/highlight-core)
 
-Highlight text snippets in **Jetpack Compose** or **View-based** using regular expressions.
+Cross-platform text highlighting and syntax highlighting for **Compose** and **View**, using regular expressions.
 
 ## Objective
 
-Facilitate the creation of dynamic highlights using regular expressions, useful for creating code editors or text editors with custom formatting.
+Facilitate the creation of dynamic highlights using regular expressions, ideal for code editors or text editors with custom formatting.
+
+## Supported Platforms
+
+| Platform                     | Support |
+|------------------------------|---------|
+| Android with Jetpack Compose | OK      |
+| Android with View            | OK      |
+| Compose for Desktop          | OK      |
+| Compose for Web              | NO      |
+| Compose for iOS              | NO      |
 
 ## Quick Start
 
-The central class is `Highlight`, from which highlighted texts are generated in formats like `SpannedString` for View-based or `AnnotatedString` for Jetpack Compose, from schemes defined by `Scheme<*>`.
+The main class is `Highlight`, which generates formatted text in types like `SpannedString` or `AnnotatedString`, depending on the platform. 
 
-**Usage Example**
+You can pass a list of schemes directly through the constructor.
 
-``` kotlin
+### Usage Example
+
+```kotlin
 val highlight = Highlight(
     TextColorScheme(
-        regex = "\\b(color)\\b".toRegex(),
+        regex = "\\bcolor\\b".toRegex(),
         match = Match.fully(UiColor.Black)
     )
 )
 
 // Jetpack Compose
-val text = highlight.toAnnotatedString("Example of foreground color.")
+val annotatedString = highlight.toAnnotatedString("Foreground color example.")
 
 // View-based
-val text = highlight.toSpannedString("Example of foreground color.")
+val spannedString = highlight.toSpannedString("Foreground color example.")
 ```
 
-You can also use extensions to simplify the creation of highlights:
+Or use the builder scope to create patterns:
 
-``` kotlin
+```kotlin
 val highlight = Highlight {
     textColor {
         fully(
-            regex = "\\b(color)\\b",
-            UiColor.Black
+            regex = "\\bcolor\\b".toRegex(),
+            value = UiColor.Black
         )
     }
 }
 
 // Jetpack Compose
-val text = highlight.toAnnotatedString("Example of foreground color.")
+val annotatedString = highlight.toAnnotatedString("Foreground color example.")
 
 // View-based
-val text = highlight.toSpannedString("Example of foreground color.")
+val spannedString = highlight.toSpannedString("Foreground color example.")
 ```
 
-## Jetpack Compose
+## Compose
 
-In Jetpack Compose, work with `AnnotatedString` or `TextFieldValue` to integrate the highlight into your layout.
+In Compose environments, use `rememberAnnotatedString` to integrate highlighting into a `Text` component.
 
-**Usage Example**
+### Usage Example
 
-``` kotlin
+```kotlin
 val highlight = rememberHighlight {
     spanStyle {
-         fully(
-            regex = "\\b(styled)\\b",
-            SpanStyle(
+        fully(
+            regex = "\\bstyled\\b".toRegex(),
+            value = SpanStyle(
                 color = Color.White,
                 background = Color.Black,
                 fontStyle = FontStyle.Italic,
@@ -66,14 +78,16 @@ val highlight = rememberHighlight {
     }
 }
 
-// AnnotatedString
 Text(
     text = highlight.rememberAnnotatedString(
         "Example of styled text."
     )
 )
+```
 
-// TextFieldValue
+Or use `rememberTextFieldValue` for `TextFieldValue`:
+
+``` kotlin
 val textFieldValue = rememberSaveable { mutableStateOf(TextFieldValue()) }
 
 BasicTextField(
@@ -88,70 +102,48 @@ BasicTextField(
 )
 ```
 
-## View-based
+## View-Based
 
-In View-based environments, work with `SpannedString`, `Editable`, or `SpannableString` to apply the highlights.
+In View-based environments, use `toSpannedString`, or `apply` to apply highlights.
 
-**Usage Example**
+### Usage Example
 
 ``` kotlin
 val highlight = Highlight {
     backgroundColor {
         fully(
-            regex = "\\b(color)\\b",
-            UiColor.Blue
+            regex = "\\bcolor\\b".toRegex(),
+            value = UiColor.Blue
         )
     }
     textColor {
         fully(
-            regex = "\\b(color)\\b",
-            UiColor.White
+            regex = "\\bcolor\\b".toRegex(),
+            value = UiColor.White
         )
     }
 }
 
 // TextView
 binding.tvExample.text = highlight.toSpannedString(
-    "Example of background color."
+    "Background color example."
 )
 
 // EditText (Editable or Spannable)
 highlight.apply(binding.etExample)
 ```
 
-## Java Support
-
-Although the library was rewritten in Kotlin, it can be used in Java without any issues.
-
-**Usage Example**
-
-``` java
-Highlight highlight = new Highlight(
-    new TextColorScheme(
-        new Regex("\\b(java)\\b"),
-        Match.fully(new UiColor.Integer(Color.RED))
-    )
-);
-
-binding.setText(
-    HighlightKt.toSpannedString(
-        highlight,
-        "Example of java"
-    )
-);
-```
-
 ## Groups
 
-Instead of applying the highlight to the entire match using `Match.fully(..)`, you can separate it by groups, allowing for more complex highlights.
+Instead of applying the highlight to the entire match using `Match.fully(..)`, you can separate it by groups, allowing for more complex and specific highlights.
 
-**Usage Example**
+### Usage Example
 
-``` kotlin
+```kotlin
 val highlight = rememberHighlight {
     textColor {
         groups(
-            regex = "(\\w+)\\s*=\\s*(\\w+)",
+            regex = "(\\w+)\\s*=\\s*(\\w+)".toRegex(),
             UiColor.Blue,
             UiColor.Green
         )
@@ -169,20 +161,20 @@ Text(
 |---------------------------------------------------|---------------------------------------------------|
 | ![view-example.png](screenshots/view-example.png) | ![code-example.png](screenshots/code-example.png) |
 
-
-## Integration
+## Installation
 
 To integrate the Highlight library into your project, you can add it directly from the [Maven Central repository](https://central.sonatype.com/namespace/com.neoutils.highlight).
 
 ### Gradle (Kotlin DSL)
 
-Add the dependencies to your `build.gradle.kts` file:
+Add the following dependencies to your `build.gradle.kts` file:
 
-``` kotlin
+```kotlin
 dependencies {
-    // For View-based highlighting
-    implementation("com.neoutils.highlight:highlight-view:2.0.0")
-    // For Jetpack Compose highlighting
-    implementation("com.neoutils.highlight:highlight-compose:2.0.0")
+    // For highlighting in Views
+    implementation("com.neoutils.highlight:highlight-view:2.1.0")
+    
+    // For highlighting in Compose
+    implementation("com.neoutils.highlight:highlight-compose:2.1.0")
 }
 ```

@@ -50,7 +50,7 @@ android {
 
 dependencies {
 
-    implementation("com.neoutils.highlight:highlight-compose:2.0.0-snapshot5")
+    implementation(project(":highlight:compose"))
 
     implementation(libs.androidx.core.ktx)
 

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.toSpannedString
 
 class CaptureGroupsExample(
@@ -19,7 +19,7 @@ class CaptureGroupsExample(
         text = Highlight {
             textColor {
                 groups(
-                    regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")",
+                    regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")".toRegex(),
                     UiColor.Blue,
                     UiColor.Green
                 )

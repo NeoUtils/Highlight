@@ -37,7 +37,7 @@ android {
 
 dependencies {
 
-    implementation("com.neoutils.highlight:highlight-view:2.0.0-snapshot4")
+    implementation(project(":highlight:view-based"))
 
     implementation(libs.androidx.core.ktx)
 

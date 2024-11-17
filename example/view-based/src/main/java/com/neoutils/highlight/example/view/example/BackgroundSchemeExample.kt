@@ -6,7 +6,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.backgroundColor
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.toSpannedString
 
 class BackgroundSchemeExample(
@@ -20,13 +20,13 @@ class BackgroundSchemeExample(
         text = Highlight {
             backgroundColor {
                 fully(
-                    regex = "\\bcolor\\b",
+                    regex = "\\bcolor\\b".toRegex(),
                     UiColor.Blue
                 )
             }
             textColor {
                 fully(
-                    regex = "\\bcolor\\b",
+                    regex = "\\bcolor\\b".toRegex(),
                     UiColor.White
                 )
             }

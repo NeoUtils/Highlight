@@ -19,7 +19,7 @@ class StyleSchemeExample(
         text = Highlight {
             textStyle {
                 fully(
-                    regex = "\\bstyle\\b",
+                    regex = "\\bstyle\\b".toRegex(),
                     value = UiStyle.BOLD
                 )
             }

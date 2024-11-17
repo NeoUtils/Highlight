@@ -1,11 +1,12 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SonatypeHost
 import extension.config
 
 plugins {
     id("com.vanniktech.maven.publish")
     id("com.android.library")
-    kotlin("android")
+    kotlin("multiplatform")
 }
 
 android {
@@ -25,20 +26,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 mavenPublishing {
-    configure(
-        AndroidSingleVariantLibrary(
-            variant = "release",
-            sourcesJar = true,
-            publishJavadocJar = false,
-        )
-    )
 
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 

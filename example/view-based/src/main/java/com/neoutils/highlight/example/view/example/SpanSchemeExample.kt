@@ -20,7 +20,7 @@ class SpanSchemeExample(
         text = Highlight {
             span {
                 fully(
-                    regex = "\\bspan\\b",
+                    regex = "\\bspan\\b".toRegex(),
                     ForegroundColorSpan(
                         Color.GREEN
                     )

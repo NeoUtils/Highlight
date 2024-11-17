@@ -17,7 +17,7 @@ class TextFontSchemeExample(
         text = Highlight {
             textFont {
                 fully(
-                    regex = "\\bfont\\b",
+                    regex = "\\bfont\\b".toRegex(),
                     checkNotNull(
                         ResourcesCompat.getFont(
                             context,

@@ -1,8 +1,38 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import extension.config
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.neoutils.android.library)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
+    }
+
+    jvm()
+
+    sourceSets {
+        commonMain.dependencies {
+            api(project(":highlight:core"))
+
+            implementation(compose.runtime) {
+                because("remember extensions")
+            }
+
+            implementation(compose.ui) {
+                because("AnnotatedString, SpanStyle, TextFieldValue, Color")
+            }
+        }
+    }
 }
 
 android {
@@ -25,27 +55,17 @@ android {
     }
 }
 
-dependencies {
-
-    api(project(":highlight:core"))
-
-    implementation(libs.androidx.runtime) {
-        because("obviously")
-    }
-
-    implementation(libs.androidx.ui.text) {
-        because("AnnotatedString, SpanStyle, TextFieldValue")
-    }
-
-    implementation(libs.androidx.ui.graphics) {
-        because("Color")
-    }
-}
-
 mavenPublishing {
 
     coordinates(
         artifactId = "highlight-compose",
+    )
+
+    configure(
+        KotlinMultiplatform(
+            sourcesJar = true,
+            androidVariantsToPublish = listOf("release"),
+        )
     )
 
     pom {

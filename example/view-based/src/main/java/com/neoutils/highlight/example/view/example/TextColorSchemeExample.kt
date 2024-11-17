@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.toSpannedString
 
 class TextColorSchemeExample(
@@ -16,7 +16,7 @@ class TextColorSchemeExample(
         text = Highlight {
             textColor {
                 fully(
-                    regex = "\\bcolor\\b",
+                    regex = "\\bcolor\\b".toRegex(),
                     value = UiColor.Blue
                 )
             }

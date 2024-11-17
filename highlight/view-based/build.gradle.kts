@@ -1,7 +1,22 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import extension.config
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.neoutils.android.library)
+}
+
+kotlin {
+    sourceSets {
+        androidTarget {
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_1_8)
+            }
+        }
+    }
 }
 
 android {
@@ -9,18 +24,22 @@ android {
 }
 
 dependencies {
-
     api(project(":highlight:core"))
-
-    implementation(libs.androidx.appcompat) {
-        because("view-based utilities")
-    }
+    implementation(libs.androidx.appcompat)
 }
 
 mavenPublishing {
 
     coordinates(
         artifactId = "highlight-view"
+    )
+
+    configure(
+        AndroidSingleVariantLibrary(
+            variant = "release",
+            sourcesJar = true,
+            publishJavadocJar = false,
+        )
     )
 
     pom {

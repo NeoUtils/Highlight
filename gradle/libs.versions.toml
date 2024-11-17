@@ -1,6 +1,8 @@
 [versions]
 agp = "8.5.2"
-kotlin = "2.0.20"
+annotation = "1.9.1"
+kotlin = "2.0.20" # Gradle 7.5 ~ 8.8 & AGP 7.4.2 ~ 8.5
+cmp = "1.7.0" # Jetpack Compose 1.7.0 & APG 8.1+
 
 core = "1.13.1" # used for library
 appcompat = "1.7.0" # used for library
@@ -21,6 +23,7 @@ plugin-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", 
 
 # multiplatform
 plugin-compose-compiler = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 
 # android
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
@@ -45,9 +48,14 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
+# desktop
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
 # multiplatform
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "cmp" }
 
 # internal
 neoutils-android-library = { id = "com.neoutils.android-library", version = "undefined" }
