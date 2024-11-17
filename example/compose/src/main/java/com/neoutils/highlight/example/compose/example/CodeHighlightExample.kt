@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 import org.intellij.lang.annotations.Language
 
 @Language("kotlin")

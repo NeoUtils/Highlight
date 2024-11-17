@@ -1,4 +1,4 @@
-package com.neoutils.highlight.core.utils
+package com.neoutils.highlight.core.util
 
 data class Match<T : Any>(
     val values: List<T?>,

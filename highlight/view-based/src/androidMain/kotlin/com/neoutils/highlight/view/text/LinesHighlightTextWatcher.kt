@@ -3,9 +3,9 @@ package com.neoutils.highlight.view.text
 import android.text.Editable
 import android.text.TextWatcher
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.BackgroundColorScheme
-import com.neoutils.highlight.core.utils.Match
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.scheme.BackgroundColorScheme
+import com.neoutils.highlight.core.util.Match
+import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.applyTo
 import com.neoutils.highlight.view.extension.getFirstLineStart
 import com.neoutils.highlight.view.extension.getLastLineEnd

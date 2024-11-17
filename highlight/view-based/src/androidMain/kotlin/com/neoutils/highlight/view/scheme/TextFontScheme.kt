@@ -2,7 +2,7 @@ package com.neoutils.highlight.view.scheme
 
 import android.graphics.Typeface
 import com.neoutils.highlight.core.Scheme
-import com.neoutils.highlight.core.utils.Match
+import com.neoutils.highlight.core.util.Match
 
 data class TextFontScheme(
     override val regex: Regex,

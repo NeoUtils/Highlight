@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.neoutils.highlight.compose.remember.rememberHighlightModel
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.example.compose.R
 import com.neoutils.highlight.example.compose.theme.ExampleTheme
 import org.intellij.lang.annotations.Language

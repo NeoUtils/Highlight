@@ -1,7 +1,7 @@
 package com.neoutils.highlight.view.extension
 
 import android.graphics.Color
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 
 fun UiColor.toIntColor() = when (this) {
     is UiColor.Hex -> Color.parseColor(hex)

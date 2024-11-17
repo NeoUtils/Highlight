@@ -1,8 +1,8 @@
 package com.neoutils.highlight.core.scope
 
-import com.neoutils.highlight.core.utils.Match
-import com.neoutils.highlight.core.BackgroundColorScheme
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.Match
+import com.neoutils.highlight.core.scheme.BackgroundColorScheme
+import com.neoutils.highlight.core.util.UiColor
 
 class BackgroundColorScope internal constructor() :
     SchemeScope<UiColor, BackgroundColorScheme>() {

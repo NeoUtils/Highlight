@@ -1,6 +1,6 @@
 package com.neoutils.highlight.core
 
-import com.neoutils.highlight.core.utils.Match
+import com.neoutils.highlight.core.util.Match
 
 interface Scheme<T : Any> {
     val regex: Regex
