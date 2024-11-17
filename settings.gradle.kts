@@ -27,7 +27,8 @@ include(
 include(
     ":example:view-based",
     ":example:compose",
-    ":example:desktop"
+    ":example:desktop",
+    ":example:web",
 )
 
 rootProject.name = "Highlight"
