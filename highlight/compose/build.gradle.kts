@@ -1,8 +1,37 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import extension.config
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.neoutils.android.library)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.compose.compiler)
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
+    }
+
+    jvm()
+
+    sourceSets {
+        commonMain.dependencies {
+            api(project(":highlight:core"))
+
+            implementation(compose.runtime) {
+                because("remember extensions")
+            }
+
+            implementation(compose.ui) {
+                because("AnnotatedString, SpanStyle, TextFieldValue, Color")
+            }
+        }
+    }
 }
 
 android {
@@ -22,23 +51,6 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
-    }
-}
-
-dependencies {
-
-    api(project(":highlight:core"))
-
-    implementation(libs.androidx.runtime) {
-        because("obviously")
-    }
-
-    implementation(libs.androidx.ui.text) {
-        because("AnnotatedString, SpanStyle, TextFieldValue")
-    }
-
-    implementation(libs.androidx.ui.graphics) {
-        because("Color")
     }
 }
 

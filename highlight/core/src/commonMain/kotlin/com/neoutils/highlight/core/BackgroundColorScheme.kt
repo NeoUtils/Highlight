@@ -1,10 +1,9 @@
-package com.neoutils.highlight.core.scheme
+package com.neoutils.highlight.core
 
-import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.utils.Match
 import com.neoutils.highlight.core.utils.UiColor
 
-data class TextColorScheme(
+data class BackgroundColorScheme(
     override val regex: Regex,
     override val match: Match<UiColor>,
 ) : Scheme<UiColor>

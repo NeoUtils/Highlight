@@ -5,7 +5,7 @@ import extension.config
 plugins {
     id("com.vanniktech.maven.publish")
     id("com.android.library")
-    kotlin("android")
+    kotlin("multiplatform")
 }
 
 android {
@@ -24,10 +24,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 

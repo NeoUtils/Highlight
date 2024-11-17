@@ -5,9 +5,9 @@ import model.Config
 val config = Config(
     version = Config.Version(
         major = 2,
-        minor = 0,
+        minor = 1,
         patch = 0,
-        release = Config.Release.Definitive
+        release = Config.Release.Snapshot()
     ),
     android = Config.Android(
         compileSdk = 34,

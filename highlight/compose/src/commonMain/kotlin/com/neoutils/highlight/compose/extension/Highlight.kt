@@ -5,8 +5,8 @@ import androidx.compose.ui.text.SpanStyle
 import com.neoutils.highlight.compose.scheme.SpanStyleScheme
 import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.Scheme
-import com.neoutils.highlight.core.scheme.BackgroundColorScheme
-import com.neoutils.highlight.core.scheme.TextColorScheme
+import com.neoutils.highlight.core.BackgroundColorScheme
+import com.neoutils.highlight.core.TextColorScheme
 
 fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 

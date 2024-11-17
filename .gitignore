@@ -1,8 +1,16 @@
-*.iml
 .gradle
+.kotlin
 .externalNativeBuild
 .cxx
 .DS_Store
+.vscode/
+
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+*.iws
+*.iml
+*.ipr
 
 /.idea/caches
 /.idea/libraries
@@ -10,8 +18,10 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/jarRepositories.xml
+/.idea/compiler.xml
+/.idea/libraries/
 
 /build
-/captures
 
 /local.properties

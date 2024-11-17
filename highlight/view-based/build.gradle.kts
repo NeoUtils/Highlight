@@ -1,20 +1,33 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import extension.config
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.neoutils.android.library)
 }
 
-android {
-    namespace = config.module(name = "view")
+kotlin {
+    sourceSets {
+        androidTarget {
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_1_8)
+            }
+        }
+
+        commonMain.dependencies {
+            api(project(":highlight:core"))
+        }
+
+        androidMain.dependencies {
+            implementation(libs.androidx.appcompat)
+        }
+    }
 }
 
-dependencies {
-
-    api(project(":highlight:core"))
-
-    implementation(libs.androidx.appcompat) {
-        because("view-based utilities")
-    }
+android {
+    namespace = config.module(name = "view")
 }
 
 mavenPublishing {

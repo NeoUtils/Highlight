@@ -1,18 +1,18 @@
 package com.neoutils.highlight.core.scope
 
-import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.core.utils.Match
+import com.neoutils.highlight.core.BackgroundColorScheme
 import com.neoutils.highlight.core.utils.UiColor
 
-class TextColorScope internal constructor() :
-    SchemeScope<UiColor, TextColorScheme>() {
+class BackgroundColorScope internal constructor() :
+    SchemeScope<UiColor, BackgroundColorScheme>() {
 
     override fun match(
         regex: String,
         match: Match<UiColor>
     ) {
         builder.add(
-            TextColorScheme(
+            BackgroundColorScheme(
                 regex.toRegex(),
                 match
             )
