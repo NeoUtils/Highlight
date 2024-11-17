@@ -13,7 +13,7 @@ import androidx.compose.ui.window.rememberWindowState
 import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.utils.UiColor
+import com.neoutils.highlight.core.util.UiColor
 
 @Composable
 @Preview
@@ -26,11 +26,11 @@ fun App() {
         value = rememberHighlight {
             textColor {
                 fully(
-                    regex = "[A-Z][a-z]+",
+                    regex = "[A-Z][a-z]+".toRegex(),
                     UiColor.Blue
                 )
                 fully(
-                    regex = "\\W",
+                    regex = "\\W".toRegex(),
                     UiColor.Red
                 )
             }

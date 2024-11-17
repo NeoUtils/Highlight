@@ -18,6 +18,10 @@ kotlin {
 
     jvm()
 
+    js(IR) {
+        browser()
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(libs.androidx.annotation)

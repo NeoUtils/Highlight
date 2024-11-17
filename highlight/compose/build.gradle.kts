@@ -20,6 +20,10 @@ kotlin {
 
     jvm()
 
+    js(IR) {
+        browser()
+    }
+
     sourceSets {
         commonMain.dependencies {
             api(project(":highlight:core"))
