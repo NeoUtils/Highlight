@@ -119,28 +119,6 @@ binding.tvExample.text = highlight.toSpannedString(
 highlight.apply(binding.etExample)
 ```
 
-## Java Support
-
-Although the library was rewritten in Kotlin, it can be used in Java without any issues.
-
-**Usage Example**
-
-``` java
-Highlight highlight = new Highlight(
-    new TextColorScheme(
-        new Regex("\\b(java)\\b"),
-        Match.fully(new UiColor.Integer(Color.RED))
-    )
-);
-
-binding.setText(
-    HighlightKt.toSpannedString(
-        highlight,
-        "Example of java"
-    )
-);
-```
-
 ## Groups
 
 Instead of applying the highlight to the entire match using `Match.fully(..)`, you can separate it by groups, allowing for more complex highlights.

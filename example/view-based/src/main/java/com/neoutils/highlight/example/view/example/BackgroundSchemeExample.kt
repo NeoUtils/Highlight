@@ -20,13 +20,13 @@ class BackgroundSchemeExample(
         text = Highlight {
             backgroundColor {
                 fully(
-                    regex = "\\bcolor\\b",
+                    regex = "\\bcolor\\b".toRegex(),
                     UiColor.Blue
                 )
             }
             textColor {
                 fully(
-                    regex = "\\bcolor\\b",
+                    regex = "\\bcolor\\b".toRegex(),
                     UiColor.White
                 )
             }

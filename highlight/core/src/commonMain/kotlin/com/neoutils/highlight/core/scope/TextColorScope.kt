@@ -8,12 +8,12 @@ class TextColorScope internal constructor() :
     SchemeScope<UiColor, TextColorScheme>() {
 
     override fun match(
-        regex: String,
+        regex: Regex,
         match: Match<UiColor>
     ) {
         builder.add(
             TextColorScheme(
-                regex.toRegex(),
+                regex,
                 match
             )
         )

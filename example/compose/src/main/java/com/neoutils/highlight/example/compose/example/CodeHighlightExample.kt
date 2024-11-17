@@ -1,19 +1,14 @@
 package com.neoutils.highlight.example.compose.example
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,6 +17,7 @@ import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
+import com.neoutils.highlight.example.compose.R
 import org.intellij.lang.annotations.Language
 
 @Language("kotlin")
@@ -32,34 +28,30 @@ private val code = """
 """.trimIndent()
 
 @Composable
-fun CodeHighlightExample() {
+fun CodeHighlightExample(modifier: Modifier = Modifier) {
 
-    var highlightEnabled by rememberSaveable { mutableStateOf(true) }
+    val highlight = rememberHighlight {
+        textColor {
+            fully(
+                regex = "\\b(fun)\\b".toRegex(),
+                UiColor.Hex(hex = "#E66123")
+            )
 
-    val highlight = rememberHighlight(highlightEnabled) {
-        if (highlightEnabled) {
-            textColor {
-                fully(
-                    regex = "\\b(fun)\\b",
-                    UiColor.Hex(hex = "#0033B3")
-                )
+            groups(
+                regex = "\\b(\\w+)\\b\\((\\w+\\s*=)?[^)]*\\)".toRegex(),
+                UiColor.Hex(hex = "#00627A"),
+                UiColor.Hex(hex = "#548AF7"),
+            )
 
-                groups(
-                    regex = "\\b(fun)\\b\\s*\\b(\\w+)\\b\\([^()]*\\)",
-                    UiColor.Hex(hex = "#0033B3"),
-                    UiColor.Hex(hex = "#00627A")
-                )
+            fully(
+                regex = "@.+".toRegex(),
+                UiColor.Hex(hex = "#93880D")
+            )
 
-                fully(
-                    regex = "@.+",
-                    UiColor.Hex(hex = "#93880D")
-                )
-
-                fully(
-                    regex = "\"[^\"]*\"",
-                    UiColor.Hex(hex = "#067D17")
-                )
-            }
+            fully(
+                regex = "\"[^\"]*\"".toRegex(),
+                UiColor.Hex(hex = "#067D17")
+            )
         }
     }
 
@@ -70,7 +62,7 @@ fun CodeHighlightExample() {
     }
 
     BasicTextField(
-        modifier = Modifier,
+        modifier = modifier.padding(16.dp),
         value = highlight.rememberTextFieldValue(
             value = textFieldValue.value.copy(
                 composition = null
@@ -79,29 +71,11 @@ fun CodeHighlightExample() {
         onValueChange = {
             textFieldValue.value = it
         },
-        decorationBox = {
-            Row(
-                modifier = Modifier.padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                it()
-
-                Button(
-                    onClick = {
-                        highlightEnabled = !highlightEnabled
-                    }
-                ) {
-                    if (highlightEnabled) {
-                        Text(text = "OFF")
-                    } else {
-                        Text(text = "ON")
-                    }
-                }
-            }
-        },
         textStyle = TextStyle(
-            fontSize = 16.sp
+            fontSize = 16.sp,
+            fontFamily = FontFamily(
+                Font(R.font.jetbrains_mono)
+            )
         ),
     )
 }

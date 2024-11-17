@@ -9,12 +9,12 @@ class TextFontScope internal constructor() :
     SchemeScope<Typeface, TextFontScheme>() {
 
     override fun match(
-        regex: String,
+        regex: Regex,
         match: Match<Typeface>
     ) {
         builder.add(
             TextFontScheme(
-                regex.toRegex(),
+                regex,
                 match
             )
         )

@@ -9,12 +9,12 @@ class SpanScope internal constructor() :
     SchemeScope<ParcelableSpan, SpanScheme>() {
 
     override fun match(
-        regex: String,
+        regex: Regex,
         match: Match<ParcelableSpan>
     ) {
         builder.add(
             SpanScheme(
-                regex.toRegex(),
+                regex,
                 match
             )
         )

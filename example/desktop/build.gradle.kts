@@ -9,7 +9,7 @@ version = "1.0.0"
 
 dependencies {
 
-    implementation("com.neoutils.highlight:highlight-compose:2.1.0-snapshot4")
+    implementation(project(":highlight:compose"))
 
     implementation(compose.runtime)
     implementation(compose.foundation)

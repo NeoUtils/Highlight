@@ -19,7 +19,7 @@ class CaptureGroupsExample(
         text = Highlight {
             textColor {
                 groups(
-                    regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")",
+                    regex = "(\"\\w+\")\\s*=\\s*(\"\\w+\")".toRegex(),
                     UiColor.Blue,
                     UiColor.Green
                 )

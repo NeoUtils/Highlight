@@ -9,12 +9,12 @@ class TextStyleScope internal constructor() :
     SchemeScope<UiStyle, TextStyleScheme>() {
 
     override fun match(
-        regex: String,
+        regex: Regex,
         match: Match<UiStyle>
     ) {
         builder.add(
             TextStyleScheme(
-                regex.toRegex(),
+                regex,
                 match
             )
         )

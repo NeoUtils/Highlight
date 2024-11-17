@@ -12,6 +12,10 @@
 *.iml
 *.ipr
 
+*.iws
+*.iml
+*.ipr
+
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml

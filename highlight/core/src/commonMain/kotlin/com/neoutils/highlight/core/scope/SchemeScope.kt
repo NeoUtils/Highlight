@@ -3,17 +3,16 @@ package com.neoutils.highlight.core.scope
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.Scope
 import com.neoutils.highlight.core.util.Match
-import org.intellij.lang.annotations.Language
 
 abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     abstract fun match(
-        @Language("RegExp") regex: String,
+        regex: Regex,
         match: Match<T>
     )
 
     fun fully(
-        @Language("RegExp") regex: String,
+        regex: Regex,
         value: T
     ) = match(
         regex = regex,
@@ -21,7 +20,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
     )
 
     fun groups(
-        @Language("RegExp") regex: String,
+        regex: Regex,
         groups: List<T?>
     ) = match(
         regex = regex,
@@ -29,7 +28,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
     )
 
     fun groups(
-        @Language("RegExp") regex: String,
+        regex: Regex,
         vararg groups: T?
     ) = match(
         regex = regex,

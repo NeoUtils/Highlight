@@ -8,12 +8,12 @@ class BackgroundColorScope internal constructor() :
     SchemeScope<UiColor, BackgroundColorScheme>() {
 
     override fun match(
-        regex: String,
+        regex: Regex,
         match: Match<UiColor>
     ) {
         builder.add(
             BackgroundColorScheme(
-                regex.toRegex(),
+                regex,
                 match
             )
         )

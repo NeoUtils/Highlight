@@ -9,12 +9,12 @@ class SpanStyleScope internal constructor() :
     SchemeScope<SpanStyle, SpanStyleScheme>() {
 
     override fun match(
-        regex: String,
+        regex: Regex,
         match: Match<SpanStyle>
     ) {
         builder.add(
             SpanStyleScheme(
-                regex.toRegex(),
+                regex,
                 match
             )
         )
