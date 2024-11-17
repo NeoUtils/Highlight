@@ -10,31 +10,17 @@ actual fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
     for (scheme in schemes) {
 
-        for (result in scheme.regex.findAll(text)) {
+        val spans = scheme.toSpanStyle()
+        val regex = scheme.regex.pattern
 
-            val spans = scheme.toSpanStyle()
-
-            for ((index, group) in result.groups.withIndex()) {
-
-                if (group == null) continue
-
-                // TODO(improve): this can cause collisions
-                val start = result.range.first +
-                        result.value.indexOf(group.value)
-
-                val range = IntRange(
-                    start = start,
-                    endInclusive = start + group.value.lastIndex
+        for ((index, match) in regex.matchAllWithGroups(text).withIndex()) {
+            spanStyles.add(
+                AnnotatedString.Range(
+                    item = spans.getOrNull(index) ?: continue,
+                    start = match.range.first,
+                    end = match.range.last + 1
                 )
-
-                spanStyles.add(
-                    AnnotatedString.Range(
-                        item = spans.getOrNull(index) ?: continue,
-                        start = range.first,
-                        end = range.last + 1
-                    )
-                )
-            }
+            )
         }
     }
 

@@ -9,9 +9,9 @@ actual fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
     for (scheme in schemes) {
 
-        for (result in scheme.regex.findAll(text)) {
+        val spans = scheme.toSpanStyle()
 
-            val spans = scheme.toSpanStyle()
+        for (result in scheme.regex.findAll(text)) {
 
             for ((index, group) in result.groups.withIndex()) {
 
