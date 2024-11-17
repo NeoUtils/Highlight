@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SonatypeHost
 import extension.config
 
@@ -28,13 +29,6 @@ android {
 }
 
 mavenPublishing {
-    configure(
-        AndroidSingleVariantLibrary(
-            variant = "release",
-            sourcesJar = true,
-            publishJavadocJar = false,
-        )
-    )
 
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 

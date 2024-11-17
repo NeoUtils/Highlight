@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import extension.config
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -58,6 +59,13 @@ mavenPublishing {
 
     coordinates(
         artifactId = "highlight-compose",
+    )
+
+    configure(
+        KotlinMultiplatform(
+            sourcesJar = true,
+            androidVariantsToPublish = listOf("release"),
+        )
     )
 
     pom {
