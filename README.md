@@ -10,11 +10,11 @@ Facilitate the creation of dynamic highlights using regular expressions, ideal f
 
 | Platform                     | Support |
 |------------------------------|---------|
-| Android with Jetpack Compose | OK      |
-| Android with View            | OK      |
-| Compose for Desktop          | OK      |
-| Compose for Web              | NO      |
-| Compose for iOS              | NO      |
+| Android with Jetpack Compose | ✅       |
+| Android with View            | ✅       |
+| Compose for Desktop          | ✅       |
+| Compose for Web              | ❌       |
+| Compose for iOS              | ❌       |
 
 ## Quick Start
 
