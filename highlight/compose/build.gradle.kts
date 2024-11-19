@@ -1,9 +1,5 @@
-@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
-
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import extension.config
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.neoutils.android.library)
@@ -12,11 +8,6 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
-        }
-    }
 
     jvm()
 
@@ -74,8 +65,8 @@ mavenPublishing {
     )
 
     pom {
-        name.set("Highlight for Jetpack Compose")
-        description.set("Jetpack Compose patterned highlighting.")
+        name.set("Highlight for Compose")
+        description.set("Compose patterned highlighting.")
         inceptionYear.set("2021")
         url.set("https://github.com/NeoUtils/Highlight")
     }

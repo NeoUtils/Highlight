@@ -8,7 +8,33 @@ import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 
-expect fun Highlight.toAnnotatedString(text: String): AnnotatedString
+fun Highlight.toAnnotatedString(text: String): AnnotatedString {
+    val spanStyles = mutableListOf<AnnotatedString.Range<SpanStyle>>()
+
+    for (scheme in schemes) {
+
+        val spans = scheme.toSpanStyle()
+
+        for (result in text.matchAll(scheme.regex.pattern)) {
+
+            for ((index, group) in result.groups.withIndex()) {
+
+                spanStyles.add(
+                    AnnotatedString.Range(
+                        item = spans.getOrNull(index) ?: continue,
+                        start = group.range.first,
+                        end = group.range.last + 1
+                    )
+                )
+            }
+        }
+    }
+
+    return AnnotatedString(
+        text = text,
+        spanStyles = spanStyles
+    )
+}
 
 fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
 

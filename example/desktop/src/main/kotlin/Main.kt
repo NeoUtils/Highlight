@@ -1,14 +1,12 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,19 +24,29 @@ import com.neoutils.highlight.core.util.UiColor
 @Preview
 fun App() {
     var textFieldValue by remember {
-        mutableStateOf(TextFieldValue("Hello, World!"))
+        mutableStateOf(TextFieldValue("name = Highlight"))
     }
 
     BasicTextField(
         value = rememberHighlight {
             textColor {
-                fully(
-                    regex = "[A-Z][a-z]+".toRegex(),
-                    UiColor.Blue
+                match(
+                    regex = "(\\w+)\\s*=\\s*(\\w+)".toRegex(),
+                    match = Match.groups(
+                        UiColor.Blue,
+                        UiColor.Red
+                    )
                 )
-                fully(
-                    regex = "\\W".toRegex(),
-                    UiColor.Red
+            }
+
+            spanStyle {
+                match(
+                    regex = "\\b(High)(light)\\b".toRegex(),
+                    match = Match.fully(
+                        SpanStyle(
+                            fontStyle = FontStyle.Italic
+                        )
+                    )
                 )
             }
         }.rememberTextFieldValue(
@@ -50,7 +58,9 @@ fun App() {
         textStyle = TextStyle(
             fontSize = 16.sp
         ),
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxSize()
     )
 }
 
@@ -59,8 +69,8 @@ fun main() = application {
         title = "Desktop example",
         onCloseRequest = ::exitApplication,
         state = rememberWindowState(
-            width = 400.dp,
-            height = 300.dp
+            width = 600.dp,
+            height = 400.dp
         )
     ) {
         App()

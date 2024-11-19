@@ -1,25 +1,16 @@
-@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
-
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import extension.config
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.neoutils.android.library)
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
-        }
-    }
-
     jvm()
 
     js(IR) {
         browser()
+        binaries.library()
     }
 
     sourceSets {

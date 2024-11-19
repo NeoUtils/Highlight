@@ -18,14 +18,6 @@ import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.example.compose.R
-import org.intellij.lang.annotations.Language
-
-@Language("kotlin")
-private val code = """
-    fun main() {
-        print("Hello, World!")
-    }
-""".trimIndent()
 
 @Composable
 fun CodeHighlightExample(modifier: Modifier = Modifier) {
@@ -58,7 +50,15 @@ fun CodeHighlightExample(modifier: Modifier = Modifier) {
     val textFieldValue = rememberSaveable(
         stateSaver = TextFieldValue.Saver
     ) {
-        mutableStateOf(TextFieldValue(code))
+        mutableStateOf(
+            TextFieldValue(
+                """
+                    fun main() {
+                        print("Hello, World!")
+                    }
+                """.trimIndent()
+            )
+        )
     }
 
     BasicTextField(
