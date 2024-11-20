@@ -19,6 +19,8 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
             for ((index, group) in result.groups.withIndex()) {
 
+                if (group == null) continue
+
                 spanStyles.add(
                     AnnotatedString.Range(
                         item = spans.getOrNull(index) ?: continue,

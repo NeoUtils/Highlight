@@ -13,9 +13,9 @@ actual fun String.matchAll(
             add(
                 Match(
                     text = match.value,
-                    groups = match.groups.mapNotNull {
+                    groups = match.groups.map {
 
-                        if (it == null) return@mapNotNull null
+                        if (it == null) return@map null
 
                         Match.Group(
                             text = it.value,

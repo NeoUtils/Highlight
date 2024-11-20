@@ -20,14 +20,16 @@ actual fun String.matchAll(
                 Match(
                     text = match.toString(),
                     groups = buildList {
-                        groupsWithIndex.forEach { (index, it) ->
-                            val range = indices[index].unsafeCast<IntArray>()
+                        groupsWithIndex.forEach { (index, group) ->
+                            val range = indices[index]?.unsafeCast<IntArray>()
 
                             add(
-                                Match.Group(
-                                    text = it.toString(),
-                                    range = range.toRange()
-                                )
+                                range?.let {
+                                    Match.Group(
+                                        text = group.unsafeCast<String>(),
+                                        range = range.toRange()
+                                    )
+                                }
                             )
                         }
                     }
