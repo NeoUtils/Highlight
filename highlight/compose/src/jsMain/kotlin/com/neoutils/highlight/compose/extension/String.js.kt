@@ -14,23 +14,22 @@ actual fun String.matchAll(
         matches.forEach { match ->
 
             val indices = match.indices
+            val groupsWithIndex = match.iterator().withIndex()
 
             add(
                 Match(
                     text = match.toString(),
                     groups = buildList {
-                        match.iterator()
-                            .withIndex()
-                            .forEach { (index, it) ->
-                                val range = indices[index].unsafeCast<IntArray>()
+                        groupsWithIndex.forEach { (index, it) ->
+                            val range = indices[index].unsafeCast<IntArray>()
 
-                                add(
-                                    Match.Group(
-                                        text = it.toString(),
-                                        range = range.first() until range.last()
-                                    )
+                            add(
+                                Match.Group(
+                                    text = it.toString(),
+                                    range = range.toRange()
                                 )
-                            }
+                            )
+                        }
                     }
                 )
             )

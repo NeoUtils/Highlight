@@ -36,7 +36,7 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
     )
 }
 
-fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
+private fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
 
     return when (this) {
 

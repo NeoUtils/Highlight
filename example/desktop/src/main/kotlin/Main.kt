@@ -41,7 +41,7 @@ fun App() {
 
             spanStyle {
                 match(
-                    regex = "\\b(High)(light)\\b".toRegex(),
+                    regex = "\\bHighlight\\b".toRegex(),
                     match = Match.fully(
                         SpanStyle(
                             fontStyle = FontStyle.Italic
