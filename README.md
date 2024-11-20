@@ -13,7 +13,7 @@ Facilitate the creation of dynamic highlights using regular expressions, ideal f
 | Android with Jetpack Compose | ✅       |
 | Android with View            | ✅       |
 | Compose for Desktop          | ✅       |
-| Compose for Web              | ❌       |
+| Compose for Web              | ✅       |
 | Compose for iOS              | ❌       |
 
 ## Quick Start
