@@ -172,9 +172,9 @@ Add the following dependencies to your `build.gradle.kts` file:
 ```kotlin
 dependencies {
     // For highlighting in Views
-    implementation("com.neoutils.highlight:highlight-view:2.1.0")
+    implementation("com.neoutils.highlight:highlight-view:2.2.0")
     
     // For highlighting in Compose
-    implementation("com.neoutils.highlight:highlight-compose:2.1.0")
+    implementation("com.neoutils.highlight:highlight-compose:2.2.0")
 }
 ```
