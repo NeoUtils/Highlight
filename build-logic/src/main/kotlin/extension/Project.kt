@@ -5,7 +5,7 @@ import model.Config
 val config = Config(
     version = Config.Version(
         major = 2,
-        minor = 1,
+        minor = 2,
         patch = 0,
         release = Config.Release.Definitive
     ),

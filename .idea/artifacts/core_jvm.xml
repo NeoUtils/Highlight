@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="core-jvm">
+    <output-path>$PROJECT_DIR$/highlight/core/build/libs</output-path>
+    <root id="archive" name="core-jvm.jar">
+      <element id="module-output" name="Highlight.highlight.core.jvmMain" />
+    </root>
+  </artifact>
+</component>

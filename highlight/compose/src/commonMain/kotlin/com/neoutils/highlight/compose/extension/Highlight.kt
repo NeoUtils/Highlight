@@ -9,14 +9,13 @@ import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 
 fun Highlight.toAnnotatedString(text: String): AnnotatedString {
-
     val spanStyles = mutableListOf<AnnotatedString.Range<SpanStyle>>()
 
     for (scheme in schemes) {
 
-        for (result in scheme.regex.findAll(text)) {
+        val spans = scheme.toSpanStyle()
 
-            val spans = scheme.toSpanStyle()
+        for (result in text.matchAll(scheme.regex.pattern)) {
 
             for ((index, group) in result.groups.withIndex()) {
 

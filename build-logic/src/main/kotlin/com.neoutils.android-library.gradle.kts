@@ -1,12 +1,23 @@
-import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
-import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SonatypeHost
 import extension.config
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.vanniktech.maven.publish")
     id("com.android.library")
     kotlin("multiplatform")
+}
+
+kotlin {
+    sourceSets {
+        androidTarget {
+            compilerOptions {
+                jvmTarget.set(
+                    JvmTarget.JVM_1_8
+                )
+            }
+        }
+    }
 }
 
 android {
