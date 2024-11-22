@@ -8,7 +8,7 @@ import com.neoutils.highlight.view.scheme.TextFontScheme
 class TextFontScope internal constructor() :
     SchemeScope<Typeface, TextFontScheme>() {
 
-    override fun match(
+    override fun addScheme(
         regex: Regex,
         match: Match<Typeface>
     ) {

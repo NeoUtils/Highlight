@@ -8,7 +8,7 @@ import com.neoutils.highlight.view.util.UiStyle
 class TextStyleScope internal constructor() :
     SchemeScope<UiStyle, TextStyleScheme>() {
 
-    override fun match(
+    override fun addScheme(
         regex: Regex,
         match: Match<UiStyle>
     ) {

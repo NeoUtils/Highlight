@@ -23,7 +23,7 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
                 spanStyles.add(
                     AnnotatedString.Range(
-                        item = spans.getOrNull(index) ?: continue,
+                        item = spans[index] ?: continue,
                         start = group.range.first,
                         end = group.range.last + 1
                     )
@@ -38,30 +38,25 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
     )
 }
 
-private fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
+
+private fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle?> {
 
     return when (this) {
 
-        is SpanStyleScheme -> match.values
+        is SpanStyleScheme -> match.matches
 
         is TextColorScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
+            match.matches.mapValues {
                 SpanStyle(
-                    color = it.toColor()
+                    color = it.value.toColor()
                 )
             }
         }
 
         is BackgroundColorScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
+            match.matches.mapValues {
                 SpanStyle(
-                    background = it.toColor()
+                    background = it.value.toColor()
                 )
             }
         }
