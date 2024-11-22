@@ -8,14 +8,14 @@ import com.neoutils.highlight.core.util.Match
 class SpanStyleScope internal constructor() :
     SchemeScope<SpanStyle, SpanStyleScheme>() {
 
-    override fun match(
+    override fun addScheme(
         regex: Regex,
         match: Match<SpanStyle>
     ) {
         builder.add(
             SpanStyleScheme(
-                regex,
-                match
+                regex = regex,
+                match = match
             )
         )
     }

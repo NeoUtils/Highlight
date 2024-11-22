@@ -1,6 +1,7 @@
 package com.neoutils.highlight.compose.extension
 
 data class Match(
+    val range: IntRange,
     val text: String,
     val groups: List<Group?>
 ) {

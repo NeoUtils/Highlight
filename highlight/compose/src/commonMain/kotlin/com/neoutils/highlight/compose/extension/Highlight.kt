@@ -9,59 +9,54 @@ import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 
 fun Highlight.toAnnotatedString(text: String): AnnotatedString {
-    val spanStyles = mutableListOf<AnnotatedString.Range<SpanStyle>>()
-
-    for (scheme in schemes) {
-
-        val spans = scheme.toSpanStyle()
-
-        for (result in text.matchAll(scheme.regex.pattern)) {
-
-            for ((index, group) in result.groups.withIndex()) {
-
-                if (group == null) continue
-
-                spanStyles.add(
-                    AnnotatedString.Range(
-                        item = spans.getOrNull(index) ?: continue,
-                        start = group.range.first,
-                        end = group.range.last + 1
-                    )
-                )
-            }
-        }
-    }
 
     return AnnotatedString(
         text = text,
-        spanStyles = spanStyles
+        spanStyles = buildList {
+            for (scheme in schemes) {
+
+                val spans by lazy { scheme.toSpanStyle() }
+
+                for (result in text.matchAll(scheme.regex.pattern)) {
+
+                    for ((index, group) in result.groups.withIndex()) {
+
+                        if (group == null) continue
+                        val spanStyle = spans[index] ?: continue
+
+                        add(
+                            AnnotatedString.Range(
+                                item = spanStyle,
+                                start = group.range.first,
+                                end = group.range.last + 1
+                            )
+                        )
+                    }
+                }
+            }
+        }
     )
 }
 
-private fun <T : Any> Scheme<T>.toSpanStyle(): List<SpanStyle?> {
+
+private fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle> {
 
     return when (this) {
 
-        is SpanStyleScheme -> match.values
+        is SpanStyleScheme -> match.matches
 
         is TextColorScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
+            match.matches.mapValues {
                 SpanStyle(
-                    color = it.toColor()
+                    color = it.value.toColor()
                 )
             }
         }
 
         is BackgroundColorScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
+            match.matches.mapValues {
                 SpanStyle(
-                    background = it.toColor()
+                    background = it.value.toColor()
                 )
             }
         }

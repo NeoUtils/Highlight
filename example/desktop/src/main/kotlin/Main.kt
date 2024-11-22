@@ -30,24 +30,22 @@ fun App() {
     BasicTextField(
         value = rememberHighlight {
             textColor {
-                match(
-                    regex = "(\\w+)\\s*=\\s*(\\w+)".toRegex(),
-                    match = Match.groups(
+                """(\w+)\s*=\s*(\w+)"""
+                    .toRegex()
+                    .groups(
                         UiColor.Blue,
                         UiColor.Red
                     )
-                )
             }
 
             spanStyle {
-                match(
-                    regex = "\\bHighlight\\b".toRegex(),
-                    match = Match.fully(
+                "\\bHighlight\\b"
+                    .toRegex()
+                    .fully(
                         SpanStyle(
                             fontStyle = FontStyle.Italic
                         )
                     )
-                )
             }
         }.rememberTextFieldValue(
             value = textFieldValue

@@ -13,6 +13,7 @@ actual fun String.matchAll(
             add(
                 Match(
                     text = match.value,
+                    range = match.range,
                     groups = match.groups.map {
 
                         if (it == null) return@map null

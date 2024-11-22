@@ -19,6 +19,7 @@ actual fun String.matchAll(
             add(
                 Match(
                     text = match.toString(),
+                    range = indices[0].unsafeCast<IntArray>().toRange(),
                     groups = buildList {
                         groupsWithIndex.forEach { (index, group) ->
                             val range = indices[index]?.unsafeCast<IntArray>()

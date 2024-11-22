@@ -6,32 +6,40 @@ import com.neoutils.highlight.core.util.Match
 
 abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
-    abstract fun match(
+    protected abstract fun addScheme(
         regex: Regex,
         match: Match<T>
     )
 
-    fun fully(
-        regex: Regex,
+    fun Regex.match(
+        scope: MutableMap<Int, T>.() -> Unit
+    ) = addScheme(
+        regex = this,
+        match = Match(
+            matches = buildMap {
+                scope(this)
+            }
+        )
+    )
+
+    fun Regex.match(
+        vararg matches: Pair<Int, T>
+    ) = addScheme(
+        regex = this,
+        match = Match.all(*matches)
+    )
+
+    fun Regex.fully(
         value: T
-    ) = match(
-        regex = regex,
-        match = Match.fully(value)
+    ) = addScheme(
+        regex = this,
+        Match.fully(value)
     )
 
-    fun groups(
-        regex: Regex,
-        groups: List<T?>
-    ) = match(
-        regex = regex,
-        match = Match.groups(groups)
-    )
-
-    fun groups(
-        regex: Regex,
+    fun Regex.groups(
         vararg groups: T?
-    ) = match(
-        regex = regex,
-        match = Match.groups(*groups)
+    ) = addScheme(
+        regex = this,
+        Match.groups(*groups)
     )
 }

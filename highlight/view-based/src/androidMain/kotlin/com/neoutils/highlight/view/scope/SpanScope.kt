@@ -8,14 +8,14 @@ import com.neoutils.highlight.view.scheme.SpanScheme
 class SpanScope internal constructor() :
     SchemeScope<ParcelableSpan, SpanScheme>() {
 
-    override fun match(
+    override fun addScheme(
         regex: Regex,
         match: Match<ParcelableSpan>
     ) {
         builder.add(
             SpanScheme(
-                regex,
-                match
+                regex = regex,
+                match = match
             )
         )
     }

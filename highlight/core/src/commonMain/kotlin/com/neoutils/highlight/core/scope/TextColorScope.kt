@@ -7,14 +7,14 @@ import com.neoutils.highlight.core.util.UiColor
 class TextColorScope internal constructor() :
     SchemeScope<UiColor, TextColorScheme>() {
 
-    override fun match(
+    override fun addScheme(
         regex: Regex,
         match: Match<UiColor>
     ) {
         builder.add(
             TextColorScheme(
-                regex,
-                match
+                regex = regex,
+                match = match
             )
         )
     }

@@ -23,16 +23,17 @@ fun Highlight.applyTo(
 
     for (scheme in schemes) {
 
-        for (result in scheme.regex.findAll(text.subSequence(0, end), start)) {
+        val spans by lazy { scheme.toParcelableSpans() }
 
-            val spans = scheme.toParcelableSpans()
+        for (result in scheme.regex.findAll(text.subSequence(0, end), start)) {
 
             for ((index, group) in result.groups.withIndex()) {
 
                 if (group == null) continue
+                val span = spans[index] ?: continue
 
                 text.setSpan(
-                    spans.getOrNull(index),
+                    span,
                     group.range.first,
                     group.range.last + 1,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -51,37 +52,28 @@ fun Highlight.toSpannedString(
     )
 }
 
-private fun <T : Any> Scheme<T>.toParcelableSpans(): List<ParcelableSpan?> {
+private fun <T : Any> Scheme<T>.toParcelableSpans(): Map<Int, ParcelableSpan?> {
 
     return when (this) {
 
-        is SpanScheme -> match.values
+        is SpanScheme -> match.matches
 
         is BackgroundColorScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
-                BackgroundColorSpan(it.toIntColor())
+            match.matches.mapValues {
+                BackgroundColorSpan(it.value.toIntColor())
             }
         }
 
         is TextColorScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
-                ForegroundColorSpan(it.toIntColor())
+            match.matches.mapValues {
+                ForegroundColorSpan(it.value.toIntColor())
             }
         }
 
         is TextStyleScheme -> {
-            match.values.map {
-
-                if (it == null) return@map null
-
+            match.matches.mapValues {
                 StyleSpan(
-                    when (it) {
+                    when (it.value) {
                         UiStyle.BOLD -> Typeface.BOLD
                         UiStyle.ITALIC -> Typeface.ITALIC
                         UiStyle.BOLD_ITALIC -> Typeface.BOLD_ITALIC
@@ -91,9 +83,9 @@ private fun <T : Any> Scheme<T>.toParcelableSpans(): List<ParcelableSpan?> {
         }
 
         is TextFontScheme -> {
-            match.values.map {
+            match.matches.mapValues {
                 TextFontSpan(
-                    typeface = it ?: return@map null
+                    typeface = it.value
                 )
             }
         }
