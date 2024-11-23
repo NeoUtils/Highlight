@@ -16,7 +16,10 @@ import androidx.compose.ui.unit.sp
 import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
+import com.neoutils.highlight.core.util.AnyLetter
+import com.neoutils.highlight.core.util.RegexScope
 import com.neoutils.highlight.core.util.UiColor
+import com.neoutils.highlight.core.util.regex
 import com.neoutils.highlight.example.compose.R
 
 @Composable
@@ -24,11 +27,25 @@ fun CodeHighlightExample(modifier: Modifier = Modifier) {
 
     val highlight = rememberHighlight {
         textColor {
-            "\\b(fun)\\b"
-                .toRegex()
-                .fully(
-                    UiColor.Hex(hex = "#E66123")
-                )
+            regex {
+                wordBoundary {
+                    group {
+                        word(text = "fun")
+                    }
+                }
+            }.fully(
+                UiColor.Hex(hex = "#E66123")
+            )
+
+            regex {
+                wordBoundary {
+                   group {
+                       anyLetter(AnyLetter.Many)
+                   }
+                }
+
+                word("\\(")
+            }
 
             """\b(\w+)\b\((\w+\s*=)?[^)]*\)"""
                 .toRegex()

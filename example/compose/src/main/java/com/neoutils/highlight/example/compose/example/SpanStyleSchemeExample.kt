@@ -10,22 +10,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.neoutils.highlight.compose.extension.spanStyle
 import com.neoutils.highlight.compose.remember.rememberAnnotatedString
 import com.neoutils.highlight.compose.remember.rememberHighlight
+import com.neoutils.highlight.core.util.regex
 
 @Composable
 fun SpanStyleSchemeExample() {
 
     val annotatedString = rememberHighlight {
         spanStyle {
-            "\\bstyled\\b"
-                .toRegex()
-                .fully(
-                    SpanStyle(
-                        color = Color.White,
-                        background = Color.Black,
-                        fontStyle = FontStyle.Italic,
-                        textDecoration = TextDecoration.LineThrough,
-                    )
+            regex {
+                wordBoundary {
+                    word(text = "styled")
+                }
+            }.fully(
+                SpanStyle(
+                    color = Color.White,
+                    background = Color.Black,
+                    fontStyle = FontStyle.Italic,
+                    textDecoration = TextDecoration.LineThrough,
                 )
+            )
         }
     }.rememberAnnotatedString(
         text = "Example of styled text."

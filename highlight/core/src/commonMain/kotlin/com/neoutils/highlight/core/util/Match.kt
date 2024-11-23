@@ -4,7 +4,7 @@ package com.neoutils.highlight.core.util
  * Represents a match, where index 0 corresponds to the full match,
  * and subsequent indices represent individual groups.
  */
-data class Match<T : Any>(
+data class Match<T : AnyLetter>(
     val matches: Map<Int, T>
 ) {
 
@@ -19,7 +19,7 @@ data class Match<T : Any>(
          * @param matches Pairs representing the index and value of each match.
          * @return A Match instance containing the provided matches.
          */
-        fun <T : Any> all(
+        fun <T : AnyLetter> all(
             vararg matches: Pair<Int, T>
         ) = Match(
             matches = mapOf(*matches)
@@ -31,7 +31,7 @@ data class Match<T : Any>(
          * @param value The value corresponding to the full match.
          * @return A Match instance containing only the full match.
          */
-        fun <T : Any> fully(value: T) = Match(
+        fun <T : AnyLetter> fully(value: T) = Match(
             matches = mapOf(0 to value)
         )
 
@@ -43,7 +43,7 @@ data class Match<T : Any>(
          * @param groups The values of the groups, which can be null.
          * @return A Match instance containing the provided groups.
          */
-        fun <T : Any> groups(vararg groups: T?) = Match<T>(
+        fun <T : AnyLetter> groups(vararg groups: T?) = Match<T>(
             matches = buildMap {
                 groups.forEachIndexed { index, group ->
                     group?.let { put(index + 1, it) }
