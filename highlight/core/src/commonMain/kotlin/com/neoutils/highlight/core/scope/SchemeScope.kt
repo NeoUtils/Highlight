@@ -8,10 +8,12 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     protected abstract fun addScheme(
         regex: Regex,
-        match: Match<T>
+        match: Match<T>,
+        level: Int
     )
 
     fun Regex.match(
+        level: Int = 0,
         scope: MutableMap<Int, T>.() -> Unit
     ) = addScheme(
         regex = this,
@@ -19,27 +21,34 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
             matches = buildMap {
                 scope(this)
             }
-        )
+        ),
+        level = level
     )
 
     fun Regex.match(
-        vararg matches: Pair<Int, T>
+        vararg matches: Pair<Int, T>,
+        level: Int = 0
     ) = addScheme(
         regex = this,
-        match = Match.all(*matches)
+        match = Match.all(*matches),
+        level = level
     )
 
     fun Regex.fully(
-        value: T
+        value: T,
+        level: Int = 0
     ) = addScheme(
         regex = this,
-        Match.fully(value)
+        match = Match.fully(value),
+        level = level
     )
 
     fun Regex.groups(
-        vararg groups: T?
+        vararg groups: T?,
+        level: Int = 0
     ) = addScheme(
         regex = this,
-        Match.groups(*groups)
+        match = Match.groups(*groups),
+        level = level
     )
 }

@@ -10,12 +10,14 @@ class TextStyleScope internal constructor() :
 
     override fun addScheme(
         regex: Regex,
-        match: Match<UiStyle>
+        match: Match<UiStyle>,
+        level : Int
     ) {
         builder.add(
             TextStyleScheme(
-                regex,
-                match
+                regex = regex,
+                match = match,
+                level = level
             )
         )
     }

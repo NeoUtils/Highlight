@@ -9,12 +9,14 @@ class TextColorScope internal constructor() :
 
     override fun addScheme(
         regex: Regex,
-        match: Match<UiColor>
+        match: Match<UiColor>,
+        level: Int
     ) {
         builder.add(
             TextColorScheme(
                 regex = regex,
-                match = match
+                match = match,
+                level = level
             )
         )
     }

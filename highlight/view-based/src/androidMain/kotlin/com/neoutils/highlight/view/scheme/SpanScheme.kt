@@ -6,5 +6,7 @@ import com.neoutils.highlight.core.util.Match
 
 data class SpanScheme(
     override val regex: Regex,
-    override val match: Match<ParcelableSpan>
+    override val match: Match<ParcelableSpan>,
+    override val level: Int = 0,
+    override val tag: String = "span_scheme",
 ) : Scheme<ParcelableSpan>

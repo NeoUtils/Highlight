@@ -17,7 +17,6 @@ import com.neoutils.highlight.compose.extension.spanStyle
 import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
-import com.neoutils.highlight.core.util.Match
 import com.neoutils.highlight.core.util.UiColor
 
 @Composable
@@ -34,17 +33,28 @@ fun App() {
                     .toRegex()
                     .groups(
                         UiColor.Blue,
-                        UiColor.Red
+                        UiColor.Red,
+                        level = 2,
                     )
             }
 
             spanStyle {
-                "\\bHighlight\\b"
+                "\\b(High)light\\b"
                     .toRegex()
-                    .fully(
+                    .groups(
                         SpanStyle(
                             fontStyle = FontStyle.Italic
-                        )
+                        ),
+                        level = 1,
+                    )
+            }
+
+            textColor {
+                """//.+"""
+                    .toRegex()
+                    .fully(
+                        UiColor.Green,
+                        level = 0
                     )
             }
         }.rememberTextFieldValue(
