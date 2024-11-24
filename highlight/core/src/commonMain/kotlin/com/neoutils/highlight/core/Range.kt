@@ -5,5 +5,5 @@ data class Range<T : Any>(
     val end: Int,
     val level: Int,
     val tag: String,
-    val item: T
+    val item: T?
 )

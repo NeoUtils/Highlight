@@ -14,7 +14,7 @@ import com.neoutils.highlight.view.scheme.TextStyleScheme
 import com.neoutils.highlight.view.span.TextFontSpan
 import com.neoutils.highlight.view.util.UiStyle
 
-fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
+fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan?> {
 
     return when (this) {
 
@@ -22,20 +22,20 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
 
         is BackgroundColorScheme -> {
             match.matches.mapValues {
-                BackgroundColorSpan(it.value.toIntColor())
+                BackgroundColorSpan((it.value ?: return@mapValues null).toIntColor())
             }
         }
 
         is TextColorScheme -> {
             match.matches.mapValues {
-                ForegroundColorSpan(it.value.toIntColor())
+                ForegroundColorSpan((it.value ?: return@mapValues null).toIntColor())
             }
         }
 
         is TextStyleScheme -> {
             match.matches.mapValues {
                 StyleSpan(
-                    when (it.value) {
+                    when ((it.value ?: return@mapValues null)) {
                         UiStyle.BOLD -> Typeface.BOLD
                         UiStyle.ITALIC -> Typeface.ITALIC
                         UiStyle.BOLD_ITALIC -> Typeface.BOLD_ITALIC
@@ -47,7 +47,7 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
         is TextFontScheme -> {
             match.matches.mapValues {
                 TextFontSpan(
-                    typeface = it.value
+                    typeface =(it.value ?: return@mapValues null)
                 )
             }
         }

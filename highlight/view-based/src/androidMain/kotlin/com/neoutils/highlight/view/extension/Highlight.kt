@@ -5,8 +5,8 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.SpannedString
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.extension.addOrOverlap
 import com.neoutils.highlight.core.Range
+import com.neoutils.highlight.core.extension.addOrOverlap
 
 fun Highlight.applyTo(
     text: Spannable,
@@ -24,11 +24,11 @@ fun Highlight.applyTo(
                 for ((index, group) in result.groups.withIndex()) {
 
                     if (group == null) continue
-                    val span = spans[index] ?: continue
+                    if (!spans.containsKey(index)) continue
 
                     addOrOverlap(
                         Range(
-                            item = span,
+                            item = spans[index],
                             start = group.range.first,
                             end = group.range.last + 1,
                             level = scheme.level,
@@ -41,12 +41,14 @@ fun Highlight.applyTo(
     }
 
     spans.forEach {
-        text.setSpan(
-            it.item,
-            it.start,
-            it.end,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        if (it.item != null) {
+            text.setSpan(
+                it.item,
+                it.start,
+                it.end,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
     }
 }
 

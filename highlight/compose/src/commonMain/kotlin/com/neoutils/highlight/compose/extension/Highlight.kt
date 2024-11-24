@@ -2,8 +2,8 @@ package com.neoutils.highlight.compose.extension
 
 import androidx.compose.ui.text.AnnotatedString
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.extension.addOrOverlap
 import com.neoutils.highlight.core.Range
+import com.neoutils.highlight.core.extension.addOrOverlap
 
 fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
@@ -17,11 +17,11 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
                 for ((index, group) in result.groups.withIndex()) {
 
                     if (group == null) continue
-                    val spanStyle = spans[index] ?: continue
+                    if (!spans.containsKey(index)) continue
 
                     addOrOverlap(
                         Range(
-                            item = spanStyle,
+                            item = spans[index],
                             start = group.range.first,
                             end = group.range.last + 1,
                             level = scheme.level,
@@ -35,9 +35,9 @@ fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
     return AnnotatedString(
         text = text,
-        spanStyles = spans.map {
+        spanStyles = spans.mapNotNull {
             AnnotatedString.Range(
-                item = it.item,
+                item = it.item ?: return@mapNotNull null,
                 start = it.start,
                 end = it.end
             )

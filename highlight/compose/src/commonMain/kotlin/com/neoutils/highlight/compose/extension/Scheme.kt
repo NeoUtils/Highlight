@@ -6,7 +6,7 @@ import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 
-fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle> {
+fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle?> {
 
     return when (this) {
 
@@ -15,7 +15,7 @@ fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle> {
         is TextColorScheme -> {
             match.matches.mapValues {
                 SpanStyle(
-                    color = it.value.toColor()
+                    color = (it.value ?: return@mapValues null).toColor()
                 )
             }
         }
@@ -23,7 +23,7 @@ fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle> {
         is BackgroundColorScheme -> {
             match.matches.mapValues {
                 SpanStyle(
-                    background = it.value.toColor()
+                    background = (it.value ?: return@mapValues null).toColor()
                 )
             }
         }

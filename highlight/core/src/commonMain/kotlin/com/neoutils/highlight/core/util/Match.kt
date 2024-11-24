@@ -5,7 +5,7 @@ package com.neoutils.highlight.core.util
  * and subsequent indices represent individual groups.
  */
 data class Match<T : Any>(
-    val matches: Map<Int, T>
+    val matches: Map<Int, T?>
 ) {
 
     companion object {
@@ -20,7 +20,7 @@ data class Match<T : Any>(
          * @return A Match instance containing the provided matches.
          */
         fun <T : Any> all(
-            vararg matches: Pair<Int, T>
+            vararg matches: Pair<Int, T?>
         ) = Match(
             matches = mapOf(*matches)
         )
@@ -46,7 +46,7 @@ data class Match<T : Any>(
         fun <T : Any> groups(vararg groups: T?) = Match<T>(
             matches = buildMap {
                 groups.forEachIndexed { index, group ->
-                    group?.let { put(index + 1, it) }
+                    put(index + 1, group)
                 }
             }
         )

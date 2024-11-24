@@ -14,19 +14,17 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     fun Regex.match(
         level: Int = 0,
-        scope: MutableMap<Int, T>.() -> Unit
+        scope: MutableMap<Int, T?>.() -> Unit
     ) = addScheme(
         regex = this,
         match = Match(
-            matches = buildMap {
-                scope(this)
-            }
+            matches = buildMap(scope)
         ),
         level = level
     )
 
     fun Regex.match(
-        vararg matches: Pair<Int, T>,
+        vararg matches: Pair<Int, T?>,
         level: Int = 0
     ) = addScheme(
         regex = this,
