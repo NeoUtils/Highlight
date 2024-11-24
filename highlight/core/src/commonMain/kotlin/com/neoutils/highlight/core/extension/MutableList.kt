@@ -1,18 +1,19 @@
 package com.neoutils.highlight.core.extension
 
-import com.neoutils.highlight.core.Range
+import com.neoutils.highlight.core.SpanRange
 
-fun <T : Any> MutableList<Range<T>>.addOrOverlap(range: Range<T>) {
+fun <T : Any> MutableList<SpanRange<T>>.addOrOverlap(
+    spanRange: SpanRange<T>
+) {
 
     val collisions = filter {
-        it.start < range.end &&
-                range.start < it.end &&
-                it.tag == range.tag &&
-                it.level > range.level
+        it.start < spanRange.end &&
+                spanRange.start < it.end &&
+                it.level > spanRange.level
     }
 
     if (collisions.isEmpty()) {
-        add(range)
+        add(spanRange)
         return
     }
 
@@ -21,15 +22,15 @@ fun <T : Any> MutableList<Range<T>>.addOrOverlap(range: Range<T>) {
     addAll(
         collisions.flatMap {
             buildList {
-                if (it.start < range.start) {
-                    add(it.copy(end = range.start))
+                if (it.start < spanRange.start) {
+                    add(it.copy(end = spanRange.start))
                 }
-                if (it.end > range.end) {
-                    add(it.copy(start = range.end))
+                if (it.end > spanRange.end) {
+                    add(it.copy(start = spanRange.end))
                 }
             }
         }
     )
 
-    add(range)
+    add(spanRange)
 }

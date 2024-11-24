@@ -13,18 +13,22 @@ fun <T : Any> Scheme<T>.toSpanStyle(): Map<Int, SpanStyle?> {
         is SpanStyleScheme -> match.matches
 
         is TextColorScheme -> {
-            match.matches.mapValues {
-                SpanStyle(
-                    color = (it.value ?: return@mapValues null).toColor()
-                )
+            match.matches.mapValues { (_, uiColor) ->
+                uiColor?.let {
+                    SpanStyle(
+                        color = it.toColor()
+                    )
+                }
             }
         }
 
         is BackgroundColorScheme -> {
-            match.matches.mapValues {
-                SpanStyle(
-                    background = (it.value ?: return@mapValues null).toColor()
-                )
+            match.matches.mapValues { (_, uiColor) ->
+                uiColor?.let {
+                    SpanStyle(
+                        background = it.toColor()
+                    )
+                }
             }
         }
 

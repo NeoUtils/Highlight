@@ -1,46 +1,50 @@
 package com.neoutils.highlight.compose.extension
 
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.Range
+import com.neoutils.highlight.core.SpanRange
 import com.neoutils.highlight.core.extension.addOrOverlap
 
 fun Highlight.toAnnotatedString(text: String): AnnotatedString {
 
-    val spans = buildList {
-        for (scheme in schemes.sortedByDescending { it.level }) {
+    val ranges = mutableMapOf<String, MutableList<SpanRange<SpanStyle>>>()
 
-            val spans by lazy { scheme.toSpanStyle() }
+    for (scheme in schemes.sortedByDescending { it.level }) {
 
-            for (result in text.matchAll(scheme.regex.pattern)) {
+        val spans by lazy { scheme.toSpanStyle() }
 
-                for ((index, group) in result.groups.withIndex()) {
+        for (result in text.matchAll(scheme.regex.pattern)) {
 
-                    if (group == null) continue
-                    if (!spans.containsKey(index)) continue
+            for ((index, group) in result.groups.withIndex()) {
 
-                    addOrOverlap(
-                        Range(
+                if (group == null) continue
+                if (!spans.containsKey(index)) continue
+
+                ranges
+                    .getOrPut(scheme.tag, ::mutableListOf)
+                    .addOrOverlap(
+                        SpanRange(
                             item = spans[index],
                             start = group.range.first,
                             end = group.range.last + 1,
                             level = scheme.level,
-                            tag = scheme.tag
                         )
                     )
-                }
             }
         }
     }
 
     return AnnotatedString(
         text = text,
-        spanStyles = spans.mapNotNull {
-            AnnotatedString.Range(
-                item = it.item ?: return@mapNotNull null,
-                start = it.start,
-                end = it.end
-            )
+        spanStyles = ranges.flatMap { (_, ranges) ->
+            ranges.mapNotNull {
+                AnnotatedString.Range(
+                    item = it.item ?: return@mapNotNull null,
+                    start = it.start,
+                    end = it.end
+                )
+            }
         }
     )
 }

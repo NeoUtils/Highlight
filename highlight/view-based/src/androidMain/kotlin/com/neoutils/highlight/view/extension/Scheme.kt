@@ -21,34 +21,42 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan?> {
         is SpanScheme -> match.matches
 
         is BackgroundColorScheme -> {
-            match.matches.mapValues {
-                BackgroundColorSpan((it.value ?: return@mapValues null).toIntColor())
+            match.matches.mapValues { (_, uiColor) ->
+                uiColor?.let {
+                    BackgroundColorSpan(it.toIntColor())
+                }
             }
         }
 
         is TextColorScheme -> {
-            match.matches.mapValues {
-                ForegroundColorSpan((it.value ?: return@mapValues null).toIntColor())
+            match.matches.mapValues { (_, uiColor) ->
+                uiColor?.let {
+                    ForegroundColorSpan(it.toIntColor())
+                }
             }
         }
 
         is TextStyleScheme -> {
-            match.matches.mapValues {
-                StyleSpan(
-                    when ((it.value ?: return@mapValues null)) {
-                        UiStyle.BOLD -> Typeface.BOLD
-                        UiStyle.ITALIC -> Typeface.ITALIC
-                        UiStyle.BOLD_ITALIC -> Typeface.BOLD_ITALIC
-                    }
-                )
+            match.matches.mapValues { (_, uiColor) ->
+                uiColor?.let {
+                    StyleSpan(
+                        when (it) {
+                            UiStyle.BOLD -> Typeface.BOLD
+                            UiStyle.ITALIC -> Typeface.ITALIC
+                            UiStyle.BOLD_ITALIC -> Typeface.BOLD_ITALIC
+                        }
+                    )
+                }
             }
         }
 
         is TextFontScheme -> {
-            match.matches.mapValues {
-                TextFontSpan(
-                    typeface =(it.value ?: return@mapValues null)
-                )
+            match.matches.mapValues { (_, typeface) ->
+                typeface?.let {
+                    TextFontSpan(
+                        typeface = it
+                    )
+                }
             }
         }
 
