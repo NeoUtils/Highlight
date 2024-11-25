@@ -40,8 +40,7 @@ fun MutableList<AnnotatedString.Range<SpanStyle>>.addOrMerge(
 ) {
 
     val collisions = filter {
-        it.start < spanStyle.end &&
-                spanStyle.start < it.end
+        it.start < spanStyle.end && spanStyle.start < it.end
     }
 
     if (collisions.isEmpty()) {
@@ -58,18 +57,13 @@ fun MutableList<AnnotatedString.Range<SpanStyle>>.addOrMerge(
                     add(it.copy(end = spanStyle.start))
                 }
 
-                if (it.start < spanStyle.end && it.end > spanStyle.start) {
-                    val start = maxOf(it.start, spanStyle.start)
-                    val end = minOf(it.end, spanStyle.end)
-
-                    add(
-                        it.copy(
-                            item = it.item.merge(spanStyle.item),
-                            start = start,
-                            end = end
-                        )
+                add(
+                    it.copy(
+                        item = it.item.merge(spanStyle.item),
+                        start = maxOf(it.start, spanStyle.start),
+                        end = minOf(it.end, spanStyle.end)
                     )
-                }
+                )
 
                 if (it.end > spanStyle.end) {
                     add(it.copy(start = spanStyle.end))

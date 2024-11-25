@@ -13,9 +13,9 @@ fun Highlight.applyTo(
 ) {
     for (scheme in schemes) {
 
-        val spans by lazy { scheme.toParcelableSpan() }
-
         for (result in scheme.regex.findAll(text.subSequence(0, end), start)) {
+
+            val spans by lazy { scheme.toParcelableSpan() }
 
             for ((index, group) in result.groups.withIndex()) {
 
