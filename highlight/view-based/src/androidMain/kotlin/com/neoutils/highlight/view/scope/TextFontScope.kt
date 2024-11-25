@@ -11,7 +11,7 @@ class TextFontScope internal constructor() :
     override fun addScheme(
         regex: Regex,
         match: Match<Typeface>,
-        level: Int
+        level: Int?
     ) {
         builder.add(
             TextFontScheme(

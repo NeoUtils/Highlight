@@ -11,7 +11,7 @@ class TextStyleScope internal constructor() :
     override fun addScheme(
         regex: Regex,
         match: Match<UiStyle>,
-        level : Int
+        level: Int?
     ) {
         builder.add(
             TextStyleScheme(

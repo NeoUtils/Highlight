@@ -9,11 +9,11 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
     protected abstract fun addScheme(
         regex: Regex,
         match: Match<T>,
-        level: Int
+        level: Int?
     )
 
     fun Regex.match(
-        level: Int = 0,
+        level: Int? = null,
         scope: MutableMap<Int, T?>.() -> Unit
     ) = addScheme(
         regex = this,
@@ -25,7 +25,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     fun Regex.match(
         vararg matches: Pair<Int, T?>,
-        level: Int = 0
+        level: Int? = null,
     ) = addScheme(
         regex = this,
         match = Match.all(*matches),
@@ -34,7 +34,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     fun Regex.fully(
         value: T,
-        level: Int = 0
+        level: Int? = null,
     ) = addScheme(
         regex = this,
         match = Match.fully(value),
@@ -43,7 +43,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     fun Regex.groups(
         vararg groups: T?,
-        level: Int = 0
+        level: Int? = null,
     ) = addScheme(
         regex = this,
         match = Match.groups(*groups),

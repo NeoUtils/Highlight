@@ -11,7 +11,7 @@ class SpanScope internal constructor() :
     override fun addScheme(
         regex: Regex,
         match: Match<ParcelableSpan>,
-        level: Int
+        level: Int?
     ) {
         builder.add(
             SpanScheme(

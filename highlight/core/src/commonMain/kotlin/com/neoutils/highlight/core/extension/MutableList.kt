@@ -6,9 +6,15 @@ fun <T : Any> MutableList<SpanRange<T>>.addOrOverlap(
     spanRange: SpanRange<T>
 ) {
 
+    if (spanRange.level == null) {
+        add(spanRange)
+        return
+    }
+
     val collisions = filter {
         it.start < spanRange.end &&
                 spanRange.start < it.end &&
+                it.level != null &&
                 it.level > spanRange.level
     }
 
