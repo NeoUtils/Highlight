@@ -10,13 +10,11 @@ class BackgroundColorScope internal constructor() :
     override fun addScheme(
         regex: Regex,
         match: Match<UiColor>,
-        level: Int?
     ) {
         builder.add(
             BackgroundColorScheme(
                 regex = regex,
                 match = match,
-                level = level
             )
         )
     }

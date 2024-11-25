@@ -14,7 +14,7 @@ import com.neoutils.highlight.view.scheme.TextStyleScheme
 import com.neoutils.highlight.view.span.TextFontSpan
 import com.neoutils.highlight.view.util.UiStyle
 
-fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan?> {
+fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
 
     return when (this) {
 
@@ -22,41 +22,33 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan?> {
 
         is BackgroundColorScheme -> {
             match.matches.mapValues { (_, uiColor) ->
-                uiColor?.let {
-                    BackgroundColorSpan(it.toIntColor())
-                }
+                BackgroundColorSpan(uiColor.toIntColor())
             }
         }
 
         is TextColorScheme -> {
             match.matches.mapValues { (_, uiColor) ->
-                uiColor?.let {
-                    ForegroundColorSpan(it.toIntColor())
-                }
+                ForegroundColorSpan(uiColor.toIntColor())
             }
         }
 
         is TextStyleScheme -> {
             match.matches.mapValues { (_, uiColor) ->
-                uiColor?.let {
-                    StyleSpan(
-                        when (it) {
-                            UiStyle.BOLD -> Typeface.BOLD
-                            UiStyle.ITALIC -> Typeface.ITALIC
-                            UiStyle.BOLD_ITALIC -> Typeface.BOLD_ITALIC
-                        }
-                    )
-                }
+                StyleSpan(
+                    when (uiColor) {
+                        UiStyle.BOLD -> Typeface.BOLD
+                        UiStyle.ITALIC -> Typeface.ITALIC
+                        UiStyle.BOLD_ITALIC -> Typeface.BOLD_ITALIC
+                    }
+                )
             }
         }
 
         is TextFontScheme -> {
             match.matches.mapValues { (_, typeface) ->
-                typeface?.let {
-                    TextFontSpan(
-                        typeface = it
-                    )
-                }
+                TextFontSpan(
+                    typeface = typeface
+                )
             }
         }
 

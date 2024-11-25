@@ -7,6 +7,5 @@ import com.neoutils.highlight.view.util.UiStyle
 data class TextStyleScheme(
     override val regex: Regex,
     override val match: Match<UiStyle>,
-    override val level: Int? = null,
     override val tag: String = "text_style_scheme",
 ) : Scheme<UiStyle>

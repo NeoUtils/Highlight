@@ -34,7 +34,6 @@ fun App() {
                     .groups(
                         UiColor.Blue,
                         UiColor.Red,
-                        level = 2,
                     )
             }
 
@@ -45,7 +44,6 @@ fun App() {
                         SpanStyle(
                             fontStyle = FontStyle.Italic
                         ),
-                        level = 1,
                     )
             }
 
@@ -54,7 +52,6 @@ fun App() {
                     .toRegex()
                     .fully(
                         UiColor.Green,
-                        level = 0
                     )
             }
         }.rememberTextFieldValue(
