@@ -11,7 +11,7 @@ fun Highlight.applyTo(
     start: Int = 0,
     end: Int = text.length
 ) {
-    for (scheme in schemes) {
+    for (scheme in schemes.resolveScript(text.subSequence(0, end), start)) {
 
         for (result in scheme.regex.findAll(text.subSequence(0, end), start)) {
 

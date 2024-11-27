@@ -1,5 +1,7 @@
 package com.neoutils.highlight.compose.extension
 
+import Match
+
 actual fun String.matchAll(
     pattern: String,
 ): List<Match> {
@@ -9,9 +11,10 @@ actual fun String.matchAll(
     ).findAll(input = this)
 
     return buildList {
-        matches.forEach { match ->
+        matches.forEachIndexed { index, match ->
             add(
                 Match(
+                    index = index,
                     text = match.value,
                     range = match.range,
                     groups = match.groups.map {

@@ -1,7 +1,7 @@
 package com.neoutils.highlight.core.scope
 
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
-import com.neoutils.highlight.core.util.Match
+import com.neoutils.highlight.core.util.Matcher
 import com.neoutils.highlight.core.util.UiColor
 
 class BackgroundColorScope internal constructor() :
@@ -9,12 +9,12 @@ class BackgroundColorScope internal constructor() :
 
     override fun addScheme(
         regex: Regex,
-        match: Match<UiColor>,
+        matcher: Matcher<UiColor>,
     ) {
         builder.add(
             BackgroundColorScheme(
                 regex = regex,
-                match = match,
+                matcher = matcher,
             )
         )
     }

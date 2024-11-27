@@ -1,12 +1,15 @@
 package com.neoutils.highlight.view.extension
 
+import Match
 import android.graphics.Typeface
 import android.text.ParcelableSpan
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
+import com.neoutils.highlight.core.scheme.ScriptScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
 import com.neoutils.highlight.view.scheme.SpanScheme
 import com.neoutils.highlight.view.scheme.TextFontScheme
@@ -18,22 +21,22 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
 
     return when (this) {
 
-        is SpanScheme -> match.matches
+        is SpanScheme -> matcher.matches
 
         is BackgroundColorScheme -> {
-            match.matches.mapValues { (_, uiColor) ->
+            matcher.matches.mapValues { (_, uiColor) ->
                 BackgroundColorSpan(uiColor.toIntColor())
             }
         }
 
         is TextColorScheme -> {
-            match.matches.mapValues { (_, uiColor) ->
+            matcher.matches.mapValues { (_, uiColor) ->
                 ForegroundColorSpan(uiColor.toIntColor())
             }
         }
 
         is TextStyleScheme -> {
-            match.matches.mapValues { (_, uiColor) ->
+            matcher.matches.mapValues { (_, uiColor) ->
                 StyleSpan(
                     when (uiColor) {
                         UiStyle.BOLD -> Typeface.BOLD
@@ -45,7 +48,7 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
         }
 
         is TextFontScheme -> {
-            match.matches.mapValues { (_, typeface) ->
+            matcher.matches.mapValues { (_, typeface) ->
                 TextFontSpan(
                     typeface = typeface
                 )
@@ -54,4 +57,31 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
 
         else -> error("Unknown scheme type $this")
     }
+}
+
+fun List<Scheme<*>>.resolveScript(text: CharSequence, start: Int): List<Scheme<*>> {
+
+    val schemes = mutableListOf<Scheme<*>>()
+
+    for (scheme in this) {
+
+        if (scheme is ScriptScheme) {
+
+            for ((index, result) in scheme.regex.findAll(text, start).withIndex()) {
+
+                val match = scheme.matcher.matches[0] ?: continue
+
+                schemes.addAll(
+                    Highlight {
+                        match(Match(index, result))
+                    }.schemes
+                )
+            }
+            continue
+        }
+
+        schemes.add(scheme)
+    }
+
+    return schemes
 }

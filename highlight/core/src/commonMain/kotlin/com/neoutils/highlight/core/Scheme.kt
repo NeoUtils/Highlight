@@ -1,9 +1,8 @@
 package com.neoutils.highlight.core
 
-import com.neoutils.highlight.core.util.Match
+import com.neoutils.highlight.core.util.Matcher
 
 interface Scheme<T : Any> {
     val regex: Regex
-    val match : Match<T>
-    val tag: String
+    val matcher: Matcher<T>
 }

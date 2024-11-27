@@ -1,7 +1,7 @@
 package com.neoutils.highlight.view.scope
 
 import com.neoutils.highlight.core.scope.SchemeScope
-import com.neoutils.highlight.core.util.Match
+import com.neoutils.highlight.core.util.Matcher
 import com.neoutils.highlight.view.scheme.TextStyleScheme
 import com.neoutils.highlight.view.util.UiStyle
 
@@ -10,12 +10,12 @@ class TextStyleScope internal constructor() :
 
     override fun addScheme(
         regex: Regex,
-        match: Match<UiStyle>,
+        matcher: Matcher<UiStyle>,
     ) {
         builder.add(
             TextStyleScheme(
                 regex = regex,
-                match = match,
+                matcher = matcher,
             )
         )
     }
