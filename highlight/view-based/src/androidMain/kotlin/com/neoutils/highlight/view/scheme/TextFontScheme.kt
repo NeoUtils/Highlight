@@ -7,4 +7,5 @@ import com.neoutils.highlight.core.util.Matcher
 data class TextFontScheme(
     override val regex: Regex,
     override val matcher: Matcher<Typeface>,
+    override val range: IntRange? = null,
 ) : Scheme<Typeface>

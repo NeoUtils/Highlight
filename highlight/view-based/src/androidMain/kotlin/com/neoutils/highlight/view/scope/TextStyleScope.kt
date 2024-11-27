@@ -11,11 +11,13 @@ class TextStyleScope internal constructor() :
     override fun addScheme(
         regex: Regex,
         matcher: Matcher<UiStyle>,
+        range: IntRange?
     ) {
         builder.add(
             TextStyleScheme(
                 regex = regex,
                 matcher = matcher,
+                range = range
             )
         )
     }

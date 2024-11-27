@@ -7,4 +7,5 @@ import com.neoutils.highlight.core.util.Matcher
 class SpanStyleScheme(
     override val regex: Regex,
     override val matcher: Matcher<SpanStyle>,
+    override val range: IntRange?,
 ) : Scheme<SpanStyle>

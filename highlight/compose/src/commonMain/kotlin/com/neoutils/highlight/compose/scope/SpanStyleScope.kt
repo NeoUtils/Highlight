@@ -11,11 +11,13 @@ class SpanStyleScope internal constructor() :
     override fun addScheme(
         regex: Regex,
         matcher: Matcher<SpanStyle>,
+        range: IntRange?
     ) {
         builder.add(
             SpanStyleScheme(
                 regex = regex,
                 matcher = matcher,
+                range = range
             )
         )
     }

@@ -1,6 +1,6 @@
 package com.neoutils.highlight.compose.extension
 
-import Match
+import com.neoutils.highlight.core.Match
 import kotlin.js.RegExp
 
 actual fun String.matchAll(

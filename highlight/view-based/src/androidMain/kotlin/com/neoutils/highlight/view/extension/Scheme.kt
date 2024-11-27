@@ -1,13 +1,15 @@
 package com.neoutils.highlight.view.extension
 
-import Match
 import android.graphics.Typeface
 import android.text.ParcelableSpan
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import com.neoutils.highlight.core.Highlight
+import com.neoutils.highlight.core.Match
+import com.neoutils.highlight.core.Match.Group
 import com.neoutils.highlight.core.Scheme
+import com.neoutils.highlight.core.extension.plus
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.ScriptScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
@@ -59,28 +61,43 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
     }
 }
 
-fun List<Scheme<*>>.resolveScript(text: CharSequence, start: Int): List<Scheme<*>> {
+fun List<Scheme<*>>.resolved(text: CharSequence, start: Int): List<Scheme<*>> {
 
     val schemes = mutableListOf<Scheme<*>>()
 
-    for (scheme in this) {
+    forEach { scheme ->
+        when (scheme) {
+            is ScriptScheme -> {
+                val range = scheme.range ?: IntRange(start = 0, text.lastIndex)
 
-        if (scheme is ScriptScheme) {
+                for ((index, result) in scheme.regex.findAll(text, start).withIndex()) {
 
-            for ((index, result) in scheme.regex.findAll(text, start).withIndex()) {
+                    val match = scheme.matcher.matches[0] ?: continue
 
-                val match = scheme.matcher.matches[0] ?: continue
-
-                schemes.addAll(
-                    Highlight {
-                        match(Match(index, result))
-                    }.schemes
-                )
+                    schemes.addAll(
+                        Highlight {
+                            match(
+                                Match(
+                                    index = index,
+                                    range = result.range + range,
+                                    text = result.value,
+                                    groups = result.groups.map {
+                                        it?.let {
+                                            Group(
+                                                text = it.value,
+                                                range = it.range + range
+                                            )
+                                        }
+                                    }
+                                )
+                            )
+                        }.schemes
+                    )
+                }
             }
-            continue
-        }
 
-        schemes.add(scheme)
+            else -> schemes.add(scheme)
+        }
     }
 
     return schemes

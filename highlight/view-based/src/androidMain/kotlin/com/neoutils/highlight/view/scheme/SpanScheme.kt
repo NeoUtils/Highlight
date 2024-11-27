@@ -7,4 +7,5 @@ import com.neoutils.highlight.core.util.Matcher
 data class SpanScheme(
     override val regex: Regex,
     override val matcher: Matcher<ParcelableSpan>,
+    override val range: IntRange? = null,
 ) : Scheme<ParcelableSpan>
