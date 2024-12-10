@@ -3,32 +3,35 @@ package com.neoutils.highlight.compose.extension
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import com.neoutils.highlight.core.Highlight
-import com.neoutils.highlight.core.extension.plus
+import com.neoutils.highlight.core.extension.merge
+import com.neoutils.highlight.core.extension.range
+import com.neoutils.xregex.extension.findAll
 
-fun Highlight.toAnnotatedString(text: String): AnnotatedString {
+fun Highlight.toAnnotatedString(
+    text: String,
+    range: IntRange = text.range
+): AnnotatedString {
 
     val ranges = mutableListOf<AnnotatedString.Range<SpanStyle>>()
 
-    for (scheme in schemes.resolved(text = text)) {
+    for (scheme in schemes.resolved(text, range)) {
 
         val spans by lazy { scheme.toSpanStyle() }
 
-        val range = scheme.range ?: IntRange(start = 0, text.lastIndex)
+        val mergedRange = (scheme.range ?: text.range).merge(range)
 
-        for (result in text.substring(range).matchAll(scheme.regex.pattern)) {
+        for (result in scheme.regex.findAll(text, mergedRange)) {
 
-            for ((index, group) in result.groups.withIndex()) {
+            for (group in result.groups) {
 
                 if (group == null) continue
-                val span = spans[index] ?: continue
-
-                val groupRange = group.range + range
+                val span = spans[group.index] ?: continue
 
                 ranges.addOrMerge(
                     AnnotatedString.Range(
                         item = span,
-                        start = groupRange.first,
-                        end = groupRange.last + 1,
+                        start = group.range.first,
+                        end = group.range.last + 1,
                     )
                 )
             }

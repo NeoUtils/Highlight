@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import com.vanniktech.maven.publish.SonatypeHost
 import extension.config
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -9,11 +12,14 @@ plugins {
 }
 
 kotlin {
+
+    jvmToolchain(jdkVersion = 21)
+
     sourceSets {
         androidTarget {
             compilerOptions {
                 jvmTarget.set(
-                    JvmTarget.JVM_1_8
+                    JvmTarget.JVM_21
                 )
             }
         }
@@ -33,9 +39,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 

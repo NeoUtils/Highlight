@@ -8,6 +8,9 @@ group = "com.neoutils.highlight.example"
 version = "1.0.0"
 
 kotlin {
+
+    jvmToolchain(jdkVersion = 21)
+
     js(IR) {
 
         moduleName = "app"

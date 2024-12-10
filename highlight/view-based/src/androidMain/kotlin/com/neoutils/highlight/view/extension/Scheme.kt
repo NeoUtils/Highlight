@@ -9,7 +9,8 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.Match
 import com.neoutils.highlight.core.Match.Group
 import com.neoutils.highlight.core.Scheme
-import com.neoutils.highlight.core.extension.plus
+import com.neoutils.highlight.core.extension.merge
+import com.neoutils.highlight.core.extension.range
 import com.neoutils.highlight.core.scheme.BackgroundColorScheme
 import com.neoutils.highlight.core.scheme.ScriptScheme
 import com.neoutils.highlight.core.scheme.TextColorScheme
@@ -18,6 +19,7 @@ import com.neoutils.highlight.view.scheme.TextFontScheme
 import com.neoutils.highlight.view.scheme.TextStyleScheme
 import com.neoutils.highlight.view.span.TextFontSpan
 import com.neoutils.highlight.view.util.UiStyle
+import com.neoutils.xregex.extension.findAll
 
 fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
 
@@ -61,16 +63,19 @@ fun <T : Any> Scheme<T>.toParcelableSpan(): Map<Int, ParcelableSpan> {
     }
 }
 
-fun List<Scheme<*>>.resolved(text: CharSequence, start: Int): List<Scheme<*>> {
+fun List<Scheme<*>>.resolved(
+    text: CharSequence,
+    range: IntRange = text.range
+): List<Scheme<*>> {
 
     val schemes = mutableListOf<Scheme<*>>()
 
     forEach { scheme ->
         when (scheme) {
             is ScriptScheme -> {
-                val range = scheme.range ?: IntRange(start = 0, text.lastIndex)
+                val mergedRange = (scheme.range ?: text.range).merge(range)
 
-                for ((index, result) in scheme.regex.findAll(text, start).withIndex()) {
+                for (result in scheme.regex.findAll(text, mergedRange)) {
 
                     val match = scheme.matcher.matches[0] ?: continue
 
@@ -78,14 +83,14 @@ fun List<Scheme<*>>.resolved(text: CharSequence, start: Int): List<Scheme<*>> {
                         Highlight {
                             match(
                                 Match(
-                                    index = index,
-                                    range = result.range + range,
-                                    text = result.value,
+                                    index = result.index,
+                                    range = result.range,
+                                    text = result.text,
                                     groups = result.groups.map {
                                         it?.let {
                                             Group(
-                                                text = it.value,
-                                                range = it.range + range
+                                                text = it.text,
+                                                range = it.range
                                             )
                                         }
                                     }
@@ -96,7 +101,9 @@ fun List<Scheme<*>>.resolved(text: CharSequence, start: Int): List<Scheme<*>> {
                 }
             }
 
-            else -> schemes.add(scheme)
+            else -> {
+                schemes.add(scheme)
+            }
         }
     }
 
