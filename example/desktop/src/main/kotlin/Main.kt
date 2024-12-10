@@ -15,6 +15,7 @@ import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
+import com.neoutils.xregex.extension.toXRegex
 
 @Composable
 @Preview
@@ -26,18 +27,18 @@ fun App() {
     BasicTextField(
         value = rememberHighlight {
             """\([^\)]*\)"""
-                .toRegex()
+                .toXRegex()
                 .script { match ->
                     textColor {
                         """\\${match.index.inc()}"""
-                            .toRegex()
+                            .toXRegex()
                             .fully(UiColor.Blue)
                     }
                 }
 
             textColor {
                 """(\()[^\)]*(\))"""
-                    .toRegex()
+                    .toXRegex()
                     .groups(
                         UiColor.Green,
                         UiColor.Green,

@@ -7,28 +7,29 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.text.LinesHighlightTextWatcher
+import com.neoutils.xregex.extension.toXRegex
 
 private val CodeHighlight = Highlight {
     textColor {
         "\\b(fun)\\b"
-            .toRegex()
+            .toXRegex()
             .fully(
                 UiColor.Hex(hex = "#0033B3")
             )
 
         """\b(fun)\b\s*\b(\w+)\b\([^()]*\)"""
-            .toRegex()
+            .toXRegex()
             .groups(
                 UiColor.Hex(hex = "#0033B3"),
                 UiColor.Hex(hex = "#00627A")
             )
 
-        "@.+".toRegex().fully(
+        "@.+".toXRegex().fully(
             UiColor.Hex(hex = "#93880D")
         )
 
         "\".*?\""
-            .toRegex()
+            .toXRegex()
             .fully(
                 UiColor.Hex(hex = "#067D17")
             )

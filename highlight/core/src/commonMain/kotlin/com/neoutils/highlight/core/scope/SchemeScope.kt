@@ -3,16 +3,17 @@ package com.neoutils.highlight.core.scope
 import com.neoutils.highlight.core.Scheme
 import com.neoutils.highlight.core.Scope
 import com.neoutils.highlight.core.util.Matcher
+import com.neoutils.xregex.XRegex
 
 abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
 
     protected abstract fun addScheme(
-        regex: Regex,
+        regex: XRegex,
         matcher: Matcher<T>,
-        range: IntRange?
+        range: IntRange? = null
     )
 
-    fun Regex.match(
+    fun XRegex.match(
         range: IntRange? = null,
         scope: MutableMap<Int, T>.() -> Unit
     ) = addScheme(
@@ -23,7 +24,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
         range = range
     )
 
-    fun Regex.match(
+    fun XRegex.match(
         vararg matches: Pair<Int, T>,
         range: IntRange? = null,
     ) = addScheme(
@@ -32,7 +33,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
         range = range
     )
 
-    fun Regex.fully(
+    fun XRegex.fully(
         value: T,
         range: IntRange? = null,
     ) = addScheme(
@@ -41,7 +42,7 @@ abstract class SchemeScope<T : Any, S : Scheme<*>> : Scope<S>() {
         range = range
     )
 
-    fun Regex.groups(
+    fun XRegex.groups(
         vararg groups: T,
         range: IntRange? = null,
     ) = addScheme(

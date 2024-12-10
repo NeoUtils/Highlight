@@ -8,6 +8,7 @@ import com.neoutils.highlight.core.extension.backgroundColor
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.toSpannedString
+import com.neoutils.xregex.extension.toXRegex
 
 class BackgroundSchemeExample(
     context: Context,
@@ -20,14 +21,14 @@ class BackgroundSchemeExample(
         text = Highlight {
             backgroundColor {
                 "\\bcolor\\b"
-                    .toRegex()
+                    .toXRegex()
                     .fully(
                         UiColor.Blue
                     )
             }
             textColor {
                 "\\bcolor\\b"
-                    .toRegex()
+                    .toXRegex()
                     .fully(
                         UiColor.White
                     )

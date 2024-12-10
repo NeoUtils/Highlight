@@ -7,6 +7,7 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.toSpannedString
+import com.neoutils.xregex.extension.toXRegex
 
 class CaptureGroupsExample(
     context: Context,
@@ -19,7 +20,7 @@ class CaptureGroupsExample(
         text = Highlight {
             textColor {
                 """("\w+")\s*=\s*("\w+")"""
-                    .toRegex()
+                    .toXRegex()
                     .groups(
                         UiColor.Blue,
                         UiColor.Green

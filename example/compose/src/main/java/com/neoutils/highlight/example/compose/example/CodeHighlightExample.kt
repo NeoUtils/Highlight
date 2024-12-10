@@ -18,6 +18,7 @@ import com.neoutils.highlight.compose.remember.rememberTextFieldValue
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.example.compose.R
+import com.neoutils.xregex.extension.toXRegex
 
 @Composable
 fun CodeHighlightExample(modifier: Modifier = Modifier) {
@@ -25,25 +26,26 @@ fun CodeHighlightExample(modifier: Modifier = Modifier) {
     val highlight = rememberHighlight {
         textColor {
             "\\b(fun)\\b"
-                .toRegex()
+                .toXRegex()
                 .fully(
                     UiColor.Hex(hex = "#E66123")
                 )
 
             """\b(\w+)\b\((\w+\s*=)?[^)]*\)"""
-                .toRegex()
+                .toXRegex()
                 .groups(
                     UiColor.Hex(hex = "#00627A"),
                     UiColor.Hex(hex = "#548AF7"),
                 )
 
-            "@\\w+".toRegex()
+            "@\\w+"
+                .toXRegex()
                 .fully(
                     UiColor.Hex(hex = "#93880D")
                 )
 
             """"[^"]*""""
-                .toRegex()
+                .toXRegex()
                 .fully(
                     UiColor.Hex(hex = "#067D17")
                 )

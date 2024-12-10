@@ -8,6 +8,7 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.example.view.R
 import com.neoutils.highlight.view.extension.textFont
 import com.neoutils.highlight.view.extension.toSpannedString
+import com.neoutils.xregex.extension.toXRegex
 
 class TextFontSchemeExample(
     context: Context,
@@ -17,7 +18,7 @@ class TextFontSchemeExample(
         text = Highlight {
             textFont {
                 "\\bfont\\b"
-                    .toRegex()
+                    .toXRegex()
                     .fully(
                         checkNotNull(
                             ResourcesCompat.getFont(

@@ -7,6 +7,7 @@ import com.neoutils.highlight.compose.remember.rememberAnnotatedString
 import com.neoutils.highlight.compose.remember.rememberHighlight
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
+import com.neoutils.xregex.extension.toXRegex
 
 @Composable
 fun CaptureGroupsExample() {
@@ -14,7 +15,7 @@ fun CaptureGroupsExample() {
     val annotatedString = rememberHighlight {
         textColor {
             """("\w+")\s*=\s*("\w+")"""
-                .toRegex()
+                .toXRegex()
                 .groups(
                     UiColor.Blue,
                     UiColor.Green

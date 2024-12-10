@@ -10,6 +10,7 @@ import com.neoutils.highlight.view.extension.applyTo
 import com.neoutils.highlight.view.extension.getFirstLineStart
 import com.neoutils.highlight.view.extension.getLastLineEnd
 import com.neoutils.highlight.view.extension.removeSpans
+import com.neoutils.xregex.extension.toXRegex
 import kotlin.random.Random
 
 class LinesHighlightTextWatcher(
@@ -45,12 +46,16 @@ class LinesHighlightTextWatcher(
         val lastLineEnd: Int = text.getLastLineEnd(end = end)
 
         text.removeSpans(firstLineStart, lastLineEnd)
-        highlight.applyTo(text, firstLineStart, lastLineEnd)
+
+        highlight.applyTo(
+            text = text,
+            range = firstLineStart until lastLineEnd
+        )
 
         if (viewModifiedLines) {
             Highlight(
                 BackgroundColorScheme(
-                    regex = "[^\n]+".toRegex(),
+                    regex = "[^\n]+".toXRegex(),
                     matcher = Matcher.fully(
                         UiColor.Rgb(
                             Random.nextInt(255),
@@ -59,7 +64,10 @@ class LinesHighlightTextWatcher(
                         )
                     )
                 )
-            ).applyTo(text, firstLineStart, lastLineEnd)
+            ).applyTo(
+                text = text,
+                range = firstLineStart until lastLineEnd
+            )
         }
     }
 }

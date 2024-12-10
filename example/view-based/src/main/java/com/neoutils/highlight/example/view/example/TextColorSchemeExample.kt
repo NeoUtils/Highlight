@@ -7,6 +7,7 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.core.extension.textColor
 import com.neoutils.highlight.core.util.UiColor
 import com.neoutils.highlight.view.extension.toSpannedString
+import com.neoutils.xregex.extension.toXRegex
 
 class TextColorSchemeExample(
     context: Context,
@@ -16,7 +17,7 @@ class TextColorSchemeExample(
         text = Highlight {
             textColor {
                 "\\bcolor\\b"
-                    .toRegex()
+                    .toXRegex()
                     .fully(UiColor.Blue)
             }
         }.toSpannedString(

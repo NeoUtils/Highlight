@@ -7,6 +7,7 @@ import com.neoutils.highlight.core.Highlight
 import com.neoutils.highlight.view.extension.textStyle
 import com.neoutils.highlight.view.extension.toSpannedString
 import com.neoutils.highlight.view.util.UiStyle
+import com.neoutils.xregex.extension.toXRegex
 
 class StyleSchemeExample(
     content: Context,
@@ -19,7 +20,7 @@ class StyleSchemeExample(
         text = Highlight {
             textStyle {
                 "\\bstyle\\b"
-                    .toRegex()
+                    .toXRegex()
                     .fully(UiStyle.BOLD)
             }
         }.toSpannedString(
