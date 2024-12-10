@@ -45,7 +45,11 @@ class LinesHighlightTextWatcher(
         val lastLineEnd: Int = text.getLastLineEnd(end = end)
 
         text.removeSpans(firstLineStart, lastLineEnd)
-        highlight.applyTo(text, firstLineStart, lastLineEnd)
+
+        highlight.applyTo(
+            text = text,
+            range = firstLineStart until lastLineEnd
+        )
 
         if (viewModifiedLines) {
             Highlight(
@@ -59,7 +63,10 @@ class LinesHighlightTextWatcher(
                         )
                     )
                 )
-            ).applyTo(text, firstLineStart, lastLineEnd)
+            ).applyTo(
+                text = text,
+                range = firstLineStart until lastLineEnd
+            )
         }
     }
 }

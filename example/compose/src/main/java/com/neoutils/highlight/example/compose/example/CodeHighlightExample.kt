@@ -37,7 +37,8 @@ fun CodeHighlightExample(modifier: Modifier = Modifier) {
                     UiColor.Hex(hex = "#548AF7"),
                 )
 
-            "@\\w+".toRegex()
+            "@\\w+"
+                .toRegex()
                 .fully(
                     UiColor.Hex(hex = "#93880D")
                 )

@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+kotlin {
+    jvmToolchain(
+        jdkVersion = 21
+    )
+}
+
 android {
     namespace = "com.neoutils.highlight.example.view"
     compileSdk = 34
@@ -22,8 +28,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -31,7 +37,13 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
@@ -44,23 +56,4 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.material)
-}
-
-repositories {
-
-    google()
-    mavenCentral()
-
-    maven {
-        url = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
-
-        credentials(HttpHeaderCredentials::class) {
-            name = "Authorization"
-            value = "Bearer ${findProperty("mavenCentralToken")}"
-        }
-
-        authentication {
-            create<HttpHeaderAuthentication>("header")
-        }
-    }
 }
