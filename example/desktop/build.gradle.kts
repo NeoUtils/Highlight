@@ -9,7 +9,7 @@ version = "1.0.0"
 
 kotlin {
     jvmToolchain(
-        jdkVersion = 21
+        jdkVersion = 17
     )
 }
 

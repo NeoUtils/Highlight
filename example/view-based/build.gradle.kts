@@ -5,7 +5,7 @@ plugins {
 
 kotlin {
     jvmToolchain(
-        jdkVersion = 21
+        jdkVersion = 17
     )
 }
 
@@ -27,17 +27,12 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
     buildFeatures {
         viewBinding = true
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "17"
     }
 
     packaging {

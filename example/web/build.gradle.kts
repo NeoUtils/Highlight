@@ -9,7 +9,7 @@ version = "1.0.0"
 
 kotlin {
 
-    jvmToolchain(jdkVersion = 21)
+    jvmToolchain(jdkVersion = 17)
 
     js(IR) {
 
@@ -33,23 +33,4 @@ dependencies {
     implementation(compose.foundation)
     implementation(compose.ui)
     implementation(compose.material3)
-}
-
-repositories {
-
-    google()
-    mavenCentral()
-
-    maven {
-        url = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
-
-        credentials(HttpHeaderCredentials::class) {
-            name = "Authorization"
-            value = "Bearer ${findProperty("mavenCentralToken")}"
-        }
-
-        authentication {
-            create<HttpHeaderAuthentication>("header")
-        }
-    }
 }

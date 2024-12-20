@@ -13,13 +13,13 @@ plugins {
 
 kotlin {
 
-    jvmToolchain(jdkVersion = 21)
+    jvmToolchain(jdkVersion = 17)
 
     sourceSets {
         androidTarget {
             compilerOptions {
                 jvmTarget.set(
-                    JvmTarget.JVM_21
+                    JvmTarget.JVM_17
                 )
             }
         }

@@ -15,7 +15,7 @@ activity = "1.9.3"
 lifecycleRuntime = "2.8.7"
 mavenPublish = "0.30.0"
 
-xregex = "1.0.0-snapshot5"
+xregex = "1.0.0-rc1"
 pcre4j = "0.4.3"
 
 [libraries]
